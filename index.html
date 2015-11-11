@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hybrid SVG icons. Better together." />
+    <meta name="keywords" content="svg icon" />
+    <meta name="author" content="gabor.berkesi@softwaretailoring.net" />
+    <link rel="shortcut icon" href="hybicon_favicon.png">
+
+    <title>HYBICON - Better together</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/for-doc/bootstrap.min.css" rel="stylesheet">
+    <link href="css/for-doc/index.min.css" rel="stylesheet">
+    <link href="css/hybicon.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/required/raphael.min.js"></script>
+    <script src="js/for-doc/index.min.js"></script>
+    <script src="js/hybicon.min.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            hybicons();
+        };
+
+    </script>
+
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+    <header>
+        <div class="row">
+            <div class="col-xs-5">
+                <div id="userideaheader" class="hybicon150 hybicon-right" data-hybicon="user-idea"></div>
+            </div>
+            <div class="col-xs-7">
+                <h1 class="fontface pull-left">&nbsp;&nbsp;HYBICON&nbsp;&nbsp;</h1>
+            </div>
+        </div>
+    </header>
+
+    <div id="settings">
+        <div class="container">
+            <h2 class="fontface">Hybrid icons. Better together.</h2>
+            <div class="row">
+                <div class="col-lg-2 col-sm-12 col-xs-12"></div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="githubstarmain" class="hybicon100 hybicon-center" data-hybicon=""></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="twittertweetmain" class="hybicon100 hybicon-center" data-hybicon="twitter-tweet"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="facebooklikemain" class="hybicon100 hybicon-center" data-hybicon="facebook-like"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="gplusplusmain" class="hybicon100 hybicon-center" data-hybicon="gplus-plus"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="linkedinconnectmain" class="hybicon100 hybicon-center" data-hybicon="linkedin-connect"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="skypecallmain" class="hybicon100 hybicon-center" data-hybicon="skype-call"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="mailsendmain" class="hybicon100 hybicon-center" data-hybicon="mail-send"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="githubforkmain" class="hybicon100 hybicon-center" data-hybicon="github-fork"></div>
+                </div>
+                <div class="col-lg-2 col-sm-12 col-xs-12"></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-4">
+                    <div id="checkboxHover" class="hybicon75 hybicon-center" data-hybicon="checkbox-checked" data-hybicon-clickmode title="Show on hover" onmousedown="setHovermode();"></div>
+                    <div class="smalltitle">Hover mode</div>
+                </div>
+                <div class="col-xs-4">
+                    <div id="checkboxClick" class="hybicon75 hybicon-center" data-hybicon="checkbox-checked" data-hybicon-clickmode title="Show on click" onmousedown="setClickmode();"></div>
+                    <div class="smalltitle">Click mode</div>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+            <hr />
+        </div>
+        <div id="sourcecode">
+            <div class="container">
+                <h2 class="fontface">How to use?</h2>
+                <div class="usingtext">
+                    Download all required files from <a href='http://hybicon.softwaretailoring.net' target='_blank'>here</a>.
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preWheelHtml');" title="Select all"></span></div>
+                        <div id="preWheelHtmlDiv" class="sourceResult">
+                            <pre id="preWheelHtml">&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="smalltitle">JavaScript&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preWheelJavaScript');" title="Select all"></span></div>
+                        <div id="preWheelJavaScriptDiv" class="sourceResult">
+                            <pre id="preWheelJavaScript">window.onload = function () {
+    hybicons();
+};</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="using">
+        <div class="container">
+            <h2 class="fontface">How to customize?</h2>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="fontface">Icon</h3>
+                    <div class="usingtext">
+                        You can use predefined hybrid icons with <strong>data-hybicon</strong> attribute.
+                    </div>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100" <strong class="usingpre">data-hybicon="github-star"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="usinglink"><a href='icons.html'>See available icons</a></div>
+
+                    <h3 class="fontface">Size</h3>
+                    <div class="usingtext">
+                        Here are some predefined sizes in <strong>hybicon</strong> classes.
+                    </div>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" <strong class="usingpre">class="hybicon100"</strong> data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="usinglink"><a href='sizes.html'>See available sizes</a></div>
+
+                    <h3 class="fontface">Alignment</h3>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100 <strong class="usingpre">hybicon-center</strong>" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="usinglink"><a href='align.html'>See available alignments</a></div>
+
+                    <h3 class="fontface">Hover mode</h3>
+                    <div class="usingtext">
+                        The secondary icon appears on hover when set <strong>data-hybicon-hovermode</strong> attribute.
+                    </div>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-hovermode</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="usinglink"><a href='icons.html?hovermode'>See available icons in hovermode</a></div>
+
+                    <h3 class="fontface">Click mode</h3>
+                    <div class="usingtext">
+                        The secondary icon appears on click when set <strong>data-hybicon-clickmode</strong> attribute.
+                    </div>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-clickmode</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="usinglink"><a href='icons.html?clickmode'>See available icons in clickmode</a></div>
+
+                    <h3 class="fontface">Hyperlink</h3>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star"&gt;
+    <strong class="usingpre">&lt;a href="sizes.html?hybicon=github-star"&gt;&lt;/a&gt;</strong>
+&lt;/div&gt;</pre>
+                    </div>
+
+                    <h3 class="fontface">Color</h3>
+                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="#777"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="smalltitle">CSS&nbsp;&nbsp;&nbsp;</div>
+                    <div id="preWheelCssDiv" class="sourceResult">
+                        <pre>#githubstar > svg > [id$=icon1],
+#githubstar > svg > [id$=icon2] { 
+    fill: #777;
+    stroke: #FFF;
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="useful">
+        <div class="container">
+            <h2 class="fontface">How to spread?</h2>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="smalltitle">Tweet about it</div>
+                    <div id="iconTwitter" class="hybicon125 hybicon-center" data-hybicon="twitter-tweet" data-hybicon-hovermode>
+                        <a href="https://twitter.com/intent/tweet?url=http://hybicon.softwaretailoring.net&hashtags=hybicon&text=SVG based hybrid icons - Better together! " target="_blank"></a>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="smalltitle">Star for it</div>
+                    <div id="iconGitHub" class="hybicon125 hybicon-center" data-hybicon="github-star" data-hybicon-hovermode>
+                        <a href="https://github.com/softwaretailoring/hybicon/stargazers" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        HYBICON v0.1 : <a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v0.1"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="Did you find a bug? Please report that. Thank you!"></span></a> : &copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/for-doc/jquery-1.10.2.min.js"></script>
+    <script src="js/for-doc/bootstrap.min.js"></script>
+</body>
+</html>

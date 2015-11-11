@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hybrid SVG icons. Better together." />
+    <meta name="keywords" content="svg icon" />
+    <meta name="author" content="gabor.berkesi@softwaretailoring.net" />
+    <link rel="shortcut icon" href="hybicon_favicon.png">
+
+    <title>HYBICON - Better together</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/for-doc/bootstrap.min.css" rel="stylesheet">
+    <link href="css/for-doc/index.min.css" rel="stylesheet">
+    <link href="css/hybicon.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/required/raphael.min.js"></script>
+    <script src="js/for-doc/index.min.js"></script>
+    <script src="js/hybicon.min.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            setHybicons();
+            hybicons();
+        };
+
+    </script>
+
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+    <header>
+        <div class="row">
+            <div class="col-xs-5">
+                <div id="userideaheader" class="hybicon150 hybicon-right" data-hybicon="user-idea"></div>
+            </div>
+            <div class="col-xs-7">
+                <h1 class="fontface pull-left">&nbsp;&nbsp;<a href="index.html" title="Main page">HYBICON</a>&nbsp;&nbsp;</h1>
+            </div>
+        </div>
+    </header>
+
+    <div id="settings">
+        <div class="container">
+            <h2 class="fontface">Available icons.</h2>
+            <div class="row">
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="useridea" class="hybicon100 hybicon-center" data-hybicon="user-idea" title="data-hybicon='user-idea'" onmousedown="alert('test');">
+                        <a href="sizes.html?hybicon=user-idea"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="githubfork" class="hybicon100 hybicon-center" data-hybicon="github-fork" title="data-hybicon='github-fork'">
+                        <a href="sizes.html?hybicon=github-fork"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="twittertweet" class="hybicon100 hybicon-center" data-hybicon="twitter-tweet" title="data-hybicon=''">
+                        <a href="sizes.html?hybicon=twitter-tweet"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="facebooklike" class="hybicon100 hybicon-center" data-hybicon="facebook-like" title="data-hybicon='facebook-like'">
+                        <a href="sizes.html?hybicon=facebook-like"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="gplusplus" class="hybicon100 hybicon-center" data-hybicon="gplus-plus" title="data-hybicon='gplus-plus'">
+                        <a href="sizes.html?hybicon=gplus-plus"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="linkedinconnect" class="hybicon100 hybicon-center" data-hybicon="linkedin-connect" title="data-hybicon='linkedin-connect'">
+                        <a href="sizes.html?hybicon=linkedin-connect"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="skypecall" class="hybicon100 hybicon-center" data-hybicon="skype-call" title="data-hybicon='skype-call'">
+                        <a href="sizes.html?hybicon=skype-call"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="mailsend" class="hybicon100 hybicon-center" data-hybicon="mail-send" title="data-hybicon='mail-send'">
+                        <a href="sizes.html?hybicon=mail-send"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="githubstar" class="hybicon100 hybicon-center" data-hybicon="github-star" title="data-hybicon='github-star'">
+                        <a href="sizes.html?hybicon=github-star"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="iecheck" class="hybicon100 hybicon-center" data-hybicon="ie-check" title="data-hybicon='ie-check'">
+                        <a href="sizes.html?hybicon=ie-check"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="ie9check" class="hybicon100 hybicon-center" data-hybicon="ie9-check" title="data-hybicon='ie9-check'">
+                        <a href="sizes.html?hybicon=ie9-check"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="chromecheck" class="hybicon100 hybicon-center" data-hybicon="chrome-check" title="data-hybicon='hybicon-center'">
+                        <a href="sizes.html?hybicon=hybicon-center"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="operacheck" class="hybicon100 hybicon-center" data-hybicon="opera-check" title="data-hybicon='opera-check'">
+                        <a href="sizes.html?hybicon=opera-check"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="firefoxcheck" class="hybicon100 hybicon-center" data-hybicon="firefox-check" title="data-hybicon='firefox-check'">
+                        <a href="sizes.html?hybicon=firefox-check"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="safaricheck" class="hybicon100 hybicon-center" data-hybicon="safari-check" title="data-hybicon='safari-check'">
+                        <a href="sizes.html?hybicon=safari-check"></a>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-4 col-xs-6">
+                    <div id="checkboxchecked" class="hybicon100 hybicon-center" data-hybicon="checkbox-checked" title="data-hybicon='checkbox-checked'">
+                        <a href="sizes.html?hybicon=checkbox-checked"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="using">
+        <div class="container">
+            <h2 class="fontface">Do you have an idea?</h2>
+        </div>
+    </div>
+    <div id="useful">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="smalltitle hybicon-center">Fork it</div>
+                    <div id="iconGitHub" class="hybicon200 hybicon-center" data-hybicon="github-fork">
+                        <a href="https://github.com/softwaretailoring/hybicon"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        HYBICON v0.1 : <a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v0.1"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="Did you find a bug? Please report that. Thank you!"></span></a> : &copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/for-doc/jquery-1.10.2.min.js"></script>
+    <script src="js/for-doc/bootstrap.min.js"></script>
+</body>
+</html>
