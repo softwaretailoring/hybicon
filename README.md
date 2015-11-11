@@ -3,7 +3,7 @@ hybicon.js
 
 [![Join the chat at https://gitter.im/softwaretailoring/hybicon](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/softwaretailoring/hybicon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Hybrid SVG icons. A tiny JavaScript library based on [RaphaÃ«l.js][raphaeljs].
+Hybrid SVG icons. A tiny JavaScript library based on [Raphaël.js][raphaeljs].
 
 For more insight please visit [http://hybicon.softwaretailoring.net][projectpage]
 
@@ -23,7 +23,7 @@ window.onload = function () {
 
 ## Author
 
-GÃ¡bor Berkesi (gabor.berkesi@softwaretailoring.net)
+Gábor Berkesi (gabor.berkesi@softwaretailoring.net)
 
 ## License
 
