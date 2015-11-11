@@ -141,7 +141,7 @@ hybicon.prototype.createIcon = function () {
     }
 
     if (this.clickMode) {
-        this.iconHolder.mousedown(function () {
+        this.iconHolder.mouseup(function () {
             if (thishybicon.clicked !== true) {
                 thishybicon.clicked = true;
                 thishybicon.hoverHandler(true);
