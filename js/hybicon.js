@@ -1,5 +1,5 @@
 ﻿/* ======================================================================================= */
-/*                                   hybicon.js - v0.1.0                                   */
+/*                                   hybicon.js - v1.0.0                                   */
 /* ======================================================================================= */
 /* This is a small JavaScript library for animated SVG based icons.                        */
 /* Requires Raphaël JavaScript Vector Library (http://raphaeljs.com)                       */
@@ -17,6 +17,7 @@
 
 hybicon = function (divId) {
 
+    this.version = "1.0.0";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
