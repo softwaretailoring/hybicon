@@ -19,7 +19,7 @@ var setHybicons = function () {
 
     var clickmode = getQueryVariable("clickmode");
     if (clickmode !== "") { setClickmode(); }
-}
+};
 
 var setHovermode = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
@@ -41,7 +41,7 @@ var setHovermode = function () {
             new hybicon(hybiconId);
         }
     }
-}
+};
 
 var setClickmode = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
@@ -63,7 +63,7 @@ var setClickmode = function () {
             new hybicon(hybiconId);
         }
     }
-}
+};
 
 var selectSource = function (element) {
     var doc = document
@@ -91,4 +91,6 @@ var getQueryVariable = function (variable) {
         if (pair[0] == variable) { return pair[1]; }
     }
     return ("");
-}
+};
+
+

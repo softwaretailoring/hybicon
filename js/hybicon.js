@@ -269,7 +269,7 @@ hybicon.prototype.getIcon2Id = function () {
 
 hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
     return "t" + x.toString() + "," + y.toString() + "s" + scale.toString() + "r" + rotate.toString();
-}
+};
 
 
 /* =========================== */
@@ -429,4 +429,4 @@ var icon = {
 
 var hybicons = function () {
     new hybicon().parseAll();
-}
+};
