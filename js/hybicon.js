@@ -119,8 +119,16 @@ hybicon.prototype.createIcon = function () {
     this.icon1.attr({ fill: this.icon1Color, stroke: "none" });
     this.icon2.attr({ fill: this.icon2Color, stroke: "none" });
 
-    this.iconHolder = this.raphael.rect(0, 0, 100, 100);
-    this.iconHolder.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: "pointer" });
+    this.iconRect = this.raphael.rect(0, 0, 100, 100);
+    this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: "pointer" });
+
+    this.iconHolder = this.raphael.set();
+
+    this.iconHolder.push(
+        this.icon1,
+        this.icon2,
+        this.iconRect
+    );
 
     var thishybicon = this;
 
@@ -129,19 +137,19 @@ hybicon.prototype.createIcon = function () {
             if (thishybicon.hovered !== true &&
                 thishybicon.clicked !== true) {
                 thishybicon.hovered = true;
-                thishybicon.hoverHandler(thishybicon.hovered);
+                thishybicon.hoverHandler(true);
             }
         });
         this.iconHolder.mouseout(function () {
             if (thishybicon.clicked !== true) {
                 thishybicon.hovered = false;
-                thishybicon.hoverHandler(thishybicon.hovered);
+                thishybicon.hoverHandler(false);
             }
         });
     }
 
     if (this.clickMode) {
-        this.iconHolder.mouseup(function () {
+        this.iconHolder.click(function () {
             if (thishybicon.clicked !== true) {
                 thishybicon.clicked = true;
                 thishybicon.hoverHandler(true);
