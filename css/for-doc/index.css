@@ -55,15 +55,6 @@ footer a:hover {
     margin: auto;
 }
 
-@media (max-width: 400px) {
-    .wheelNavResult {
-        height: 300px;
-        width: 300px;
-        margin: auto;
-    }
-}
-
-
 
 h3.fontface {
     font: 35px/43px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
