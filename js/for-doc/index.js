@@ -15,13 +15,16 @@ var setHybicons = function () {
     }
 
     var hovermode = getQueryVariable("hovermode");
-    if (hovermode !== "") { setHovermode(); }
+    if (hovermode !== "") { setMode("hover"); }
 
     var clickmode = getQueryVariable("clickmode");
-    if (clickmode !== "") { setClickmode(); }
+    if (clickmode !== "") { setMode("click"); }
+
+    var infomode = getQueryVariable("infomode");
+    if (infomode !== "") { setMode("info"); }
 };
 
-var setHovermode = function () {
+var setMode = function (mode) {
     var hybicons = document.querySelectorAll('[data-hybicon]');
 
     for (var i = 0; i < hybicons.length; i++) {
@@ -32,33 +35,11 @@ var setHovermode = function () {
             hybiconId !== 'iconGitHub' &&
             hybiconId !== 'iconTwitter') {
             var icon = document.getElementById(hybiconId);
-            if (icon.hasAttribute('data-hybicon-hovermode')) {
-                icon.removeAttribute('data-hybicon-hovermode');
+            if (icon.hasAttribute('data-hybicon-' + mode + 'mode')) {
+                icon.removeAttribute('data-hybicon-' + mode + 'mode');
             }
             else {
-                icon.setAttribute('data-hybicon-hovermode', '');
-            }
-            new hybicon(hybiconId);
-        }
-    }
-};
-
-var setClickmode = function () {
-    var hybicons = document.querySelectorAll('[data-hybicon]');
-
-    for (var i = 0; i < hybicons.length; i++) {
-        var hybiconId = hybicons[i].id;
-        if (hybiconId !== 'userideaheader' &&
-            hybiconId !== 'checkboxHover' &&
-            hybiconId !== 'checkboxClick' &&
-            hybiconId !== 'iconGitHub' &&
-            hybiconId !== 'iconTwitter') {
-            var icon = document.getElementById(hybiconId);
-            if (icon.hasAttribute('data-hybicon-clickmode')) {
-                icon.removeAttribute('data-hybicon-clickmode');
-            }
-            else {
-                icon.setAttribute('data-hybicon-clickmode', '');
+                icon.setAttribute('data-hybicon-' + mode + 'mode', '');
             }
             new hybicon(hybiconId);
         }
@@ -93,4 +74,16 @@ var getQueryVariable = function (variable) {
     return ("");
 };
 
+var setStyle = function () {
+    var classname = document.body.getAttribute("class");
+    footer = document.getElementById("footer");
+    if (classname === "styledark") {
+        document.body.setAttribute("class", "stylelight");
+        footer.setAttribute("class", "stylelight");
+    }
+    else {
+        document.body.setAttribute("class", "styledark");
+        footer.setAttribute("class", "styledark");
+    }
+};
 

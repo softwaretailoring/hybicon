@@ -37,6 +37,10 @@ footer {
     margin-top: 50px;
 }
 
+#footer {
+    margin-bottom: 50px;
+}
+
 footer a {
     background-color: #222;
     color: #dedede;
@@ -217,7 +221,8 @@ hr {
     padding-top: 2px;
 }
 
-#userideaheader {
+#userideaheader,
+#userideaheaderintro {
     margin-top: 15px;
 }
 
@@ -252,8 +257,115 @@ hr {
     fill: #0F9D58;
 }
 
-
 .row {
     margin-right: 0;
     margin-left: 0;
+}
+
+/*INTRO*/
+
+.styledark {
+    background-color: #8c3d2f;
+    color: #fff;
+    -moz-transition: ease-out 0.5s;
+    -o-transition: ease-out 0.5s;
+    -webkit-transition: ease-out 0.5s;
+    transition: ease-out 0.5s;
+}
+
+.styledark .inverse {
+    background-color: #fff;
+    color: #8c3d2f;
+}
+
+.styledark svg > text > tspan {
+    fill: #8c3d2f;
+    font: 13px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; letter-spacing: 0;
+}
+
+.styledark svg > [id$=info] { 
+    fill: #FFF;
+    stroke: #FFF;
+    stroke-width: 0.6;
+}
+
+.styledark svg > [id$=icon1] { 
+    fill: #8c3d2f;
+    stroke: #fff;
+    stroke-width: 0.6;
+}
+
+.styledark svg > [id$=icon2] { 
+    fill: #fff;
+    stroke: #8c3d2f;
+    stroke-width: 1;
+}
+
+.styledark hr {
+    border-color: #fff;
+}
+
+.styledark a {
+    background-color: #8c3d2f;
+    color: #fff;
+    text-decoration: underline;
+}
+
+.styledark a:hover {
+    background-color: #fff;
+    color: #8c3d2f;
+    text-decoration: none;
+}
+
+.stylelight {
+    background-color: #fff;
+    color: #8c3d2f;
+    -moz-transition: ease-out 0.5s;
+    -o-transition: ease-out 0.5s;
+    -webkit-transition: ease-out 0.5s;
+    transition: ease-out 0.5s;
+}
+
+.stylelight .inverse {
+    background-color: #8c3d2f;
+    color: #fff;
+}
+
+.stylelight svg > text > tspan {
+    fill: #FFF;
+    font: 13px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; letter-spacing: 0;
+}
+
+.stylelight svg > [id$=info] { 
+    fill: #8c3d2f;
+    stroke: #8c3d2f;
+    stroke-width: 0.6;
+}
+
+.stylelight svg > [id$=icon1] { 
+    fill: #fff;
+    stroke: #8c3d2f;
+    stroke-width: 0.6;
+}
+
+.stylelight svg > [id$=icon2] { 
+    fill: #8c3d2f;
+    stroke: #fff;
+    stroke-width: 1;
+}
+
+.stylelight hr {
+    border-color: #8c3d2f;
+}
+
+.stylelight a {
+    background-color: #fff;
+    color: #8c3d2f;
+    text-decoration: underline;
+}
+
+.stylelight a:hover {
+    background-color: #8c3d2f;
+    color: #fff;
+    text-decoration: none;
 }
