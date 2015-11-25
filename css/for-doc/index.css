@@ -10,9 +10,14 @@ header {
     color: #EAFDF8;
     padding: 5px;
     font-family: Helvetica, sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+    header {
+        margin-bottom: 0;
+    }
+}
 .titleicon {
     font-size: 33%;
     vertical-align: middle;
@@ -49,8 +54,8 @@ footer a {
 }
 
 footer a:hover {
-    background-color: #dedede;
-    color: #222;
+    background-color: #222;
+    color: #dedede;
     text-decoration: none;
 }
 
@@ -112,6 +117,10 @@ h2.fontface {
 @media (max-width: 768px) {
     .settingtitle {
         margin-top: 21px;
+    }
+
+    .smalltitle {
+        margin-top: 33px;
     }
 }
 
@@ -221,11 +230,17 @@ hr {
     padding-top: 2px;
 }
 
+#subheader {
+    background-color: #35CE8D;
+    padding-top: 33px;
+    padding-bottom: 24px;
+    margin-top: 33px;
+}
+
 #userideaheader,
 #userideaheaderintro {
     margin-top: 15px;
 }
-
 
 #userideaheader > svg > [id$=icon1],
 #userideaheader > svg > [id$=icon2] { 
@@ -262,6 +277,10 @@ hr {
     margin-left: 0;
 }
 
+#iconMail {
+    display: inline-block;
+}
+
 /*INTRO*/
 
 .rounded {
@@ -296,17 +315,29 @@ hr {
 .styledark svg > [id$=icon1] { 
     fill: #8c3d2f;
     stroke: #fff;
-    stroke-width: 0.6;
+    stroke-width: 0.4;
 }
 
 .styledark svg > [id$=icon2] { 
-    fill: #fff;
-    stroke: #8c3d2f;
+    fill: #8c3d2f;
+    stroke: #fff;
     stroke-width: 1;
 }
 
-.styledark svg> #hybicon-iconMail-icon1,
-.styledark svg> #hybicon-iconMail-icon2 { 
+.styledark svg > #hybicon-userideaheaderintro-icon2 { 
+    fill: #fff;
+    stroke: #8c3d2f;
+    stroke-width: 0.5;
+}
+
+.styledark svg > #hybicon-iconBrightness-icon2 { 
+    fill: #fff;
+    stroke: #fff;
+    stroke-width: 0.5;
+}
+
+svg > #hybicon-iconMail-icon1,
+svg > #hybicon-iconMail-icon2 { 
     fill: #fff;
     stroke: #fff;
 }
@@ -355,13 +386,25 @@ hr {
 .stylelight svg > [id$=icon1] { 
     fill: #fff;
     stroke: #8c3d2f;
-    stroke-width: 0.6;
+    stroke-width: 0.4;
 }
 
 .stylelight svg > [id$=icon2] { 
+    fill: #fff;
+    stroke: #8c3d2f;
+    stroke-width: 1;
+}
+
+.stylelight svg > #hybicon-userideaheaderintro-icon2 { 
     fill: #8c3d2f;
     stroke: #fff;
-    stroke-width: 1;
+    stroke-width: 0.5;
+}
+
+.stylelight svg > #hybicon-iconBrightness-icon2 { 
+    fill: #8c3d2f;
+    stroke: #8c3d2f;
+    stroke-width: 0.5;
 }
 
 .stylelight svg> #hybicon-iconMail-icon1,
@@ -389,4 +432,17 @@ hr {
 #modes svg {
     border: 2px solid #8c3d2f;
     border-radius: 15%;
+}
+
+#download {
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    #download {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding-bottom: 25px;
+    }
 }

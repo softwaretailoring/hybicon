@@ -82,11 +82,11 @@
             <div class="row">
                 <div class="col-xs-2"></div>
                 <div class="col-xs-4">
-                    <div id="checkboxHover" class="hybicon75 hybicon-center" data-hybicon="checkbox-check" data-hybicon-clickmode title="Show on hover" onmousedown="setMode('hover');"></div>
+                    <div id="checkboxHover" class="hybicon75 hybicon-center" data-hybicon="checkbox-check" data-hybicon-clickmode title="Show on hover" onmousedown="setMode('hovermode');"></div>
                     <div class="smalltitle">Hover mode</div>
                 </div>
                 <div class="col-xs-4">
-                    <div id="checkboxClick" class="hybicon75 hybicon-center" data-hybicon="checkbox-check" data-hybicon-clickmode title="Show on click" onmousedown="setMode('click');"></div>
+                    <div id="checkboxClick" class="hybicon75 hybicon-center" data-hybicon="checkbox-check" data-hybicon-clickmode title="Show on click" onmousedown="setMode('clickmode');"></div>
                     <div class="smalltitle">Click mode</div>
                 </div>
                 <div class="col-xs-2"></div>
@@ -101,18 +101,18 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preWheelHtml');" title="Select all"></span></div>
-                        <div id="preWheelHtmlDiv" class="sourceResult">
-                            <pre id="preWheelHtml">&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                        <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preIconHtml');" title="Select all"></span></div>
+                        <div id="preIconHtmlDiv" class="sourceResult">
+                            <pre id="preIconHtml">&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="smalltitle">JavaScript&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preWheelJavaScript');" title="Select all"></span></div>
-                        <div id="preWheelJavaScriptDiv" class="sourceResult">
-                            <pre id="preWheelJavaScript">window.onload = function () {
+                        <div class="smalltitle">JavaScript&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preIconJavaScript');" title="Select all"></span></div>
+                        <div id="preIconJavaScriptDiv" class="sourceResult">
+                            <pre id="preIconJavaScript">window.onload = function () {
     hybicons();
 };</pre>
                         </div>
@@ -133,7 +133,7 @@
                         You can use predefined hybrid icons with <strong>data-hybicon</strong> attribute.
                     </div>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100" <strong class="usingpre">data-hybicon="github-star"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="usinglink"><a href='icons.html'>See available icons</a></div>
@@ -143,14 +143,14 @@
                         Here are some predefined sizes in <strong>hybicon</strong> classes.
                     </div>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" <strong class="usingpre">class="hybicon100"</strong> data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="usinglink"><a href='sizes.html'>See available sizes</a></div>
 
                     <h3 class="fontface">Alignment</h3>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100 <strong class="usingpre">hybicon-center</strong>" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="usinglink"><a href='align.html'>See available alignments</a></div>
@@ -160,7 +160,7 @@
                         The secondary icon appears on hover when set <strong>data-hybicon-hovermode</strong> attribute.
                     </div>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-hovermode</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="usinglink"><a href='icons.html?hovermode'>See available icons in hovermode</a></div>
@@ -170,14 +170,14 @@
                         The secondary icon appears on click when set <strong>data-hybicon-clickmode</strong> attribute.
                     </div>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-clickmode</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="usinglink"><a href='icons.html?clickmode'>See available icons in clickmode</a></div>
 
                     <h3 class="fontface">Hyperlink</h3>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star"&gt;
     <strong class="usingpre">&lt;a href="sizes.html?hybicon=github-star"&gt;&lt;/a&gt;</strong>
 &lt;/div&gt;</pre>
@@ -185,11 +185,11 @@
 
                     <h3 class="fontface">Color</h3>
                     <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>&lt;div id="githubstar" class="hybicon100" data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="#777"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="smalltitle">CSS&nbsp;&nbsp;&nbsp;</div>
-                    <div id="preWheelCssDiv" class="sourceResult">
+                    <div class="sourceResult">
                         <pre>#githubstar > svg > [id$=icon1],
 #githubstar > svg > [id$=icon2] { 
     fill: #777;
@@ -223,7 +223,13 @@
 
     <!-- FOOTER -->
     <footer>
-        HYBICON v1.0 : <a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="Did you find a bug? Please report that. Thank you!"></span></a> : &copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a>
+        <table style="margin:auto;">
+            <tr>
+                <td>HYBICON v1.0&nbsp;&nbsp;</td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" class="hybicon25 hybicon-center" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!"></div></a></td>
+                <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
+            </tr>
+        </table>
     </footer>
 
     <!-- Bootstrap core JavaScript

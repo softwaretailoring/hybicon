@@ -15,31 +15,35 @@ var setHybicons = function () {
     }
 
     var hovermode = getQueryVariable("hovermode");
-    if (hovermode !== "") { setMode("hover"); }
+    if (hovermode !== "") { setMode("hovermode"); }
 
     var clickmode = getQueryVariable("clickmode");
-    if (clickmode !== "") { setMode("click"); }
+    if (clickmode !== "") { setMode("clickmode"); }
 
     var infomode = getQueryVariable("infomode");
-    if (infomode !== "") { setMode("info"); }
+    if (infomode !== "") { setMode("infomode"); }
+
+    var inforight = getQueryVariable("inforight");
+    if (inforight !== "") { setMode("inforight"); }
 };
 
 var setMode = function (mode) {
     var hybicons = document.querySelectorAll('[data-hybicon]');
-
+    
     for (var i = 0; i < hybicons.length; i++) {
         var hybiconId = hybicons[i].id;
         if (hybiconId !== 'userideaheader' &&
             hybiconId !== 'checkboxHover' &&
             hybiconId !== 'checkboxClick' &&
             hybiconId !== 'iconGitHub' &&
-            hybiconId !== 'iconTwitter') {
+            hybiconId !== 'iconTwitter' &&
+            hybiconId !== 'iconMail') {
             var icon = document.getElementById(hybiconId);
-            if (icon.hasAttribute('data-hybicon-' + mode + 'mode')) {
-                icon.removeAttribute('data-hybicon-' + mode + 'mode');
+            if (icon.hasAttribute('data-hybicon-' + mode )) {
+                icon.removeAttribute('data-hybicon-' + mode );
             }
             else {
-                icon.setAttribute('data-hybicon-' + mode + 'mode', '');
+                icon.setAttribute('data-hybicon-' + mode, '');
             }
             new hybicon(hybiconId);
         }

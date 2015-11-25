@@ -3,6 +3,8 @@
     height: 100%;
 }
 
+/* Size */
+
 .hybicon15 {
     height: 15px;
     width: 15px;
@@ -48,6 +50,53 @@
     width: 200px;
 }
 
+/* Info mode */
+[data-hybicon-inforight].hybicon15 {
+    height: 15px;
+    width: 45px;
+}
+
+[data-hybicon-inforight].hybicon25 {
+    height: 25px;
+    width: 75px;
+}
+
+[data-hybicon-inforight].hybicon50 {
+    height: 50px;
+    width: 150px;
+}
+
+[data-hybicon-inforight].hybicon75 {
+    height: 75px;
+    width: 225px;
+}
+
+[data-hybicon-inforight].hybicon100 {
+    height: 100px;
+    width: 300px;
+}
+
+[data-hybicon-inforight].hybicon125 {
+    height: 125px;
+    width: 375px;
+}
+
+[data-hybicon-inforight].hybicon150 {
+    height: 150px;
+    width: 450px;
+}
+
+[data-hybicon-inforight].hybicon175 {
+    height: 175px;
+    width: 525px;
+}
+
+[data-hybicon-inforight].hybicon200 {
+    height: 200px;
+    width: 600px;
+}
+
+/* Alignment */
 .hybicon-center {
     margin: auto;
 }
