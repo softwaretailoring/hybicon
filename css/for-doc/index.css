@@ -264,6 +264,10 @@ hr {
 
 /*INTRO*/
 
+.rounded {
+    border-radius: 25px;
+}
+
 .styledark {
     background-color: #8c3d2f;
     color: #fff;
@@ -301,6 +305,12 @@ hr {
     stroke-width: 1;
 }
 
+.styledark svg> #hybicon-iconMail-icon1,
+.styledark svg> #hybicon-iconMail-icon2 { 
+    fill: #fff;
+    stroke: #fff;
+}
+
 .styledark hr {
     border-color: #fff;
 }
@@ -312,8 +322,8 @@ hr {
 }
 
 .styledark a:hover {
-    background-color: #fff;
-    color: #8c3d2f;
+    background-color: #8c3d2f;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -354,6 +364,12 @@ hr {
     stroke-width: 1;
 }
 
+.stylelight svg> #hybicon-iconMail-icon1,
+.stylelight svg> #hybicon-iconMail-icon2 { 
+    fill: #8c3d2f;
+    stroke: #8c3d2f;
+}
+
 .stylelight hr {
     border-color: #8c3d2f;
 }
@@ -365,7 +381,12 @@ hr {
 }
 
 .stylelight a:hover {
-    background-color: #8c3d2f;
-    color: #fff;
+    background-color: #fff;
+    color: #8c3d2f;
     text-decoration: none;
+}
+
+#modes svg {
+    border: 2px solid #8c3d2f;
+    border-radius: 15%;
 }

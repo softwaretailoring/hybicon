@@ -39,7 +39,7 @@
     <header class="inverse">
         <div class="row">
             <div class="col-xs-5">
-                <div id="userideaheaderintro" class="hybicon150 hybicon-right" data-hybicon="user-idea"></div>
+                <div id="userideaheaderintro" class="hybicon150 hybicon-right" data-hybicon="user-idea-change" data-hybicon-hovermode></div>
             </div>
             <div class="col-xs-5">
                 <h1 class="fontface pull-left">&nbsp;&nbsp;HYBICON&nbsp;&nbsp;</h1><br />
@@ -48,52 +48,57 @@
         </div>
     </header>
     <br />
-    <div id="modes">
-        <div class="container">
-            <br />
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="smalltitle">Hover</div>
-                    <div id="iconTwitter" class="hybicon200 hybicon-center" data-hybicon="twitter-tweet" data-hybicon-hovermode></div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="smalltitle">Click</div>
-                    <div id="iconBrightness" class="hybicon200 hybicon-center" data-hybicon="left-right" data-hybicon-clickmode onclick="setStyle();"></div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="smalltitle">Info</div>
-                    <div id="iconGitHub" class="hybicon200 hybicon-center" data-hybicon="github-star-fix" data-hybicon-infomode data-hybicon-infotext="0" data-hybicon-hovermode></div>
-                </div>
+    <div class="container" id="modes">
+        <br />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="smalltitle">Hover</div>
+                <div id="iconTwitter" class="hybicon200 hybicon-center" data-hybicon="twitter-bubble" data-hybicon-hovermode></div>
             </div>
-        </div>
-        <br />
-        <hr />
-        <br />
-        <div class="container inverse">
-            <br />
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <div class="smalltitle">Documentation</div>
-                    <a href="documentation.html">
-                        <div id="iconDocumentation" class="hybicon100 hybicon-center" data-hybicon="book-search" data-hybicon-hovermode>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <div class="smalltitle">Download</div>
-                    <div id="iconDownload" class="hybicon100 hybicon-center" data-hybicon="code-download" data-hybicon-hovermode></div>
-                </div>
-                <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <div class="smalltitle">Click</div>
+                <div id="iconBrightness" class="hybicon200 hybicon-center" data-hybicon="left-right" data-hybicon-clickmode onclick="setStyle();"></div>
+            </div>
+            <div class="col-sm-4">
+                <div class="smalltitle">Info</div>
+                <div id="iconGitHub" class="hybicon200 hybicon-center" data-hybicon="github-star-fix" data-hybicon-infomode data-hybicon-infotext="0" data-hybicon-hovermode></div>
             </div>
         </div>
     </div>
     <br />
-    <hr />
+    <br />
+    <br />
+    <div class="container inverse rounded">
+        <br />
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <div class="smalltitle">Documentation</div>
+                <a href="documentation.html">
+                    <div id="iconDocumentation" class="hybicon100 hybicon-center" data-hybicon="book-search" data-hybicon-hovermode>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <div class="smalltitle">Download</div>
+                <div id="iconDownload" class="hybicon100 hybicon-center" data-hybicon="cloudDown-code" data-hybicon-hovermode></div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <br />
+    </div>
+    <br />
+    <!--<hr />-->
     <!-- FOOTER -->
     <footer id="footer" class="styledark">
-        HYBICON v1.0 : <a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="Did you find a bug? Please report that. Thank you!"></span></a> : &copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a>
+        <table style="margin:auto;">
+            <tr>
+                <td>HYBICON v1.0 : </td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" class="hybicon25 hybicon-center" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!" style="display: inline-block; margin-bottom: -10px;"></div></a></td>
+                <td> : &copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
+            </tr>
+        </table>
     </footer>
 
     <!-- Bootstrap core JavaScript

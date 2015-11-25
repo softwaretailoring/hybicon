@@ -46,32 +46,54 @@ hybicon = function (divId) {
 
     this.raphael = new Raphael(divId);
 
-    //Public properties
-    this.icon1Path = icon.githubalt;
-    this.icon1X = 30;
-    this.icon1Y = 28;
-    this.icon1Scale = 2.6;
-    this.icon1Rotate = 0;
-
-    this.icon1PathAnim = null;
+    //Private properties
+    this.icon1X = null;
+    this.icon1Y = null;
+    this.icon1Height = null;
+    this.icon1Width = null;
+    this.icon1Scale = null;
     this.icon1XAnim = null;
     this.icon1YAnim = null;
+    this.icon1HeightAnim = null;
+    this.icon1WidthAnim = null;
     this.icon1ScaleAnim = null;
-    this.icon1RotateAnim = null;
-
-    this.icon1Color = "#222";
-    this.icon2Path = icon.star;
-    this.icon2X = 65;
-    this.icon2Y = 2;
-    this.icon2Scale = 0;
-    this.icon2Rotate = 0;
-
-    this.icon2Color = "#222";
-    this.icon2PathAnim = null;
+    this.icon2X = null;
+    this.icon2Y = null;
+    this.icon2Height = null;
+    this.icon2Width = null;
+    this.icon2Scale = null;
     this.icon2XAnim = null;
     this.icon2YAnim = null;
-    this.icon2ScaleAnim = 0.9;
+    this.icon2HeightAnim = null;
+    this.icon2WidthAnim = null;
+    this.icon2ScaleAnim = null;
+
+    //Public properties
+    this.icon1Color = "#222";
+    this.icon1Path = icon.githubalt;
+    this.icon1Rotate = null;
+    this.icon1Size = null;
+    this.icon1CenterX = null;
+    this.icon1CenterY = null;
+
+    this.icon1PathAnim = null;
+    this.icon1RotateAnim = null;
+    this.icon1SizeAnim = null;
+    this.icon1CenterXAnim = null;
+    this.icon1CenterYAnim = null;
+
+    this.icon2Color = "#222";
+    this.icon2Path = icon.star;
+    this.icon2Rotate = null;
+    this.icon2Size = null;
+    this.icon2CenterX = null;
+    this.icon2CenterY = null;
+
+    this.icon2PathAnim = null;
     this.icon2RotateAnim = null;
+    this.icon2SizeAnim = null;
+    this.icon2CenterXAnim = null;
+    this.icon2CenterYAnim = null;
 
     this.iconHref = "https://github.com/softwaretailoring/hybicon/stargazers";
     this.iconHrefTarget = "_blank";
@@ -97,7 +119,7 @@ hybicon.prototype.createIcon = function () {
         this.raphael.setViewBox(0, 0, 100, 100, true);
     }
 
-    this.setHoverProps();
+    this.setDefaultProps();
     this.hovered = false;
 
     this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Rotate);
@@ -124,7 +146,6 @@ hybicon.prototype.createIcon = function () {
         this.info.node.id = this.info.id;
         this.infotext = this.raphael.text(83, 83, this.infoText).attr({ transform: "r-45" });
     }
-
 
     this.icon1.id = this.getIcon1Id();
     this.icon1.node.id = this.icon1.id;
@@ -202,16 +223,62 @@ hybicon.prototype.clickHandler = function () {
     }
 };
 
+hybicon.prototype.getIconSizeTransform = function (icon, iconWidth, iconHeight, centerX, centerY) {
+
+    var transformAttrX = "";
+    var transformAttrY = "";
+
+    var relativePath = Raphael.pathToRelative(icon);
+    var bbox = Raphael.pathBBox(relativePath);
+    var pathcenterX = bbox.cx;
+    var pathcenterY = bbox.cy;
+    var width = bbox.width;
+    var height = bbox.height;
+
+    //Calculate path width & height
+    if (iconWidth !== null && iconHeight !== null) {
+        if (height > width) {
+            transformAttrX = (iconWidth / height);
+            transformAttrY = (iconHeight / height);
+        }
+        else {
+            transformAttrX = (iconWidth / width);
+            transformAttrY = (iconHeight / width);
+        }
+    }
+
+    var iconCenterX = centerX - pathcenterX;
+    var iconCenterY = centerY - pathcenterY;
+
+    return {
+        scale: transformAttrX.toString() + "," + transformAttrY.toString(),
+        iconX: iconCenterX,
+        iconY: iconCenterY
+    }
+};
 //Parse html5 data- attributes, the onmouseup event and anchor link
 hybicon.prototype.parseIcon = function (holderDiv) {
     if (holderDiv !== undefined &&
         holderDiv !== null) {
         //data-hybicon attribute is required
-        var hybiconData = holderDiv.hasAttribute("data-hybicon");
-        if (hybiconData) {
+        var hybiconHasData = holderDiv.hasAttribute("data-hybicon");
+        if (hybiconHasData) {
+
+            var hybiconData = holderDiv.getAttribute("data-hybicon");
+            var icons = hybiconData.split("-");
+            if (icons.length === 2) {
+                if (icon[icons[0]] !== undefined &&
+                    icon[icons[0]] !== null) {
+                    this.icon1Path = icon[icons[0]];
+                }
+                if (icon[icons[1]] !== undefined &&
+                    icon[icons[1]] !== null) {
+                    this.icon2Path = icon[icons[1]];
+                }
+            }
 
             //set predefined icons
-            this.setIcon(holderDiv.getAttribute("data-hybicon"));
+            this.setIcon(hybiconData);
 
             //data-hybicon-color
             var hybiconColor = holderDiv.getAttribute("data-hybicon-color");
@@ -280,18 +347,62 @@ hybicon.prototype.parseAll = function () {
 };
 
 //Set hover properties
-hybicon.prototype.setHoverProps = function () {
+hybicon.prototype.setDefaultProps = function () {
+
+    // icon1
+    if (this.icon1Size === null) { this.icon1Size = 75; }
+    if (this.icon1Height === null) { this.icon1Height = this.icon1Size; }
+    if (this.icon1Width === null) { this.icon1Width = this.icon1Size; }
+    if (this.icon1CenterX === null) { this.icon1CenterX = 45; }
+    if (this.icon1CenterY === null) { this.icon1CenterY = 55; }
+    if (this.icon1Rotate === null) { this.icon1Rotate = 0; }
+
+    var sizeTransform = this.getIconSizeTransform(this.icon1Path, this.icon1Width, this.icon1Height, this.icon1CenterX, this.icon1CenterY);
+    this.icon1Scale = sizeTransform.scale;
+    this.icon1X = sizeTransform.iconX;
+    this.icon1Y = sizeTransform.iconY;
+
+    if (this.icon1SizeAnim === null) { this.icon1SizeAnim = this.icon1Size; }
+    if (this.icon1HeightAnim === null) { this.icon1HeightAnim = this.icon1SizeAnim; }
+    if (this.icon1WidthAnim === null) { this.icon1WidthAnim = this.icon1SizeAnim; }
+    if (this.icon1CenterXAnim === null) { this.icon1CenterXAnim = this.icon1CenterX; }
+    if (this.icon1CenterYAnim === null) { this.icon1CenterYAnim = this.icon1CenterY; }
     if (this.icon1PathAnim === null) { this.icon1PathAnim = this.icon1Path; }
-    if (this.icon1XAnim === null) { this.icon1XAnim = this.icon1X; }
-    if (this.icon1YAnim === null) { this.icon1YAnim = this.icon1Y; }
-    if (this.icon1ScaleAnim === null) { this.icon1ScaleAnim = this.icon1Scale; }
     if (this.icon1RotateAnim === null) { this.icon1RotateAnim = this.icon1Rotate; }
 
+    var sizeTransformAnim = this.getIconSizeTransform(this.icon1PathAnim, this.icon1WidthAnim, this.icon1HeightAnim, this.icon1CenterXAnim, this.icon1CenterYAnim);
+    this.icon1ScaleAnim = sizeTransformAnim.scale;
+    this.icon1XAnim = sizeTransformAnim.iconX;
+    this.icon1YAnim = sizeTransformAnim.iconY;
+
+    // icon2
+    if (this.icon2Size === null) { this.icon2Size = 0; }
+    if (this.icon2Height === null) { this.icon2Height = this.icon2Size; }
+    if (this.icon2Width === null) { this.icon2Width = this.icon2Size; }
+    if (this.icon2CenterX === null) { this.icon2CenterX = 80; }
+    if (this.icon2CenterY === null) { this.icon2CenterY = 20; }
+    if (this.icon2Rotate === null) { this.icon2Rotate = 0; }
+
+    var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
+    this.icon2Scale = sizeTransform2.scale;
+    this.icon2X = sizeTransform2.iconX;
+    this.icon2Y = sizeTransform2.iconY;
+
+    if (this.icon2SizeAnim === null) {
+        if (this.icon2Size === 0) { this.icon2SizeAnim = 35; }
+        else { this.icon2SizeAnim = this.icon2Size; }
+    }
+    if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2SizeAnim; }
+    if (this.icon2WidthAnim === null) { this.icon2WidthAnim = this.icon2SizeAnim; }
+    if (this.icon2CenterXAnim === null) { this.icon2CenterXAnim = this.icon2CenterX; }
+    if (this.icon2CenterYAnim === null) { this.icon2CenterYAnim = this.icon2CenterY; }
     if (this.icon2PathAnim === null) { this.icon2PathAnim = this.icon2Path; }
-    if (this.icon2XAnim === null) { this.icon2XAnim = this.icon2X; }
-    if (this.icon2YAnim === null) { this.icon2YAnim = this.icon2Y; }
-    if (this.icon2ScaleAnim === null) { this.icon2ScaleAnim = this.icon2Scale; }
     if (this.icon2RotateAnim === null) { this.icon2RotateAnim = this.icon2Rotate; }
+
+    var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
+    this.icon2ScaleAnim = sizeTransform2Anim.scale;
+    this.icon2XAnim = sizeTransform2Anim.iconX;
+    this.icon2YAnim = sizeTransform2Anim.iconY;
 };
 
 hybicon.prototype.getIcon1Id = function () {
@@ -316,151 +427,56 @@ hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
 /* =========================== */
 
 hybicon.prototype.setIcon = function (iconName) {
+
     switch (iconName) {
-        case "github-star":
-            this.icon2RotateAnim = 216;
-            break;
         case "github-star-fix":
-            this.icon2X = 66;
-            this.icon2Y = 0;
+            this.icon2Size = 35;
+        case "github-star":
             this.icon2RotateAnim = 360;
-            this.icon2Scale = 0.9;
-            this.icon2XAnim = 66;
-            this.icon2YAnim = 0;
             break;
-        case "github-fork":
-            this.icon2Path = icon.fork;
+        case "twitter-bubble":
+            this.icon1CenterX = 36;
+            this.icon1Size = 65;
+            this.icon2SizeAnim = 31;
+            this.icon2CenterX = 82;
+            this.icon2CenterY = 22;
             break;
-        case "twitter-tweet":
-            this.icon1Path = icon.twitterbird;
-            this.icon2Path = icon.bubble;
-            this.icon1X = 22;
-            this.icon1Y = 31;
-            this.icon1Scale = 2.8;
-            this.icon2ScaleAnim = 1.1;
-            this.icon2X = 65;
-            this.icon2Y = 1;
-            break;
-        case "skype-call":
-            this.icon1Path = icon.skype;
-            this.icon2Path = icon.phone;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            break
-        case "linkedin-connect":
-            this.icon1Path = icon.linkedin;
-            this.icon2Path = icon.link;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1.2;
+        case "linkedin-link":
             this.icon2Rotate = 90;
+        case "gplus-plus":1
+        case "facebook-like":
+            this.icon1Size = 65;
+            this.icon2SizeAnim = 25;
             break;
-        case "gplus-plus":
-            this.icon1Path = icon.gplus;
-            this.icon2Path = icon.plus;
-            this.icon1Scale = 2;
-            this.icon2ScaleAnim = 1.2;
-            break;
-        case "mail-send":
-            this.icon1Path = icon.mail;
-            this.icon2Path = icon.paper;
-            this.icon1Scale = 2.4;
-            this.icon2ScaleAnim = 0.8;
-            break;
+        case "user-idea-change":
+            this.icon2Size = 35;
+            this.icon1PathAnim = icon.lamp_alt;
+            this.icon2PathAnim = icon.user;
         case "user-idea":
             this.icon1Path = icon.user;
             this.icon2Path = icon.lamp_alt;
-            this.icon2ScaleAnim = 1.4;
-            this.icon2X = 57;
-            this.icon2Y = 6;
+            this.icon1Size = 85;
+            this.icon1CenterX = 47;
+            this.icon2CenterX = 75;
+            this.icon2CenterY = 25;
             break;
-        case "facebook-like":
-            this.icon1Path = icon.facebook;
-            this.icon2Path = icon.like;
-            this.icon1Scale = 2;
-            this.icon2ScaleAnim = 0.7;
-            break;
-        case "ie-check":
-            this.icon1Path = icon.ie;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon1X = 23;
-            this.icon2X = 62;
-            break;
-        case "ie9-check":
-            this.icon1Path = icon.ie9;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon2X = 62;
-            break;
-        case "chrome-check":
-            this.icon1Path = icon.chrome;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon2X = 62;
-            break;
-        case "opera-check":
-            this.icon1Path = icon.opera;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon2X = 62;
-            break;
-        case "firefox-check":
-            this.icon1Path = icon.firefox;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon2X = 62;
-            break;
-        case "safari-check":
-            this.icon1Path = icon.safari;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon2X = 62;
-            this.icon1Y = 30;
-            break;
-        case "checkbox-checked":
-            this.icon1Path = icon.checkbox;
-            this.icon2Path = icon.check;
-            this.icon1Scale = 2.3;
-            this.icon2ScaleAnim = 1;
-            this.icon1X = 30;
-            this.icon1Y = 30;
-            this.icon2X = 30;
-            this.icon2Y = 30;
-            this.icon2ScaleAnim = 1.3;
+        case "checkbox-check":
+            this.icon1CenterX = 50;
+            this.icon1CenterY = 50;
+            this.icon2CenterX = 50;
+            this.icon2CenterY = 50;
+            this.icon2SizeAnim = 50;
             break;
         case "left-right":
             this.icon1Path = icon.dockouter;
             this.icon2Path = icon.dockinner;
-            this.icon2X = 37;
-            this.icon2XAnim = 17;
-            this.icon2Scale = 2.6;
-            this.icon2ScaleAnim = 2.6;
-            this.icon2Y = 28;
-            break;
-        case "view-noview":
-            this.icon1Path = icon.view;
-            this.icon1PathAnim = icon.noview;
-            this.icon2Path = null;
-            break;
-        case "book-search":
-            this.icon1Path = icon.book;
-            this.icon2Path = icon.search;
-            this.icon2ScaleAnim = 1.4;
-            this.icon2X = 63;
-            this.icon2Y = 5;
-            break;
-        case "code-download":
-            this.icon1Path = icon.cloudDown;
-            this.icon2Path = icon.code;
-            this.icon2ScaleAnim = 1.3;
-            this.icon2X = 61;
-            this.icon2Y = 7;
+            this.icon2Size = 40;
+            this.icon1CenterX = 50;
+            this.icon1CenterY = 50;
+            this.icon2CenterX = 40;
+            this.icon2CenterY = 50;
+            this.icon2CenterXAnim = 60;
+            this.icon2CenterYAnim = 50;
             break;
     }
 };
@@ -474,7 +490,7 @@ var icon = {
     githubalt: "M23.356,17.485c-0.004,0.007-0.007,0.013-0.01,0.021l0.162,0.005c0.107,0.004,0.218,0.01,0.33,0.016c-0.046-0.004-0.09-0.009-0.136-0.013L23.356,17.485zM15.5,1.249C7.629,1.25,1.25,7.629,1.249,15.5C1.25,23.371,7.629,29.75,15.5,29.751c7.871-0.001,14.25-6.38,14.251-14.251C29.75,7.629,23.371,1.25,15.5,1.249zM3.771,17.093c0.849-0.092,1.833-0.148,2.791-0.156c0.262,0,0.507-0.006,0.717-0.012c0.063,0.213,0.136,0.419,0.219,0.613H7.492c-0.918,0.031-2.047,0.152-3.134,0.335c-0.138,0.023-0.288,0.051-0.441,0.08C3.857,17.67,3.81,17.383,3.771,17.093zM12.196,22.224c-0.1,0.028-0.224,0.07-0.357,0.117c-0.479,0.169-0.665,0.206-1.15,0.206c-0.502,0.015-0.621-0.019-0.921-0.17C9.33,22.171,8.923,21.8,8.651,21.353c-0.453-0.746-1.236-1.275-1.889-1.275c-0.559,0-0.664,0.227-0.261,0.557c0.608,0.496,1.062,0.998,1.248,1.385c0.105,0.215,0.266,0.546,0.358,0.744c0.099,0.206,0.311,0.474,0.511,0.676c0.472,0.441,0.928,0.659,1.608,0.772c0.455,0.06,0.567,0.06,1.105-0.004c0.26-0.03,0.479-0.067,0.675-0.118v0.771c0,1.049-0.008,1.628-0.031,1.945c-1.852-0.576-3.507-1.595-4.848-2.934c-1.576-1.578-2.706-3.592-3.195-5.848c0.952-0.176,2.073-0.32,3.373-0.43l0.208-0.018c0.398,0.925,1.011,1.631,1.876,2.179c0.53,0.337,1.38,0.685,1.808,0.733c0.118,0.02,0.46,0.09,0.76,0.16c0.302,0.066,0.89,0.172,1.309,0.236h0.009c-0.007,0.018-0.014,0.02-0.022,0.02C12.747,21.169,12.418,21.579,12.196,22.224zM13.732,27.207c-0.168-0.025-0.335-0.056-0.5-0.087c0.024-0.286,0.038-0.785,0.054-1.723c0.028-1.767,0.041-1.94,0.156-2.189c0.069-0.15,0.17-0.32,0.226-0.357c0.095-0.078,0.101,0.076,0.101,2.188C13.769,26.143,13.763,26.786,13.732,27.207zM15.5,27.339c-0.148,0-0.296-0.006-0.443-0.012c0.086-0.562,0.104-1.428,0.106-2.871l0.003-1.82l0.197,0.019l0.199,0.02l0.032,2.365c0.017,1.21,0.027,1.878,0.075,2.296C15.613,27.335,15.558,27.339,15.5,27.339zM17.006,27.24c-0.039-0.485-0.037-1.243-0.027-2.553c0.019-1.866,0.019-1.866,0.131-1.769c0.246,0.246,0.305,0.623,0.305,2.373c0,0.928,0.011,1.497,0.082,1.876C17.334,27.196,17.17,27.22,17.006,27.24zM27.089,17.927c-0.155-0.029-0.307-0.057-0.446-0.08c-0.96-0.162-1.953-0.275-2.804-0.32c1.25,0.108,2.327,0.248,3.246,0.418c-0.479,2.289-1.618,4.33-3.214,5.928c-1.402,1.4-3.15,2.448-5.106,3.008c-0.034-0.335-0.058-1.048-0.066-2.212c-0.03-2.167-0.039-2.263-0.17-2.602c-0.181-0.458-0.47-0.811-0.811-1.055c-0.094-0.057-0.181-0.103-0.301-0.14c0.145-0.02,0.282-0.021,0.427-0.057c1.418-0.188,2.168-0.357,2.772-0.584c1.263-0.492,2.129-1.301,2.606-2.468c0.044-0.103,0.088-0.2,0.123-0.279l0.011,0.001c0.032-0.07,0.057-0.118,0.064-0.125c0.02-0.017,0.036-0.085,0.038-0.151c0-0.037,0.017-0.157,0.041-0.317c0.249,0.01,0.58,0.018,0.938,0.02c0.959,0.008,1.945,0.064,2.794,0.156C27.194,17.356,27.148,17.644,27.089,17.927zM25.823,16.87c-0.697-0.049-1.715-0.064-2.311-0.057c0.02-0.103,0.037-0.218,0.059-0.336c0.083-0.454,0.111-0.912,0.113-1.823c0.002-1.413-0.074-1.801-0.534-2.735c-0.188-0.381-0.399-0.705-0.655-0.998c0.225-0.659,0.207-1.68-0.02-2.575c-0.19-0.734-0.258-0.781-0.924-0.64c-0.563,0.12-1.016,0.283-1.598,0.576c-0.274,0.138-0.652,0.354-0.923,0.522c-0.715-0.251-1.451-0.419-2.242-0.508c-0.799-0.092-2.759-0.04-3.454,0.089c-0.681,0.126-1.293,0.28-1.848,0.462c-0.276-0.171-0.678-0.4-0.964-0.547C9.944,8.008,9.491,7.846,8.925,7.727c-0.664-0.144-0.732-0.095-0.922,0.64c-0.235,0.907-0.237,1.945-0.004,2.603c0.026,0.075,0.043,0.129,0.05,0.17c-0.942,1.187-1.25,2.515-1.046,4.367c0.053,0.482,0.136,0.926,0.251,1.333c-0.602-0.004-1.457,0.018-2.074,0.057c-0.454,0.031-0.957,0.076-1.418,0.129c-0.063-0.5-0.101-1.008-0.101-1.524c0-3.273,1.323-6.225,3.468-8.372c2.146-2.144,5.099-3.467,8.371-3.467c3.273,0,6.226,1.323,8.371,3.467c2.145,2.147,3.468,5.099,3.468,8.372c0,0.508-0.036,1.008-0.098,1.499C26.78,16.946,26.276,16.899,25.823,16.87z",
     star: "M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375z",
     fork: "M13.741,10.249h8.045v2.627l7.556-4.363l-7.556-4.363v2.598H9.826C11.369,7.612,12.616,8.922,13.741,10.249zM21.786,20.654c-0.618-0.195-1.407-0.703-2.291-1.587c-1.79-1.756-3.712-4.675-5.731-7.227c-2.049-2.486-4.159-4.972-7.451-5.091h-3.5v3.5h3.5c0.656-0.027,1.683,0.486,2.879,1.683c1.788,1.753,3.712,4.674,5.731,7.226c1.921,2.331,3.907,4.639,6.863,5.016v2.702l7.556-4.362l-7.556-4.362V20.654z",
-    twitterbird: "M26.492,9.493c-0.771,0.343-1.602,0.574-2.473,0.678c0.89-0.533,1.562-1.376,1.893-2.382c-0.832,0.493-1.753,0.852-2.734,1.044c-0.785-0.837-1.902-1.359-3.142-1.359c-2.377,0-4.306,1.928-4.306,4.306c0,0.337,0.039,0.666,0.112,0.979c-3.578-0.18-6.75-1.894-8.874-4.499c-0.371,0.636-0.583,1.375-0.583,2.165c0,1.494,0.76,2.812,1.915,3.583c-0.706-0.022-1.37-0.216-1.95-0.538c0,0.018,0,0.036,0,0.053c0,2.086,1.484,3.829,3.454,4.222c-0.361,0.099-0.741,0.147-1.134,0.147c-0.278,0-0.547-0.023-0.81-0.076c0.548,1.711,2.138,2.955,4.022,2.99c-1.474,1.146-3.33,1.842-5.347,1.842c-0.348,0-0.69-0.021-1.027-0.062c1.905,1.225,4.168,1.938,6.6,1.938c7.919,0,12.248-6.562,12.248-12.25c0-0.187-0.002-0.372-0.01-0.557C25.186,11.115,25.915,10.356,26.492,9.493z",
+    twitter: "M26.492,9.493c-0.771,0.343-1.602,0.574-2.473,0.678c0.89-0.533,1.562-1.376,1.893-2.382c-0.832,0.493-1.753,0.852-2.734,1.044c-0.785-0.837-1.902-1.359-3.142-1.359c-2.377,0-4.306,1.928-4.306,4.306c0,0.337,0.039,0.666,0.112,0.979c-3.578-0.18-6.75-1.894-8.874-4.499c-0.371,0.636-0.583,1.375-0.583,2.165c0,1.494,0.76,2.812,1.915,3.583c-0.706-0.022-1.37-0.216-1.95-0.538c0,0.018,0,0.036,0,0.053c0,2.086,1.484,3.829,3.454,4.222c-0.361,0.099-0.741,0.147-1.134,0.147c-0.278,0-0.547-0.023-0.81-0.076c0.548,1.711,2.138,2.955,4.022,2.99c-1.474,1.146-3.33,1.842-5.347,1.842c-0.348,0-0.69-0.021-1.027-0.062c1.905,1.225,4.168,1.938,6.6,1.938c7.919,0,12.248-6.562,12.248-12.25c0-0.187-0.002-0.372-0.01-0.557C25.186,11.115,25.915,10.356,26.492,9.493z",
     bubble: "M16,5.333c-7.732,0-14,4.701-14,10.5c0,1.982,0.741,3.833,2.016,5.414L2,25.667l5.613-1.441c2.339,1.317,5.237,2.107,8.387,2.107c7.732,0,14-4.701,14-10.5C30,10.034,23.732,5.333,16,5.333z",
     skype: "M28.777,18.438c0.209-0.948,0.318-1.934,0.318-2.944c0-7.578-6.144-13.722-13.724-13.722c-0.799,0-1.584,0.069-2.346,0.2C11.801,1.199,10.35,0.75,8.793,0.75c-4.395,0-7.958,3.562-7.958,7.958c0,1.47,0.399,2.845,1.094,4.024c-0.183,0.893-0.277,1.814-0.277,2.76c0,7.58,6.144,13.723,13.722,13.723c0.859,0,1.699-0.078,2.515-0.23c1.119,0.604,2.399,0.945,3.762,0.945c4.395,0,7.957-3.562,7.957-7.959C29.605,20.701,29.309,19.502,28.777,18.438zM22.412,22.051c-0.635,0.898-1.573,1.609-2.789,2.115c-1.203,0.5-2.646,0.754-4.287,0.754c-1.971,0-3.624-0.346-4.914-1.031C9.5,23.391,8.74,22.717,8.163,21.885c-0.583-0.842-0.879-1.676-0.879-2.479c0-0.503,0.192-0.939,0.573-1.296c0.375-0.354,0.857-0.532,1.432-0.532c0.471,0,0.878,0.141,1.209,0.422c0.315,0.269,0.586,0.662,0.805,1.174c0.242,0.558,0.508,1.027,0.788,1.397c0.269,0.355,0.656,0.656,1.151,0.89c0.497,0.235,1.168,0.354,1.992,0.354c1.135,0,2.064-0.241,2.764-0.721c0.684-0.465,1.016-1.025,1.016-1.711c0-0.543-0.173-0.969-0.529-1.303c-0.373-0.348-0.865-0.621-1.465-0.807c-0.623-0.195-1.47-0.404-2.518-0.623c-1.424-0.306-2.634-0.668-3.596-1.076c-0.984-0.419-1.777-1-2.357-1.727c-0.59-0.736-0.889-1.662-0.889-2.75c0-1.036,0.314-1.971,0.933-2.776c0.613-0.8,1.51-1.423,2.663-1.849c1.139-0.422,2.494-0.635,4.027-0.635c1.225,0,2.303,0.141,3.201,0.421c0.904,0.282,1.668,0.662,2.267,1.13c0.604,0.472,1.054,0.977,1.335,1.5c0.284,0.529,0.43,1.057,0.43,1.565c0,0.49-0.189,0.937-0.563,1.324c-0.375,0.391-0.851,0.589-1.408,0.589c-0.509,0-0.905-0.124-1.183-0.369c-0.258-0.227-0.523-0.58-0.819-1.09c-0.342-0.65-0.756-1.162-1.229-1.523c-0.463-0.351-1.232-0.529-2.292-0.529c-0.984,0-1.784,0.197-2.379,0.588c-0.572,0.375-0.85,0.805-0.85,1.314c0,0.312,0.09,0.574,0.273,0.799c0.195,0.238,0.471,0.447,0.818,0.621c0.36,0.182,0.732,0.326,1.104,0.429c0.382,0.106,1.021,0.263,1.899,0.466c1.11,0.238,2.131,0.506,3.034,0.793c0.913,0.293,1.703,0.654,2.348,1.072c0.656,0.429,1.178,0.979,1.547,1.635c0.369,0.658,0.558,1.471,0.558,2.416C23.371,20.119,23.049,21.148,22.412,22.051z",
     phone: "M22.065,18.53c-0.467-0.29-1.167-0.21-1.556,0.179l-3.093,3.092c-0.389,0.389-1.025,0.389-1.414,0L9.05,14.848c-0.389-0.389-0.389-1.025,0-1.414l2.913-2.912c0.389-0.389,0.447-1.075,0.131-1.524L6.792,1.485C6.476,1.036,5.863,0.948,5.433,1.29c0,0-4.134,3.281-4.134,6.295c0,12.335,10,22.334,22.334,22.334c3.015,0,5.948-5.533,5.948-5.533c0.258-0.486,0.087-1.122-0.38-1.412L22.065,18.53z",
