@@ -446,3 +446,22 @@ svg > #hybicon-iconMail-icon2 {
         padding-bottom: 25px;
     }
 }
+
+.centered {
+    text-align: center;
+}
+
+#hybicon-iconSize-icon2 { 
+    fill: #eafdf8;
+}
+
+svg > [id$=info] { 
+    fill: #939393;
+    stroke: #939393;
+}
+
+svg > [id$=infotext] > tspan { 
+    fill: #fff;
+    stroke: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
