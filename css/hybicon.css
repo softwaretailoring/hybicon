@@ -1,10 +1,10 @@
+/* Responsive */
 [class|=hybicon] > svg {
     width: 100%;
     height: 100%;
 }
 
 /* Size */
-
 .hybicon15 {
     height: 15px;
     width: 15px;
@@ -13,6 +13,11 @@
 .hybicon25 {
     height: 25px;
     width: 25px;
+}
+
+.hybicon30 {
+    height: 30px;
+    width: 30px;
 }
 
 .hybicon50 {
@@ -50,48 +55,53 @@
     width: 200px;
 }
 
-/* Info mode */
-[data-hybicon-inforight].hybicon15 {
+/* Infomode: right */
+[data-hybicon-infomode="right"].hybicon15 {
     height: 15px;
     width: 45px;
 }
 
-[data-hybicon-inforight].hybicon25 {
+[data-hybicon-infomode="right"].hybicon25 {
     height: 25px;
     width: 75px;
 }
 
-[data-hybicon-inforight].hybicon50 {
+[data-hybicon-infomode="right"].hybicon30 {
+    height: 30px;
+    width: 90px;
+}
+
+[data-hybicon-infomode="right"].hybicon50 {
     height: 50px;
     width: 150px;
 }
 
-[data-hybicon-inforight].hybicon75 {
+[data-hybicon-infomode="right"].hybicon75 {
     height: 75px;
     width: 225px;
 }
 
-[data-hybicon-inforight].hybicon100 {
+[data-hybicon-infomode="right"].hybicon100 {
     height: 100px;
     width: 300px;
 }
 
-[data-hybicon-inforight].hybicon125 {
+[data-hybicon-infomode="right"].hybicon125 {
     height: 125px;
     width: 375px;
 }
 
-[data-hybicon-inforight].hybicon150 {
+[data-hybicon-infomode="right"].hybicon150 {
     height: 150px;
     width: 450px;
 }
 
-[data-hybicon-inforight].hybicon175 {
+[data-hybicon-infomode="right"].hybicon175 {
     height: 175px;
     width: 525px;
 }
 
-[data-hybicon-inforight].hybicon200 {
+[data-hybicon-infomode="right"].hybicon200 {
     height: 200px;
     width: 600px;
 }
@@ -109,6 +119,11 @@
     margin-left: auto;
 }
 
-.hybicon-border {
+/* Style */
+.hybicon-border > svg {
     border: solid;
+}
+
+.hybicon-rounded > svg {
+    border-radius: 15%;
 }
