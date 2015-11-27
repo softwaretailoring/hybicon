@@ -13,6 +13,10 @@ header {
     margin-bottom: 30px;
 }
 
+.github {
+    background-color: #4183c4;
+}
+
 @media (max-width: 768px) {
     header {
         margin-bottom: 0;
@@ -464,4 +468,12 @@ svg > [id$=infotext] > tspan {
     fill: #fff;
     stroke: none;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.hybicon-border > svg {
+    border: solid;
+}
+
+.hybicon-rounded > svg {
+    border-radius: 15%;
 }

@@ -26,6 +26,8 @@ var setHybicons = function () {
 
 var setMode = function (mode, modevalue) {
     var hybicons = document.querySelectorAll('[data-hybicon]');
+
+    if (modevalue === undefined) { modevalue = ""; }
     
     for (var i = 0; i < hybicons.length; i++) {
         var hybiconId = hybicons[i].id;
@@ -92,6 +94,27 @@ var setStyle = function () {
     }
 };
 
+var setDetails = function (mode) {
+    
+    var details = "Please click the icons above for details";
+
+    switch (mode) {
+        case "hover":
+            details = "Hover mode is suitable for links and navigate to outside the page.";
+            break;
+        case "click":
+            details = "Click mode is perfect for switchers and call a method inside the page.";
+            break;
+        case "info":
+            details = "Info mode when you want to show more. Psst. There is a <a href='github.html'>GitHub API</a>";
+            break;
+        default:
+
+    }
+
+    document.getElementById("details").innerHTML = details;
+};
+
 var setGitHubSize = function () {
     var divGitHubStar = document.getElementById("divGitHubStar");
     var divGitHubFork = document.getElementById("divGitHubFork");
@@ -101,20 +124,17 @@ var setGitHubSize = function () {
 
     var infomode = "";
     var hovermode = "";
-    var currentClass = "";
-    var nextClass = "";
+    var iconSize = 100;
 
     if (divGitHubStar.getAttribute("data-hybicon-infomode") === "") {
         infomode = "right";
         hovermode = "switch";
-        currentClass = "hybicon150";
-        nextClass = "hybicon30";
+        iconSize = 32;
     }
     else {
         infomode = "";
         hovermode = "rotate";
-        currentClass = "hybicon30";
-        nextClass = "hybicon150";
+        iconSize = 150;
     }
 
     // set infomode
@@ -132,17 +152,11 @@ var setGitHubSize = function () {
     divGitHubDownload.setAttribute("data-hybicon-hovermode", hovermode);
 
     // set size
-    divGitHubStar.classList.remove(currentClass);
-    divGitHubFork.classList.remove(currentClass);
-    divGitHubWatch.classList.remove(currentClass);
-    divGitHubIssue.classList.remove(currentClass);
-    divGitHubDownload.classList.remove(currentClass);
-
-    divGitHubStar.classList.add(nextClass);
-    divGitHubFork.classList.add(nextClass);
-    divGitHubWatch.classList.add(nextClass);
-    divGitHubIssue.classList.add(nextClass);
-    divGitHubDownload.classList.add(nextClass);
+    divGitHubStar.setAttribute("data-hybicon-size", iconSize);
+    divGitHubFork.setAttribute("data-hybicon-size", iconSize);
+    divGitHubWatch.setAttribute("data-hybicon-size", iconSize);
+    divGitHubIssue.setAttribute("data-hybicon-size", iconSize);
+    divGitHubDownload.setAttribute("data-hybicon-size", iconSize);
 
     hybiconsgithub();
 };
