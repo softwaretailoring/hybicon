@@ -334,6 +334,10 @@ hr {
     stroke-width: 0.5;
 }
 
+#hybicon-iconBrightness-icon1 {
+    stroke-width: 0.7;
+}
+
 .styledark svg > #hybicon-iconBrightness-icon2 { 
     fill: #fff;
     stroke: #fff;

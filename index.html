@@ -14,7 +14,6 @@
     <!-- Bootstrap core CSS -->
     <link href="css/for-doc/bootstrap.min.css" rel="stylesheet">
     <link href="css/for-doc/index.min.css" rel="stylesheet">
-    <link href="css/hybicon.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,9 +26,9 @@
     <script src="js/hybicon.min.js"></script>
     <script type="text/javascript">
 
-        window.onload = function () {
-            hybicons();
-        };
+        //window.onload = function () {
+        //    hybicons();
+        //};
 
     </script>
 </head>
@@ -39,11 +38,11 @@
     <header class="inverse">
         <div class="row">
             <div class="col-xs-5">
-                <div id="userideaheaderintro" class="hybicon150 hybicon-right" data-hybicon="user-idea-change" data-hybicon-hovermode></div>
+                <div id="userideaheaderintro" data-hybicon="user-idea-change" data-hybicon-align="right" data-hybicon-hovermode ></div>
             </div>
             <div class="col-xs-5">
                 <h1 class="fontface pull-left">&nbsp;&nbsp;HYBICON&nbsp;&nbsp;</h1><br />
-                <h4 style="margin: auto;">JavaScript library to use SVG icons together.</h4>
+                <h5 class="fontface" style="margin: auto;">JavaScript library to use SVG icons together.</h5>
             </div>
         </div>
     </header>
@@ -53,19 +52,21 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="smalltitle">Hover</div>
-                <div id="iconTwitter" class="hybicon200 hybicon-center" data-hybicon="twitter-bubble" data-hybicon-hovermode></div>
+                <div id="iconTwitter" data-hybicon="twitter-bubble" data-hybicon-size="200" data-hybicon-hovermode onclick="setDetails('hover');"></div>
             </div>
             <div class="col-sm-4">
                 <div class="smalltitle">Click</div>
-                <div id="iconBrightness" class="hybicon200 hybicon-center" data-hybicon="left-right" data-hybicon-clickmode onclick="setStyle();"></div>
+                <div id="iconBrightness" data-hybicon="left-right" data-hybicon-size="200" data-hybicon-clickmode onclick="setStyle(); setDetails('click');"></div>
             </div>
             <div class="col-sm-4">
                 <div class="smalltitle">Info</div>
-                <div id="iconGitHub" class="hybicon200 hybicon-center hybicon-rounded hybicon-border" data-hybicon="github-star-fix" data-hybicon-infomode data-hybicon-infotext="0" data-hybicon-hovermode></div>
+                <div id="iconGitHub" class="hybicon-rounded hybicon-border" data-hybicon-size="200" data-hybicon="github-starred" data-hybicon-infomode data-hybicon-infotext="99999" data-hybicon-hovermode="rotate" onclick="setDetails('info');"></div>
             </div>
         </div>
     </div>
     <br />
+    <br />
+    <h3 id="details" class="fontface">Please click the icons above for details</h3>
     <br />
     <br />
     <div class="container inverse rounded" id="download">
@@ -75,14 +76,12 @@
             <div class="col-sm-4">
                 <div class="smalltitle">Documentation</div>
                 <a href="documentation.html">
-                    <div id="iconDocumentation" class="hybicon100 hybicon-center" data-hybicon="book-search" data-hybicon-hovermode>
-
-                    </div>
+                    <div id="iconDocumentation" data-hybicon="book-search" data-hybicon-size="100" data-hybicon-hovermode></div>
                 </a>
             </div>
             <div class="col-sm-4">
                 <div class="smalltitle">Download</div>
-                <div id="iconDownload" class="hybicon100 hybicon-center" data-hybicon="download-code" data-hybicon-hovermode></div>
+                <div id="iconDownload" data-hybicon="download-code" data-hybicon-size="100" data-hybicon-hovermode></div>
             </div>
             <div class="col-sm-2"></div>
         </div>
@@ -94,7 +93,7 @@
         <table style="margin:auto;">
             <tr>
                 <td>HYBICON v1.0&nbsp;&nbsp;</td>
-                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" class="hybicon25 hybicon-center" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!" ></div></a></td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" data-hybicon-size="25" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!" ></div></a></td>
                 <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
             </tr>
         </table>

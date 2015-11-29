@@ -25,26 +25,24 @@ hybicon = function (divId) {
         this.holderId = divId;
     }
 
-    var holderDiv = document.getElementById(divId);
+    this.holderDiv = document.getElementById(divId);
 
-    if ((holderDiv === null ||
-        holderDiv === undefined)) {
+    if ((this.holderDiv === null ||
+        this.holderDiv === undefined)) {
         return this;
     }
     
     //Prepare raphael object and set the width
     var removeChildrens = [];
-    for (var i = 0; i < holderDiv.children.length; i++) {
-        if (holderDiv.children[i].localName === "svg") {
-            removeChildrens.push(holderDiv.children[i]);
+    for (var i = 0; i < this.holderDiv.children.length; i++) {
+        if (this.holderDiv.children[i].localName === "svg") {
+            removeChildrens.push(this.holderDiv.children[i]);
         }
     }
 
     for (var i = 0; i < removeChildrens.length; i++) {
-        holderDiv.removeChild(removeChildrens[i]);
+        this.holderDiv.removeChild(removeChildrens[i]);
     }
-
-    this.raphael = new Raphael(divId);
 
     //Private properties
     this.icon1X = null;
@@ -104,7 +102,11 @@ hybicon = function (divId) {
     this.infoText = "hybicon";
     this.infoStrokeColor = "#222";
     this.infoTextColor = "#222";
-    this.parseIcon(holderDiv);
+
+    this.hybiconSize = 150;
+    this.hybiconAlign = "center";
+
+    this.parseIcon();
 
     return this;
 };
@@ -114,8 +116,41 @@ hybicon.prototype.createIcon = function () {
     var iconWidth = 100;
     var iconHeight = 100;
 
-    if (this.infoMode === "right") { iconWidth = 300; }
+    var infoType = null;
+    var infoSize = 0;
 
+    if (this.infoMode !== null) {
+        var infoModeParams = this.infoMode.split('-');
+        if (infoModeParams.length > 1) {
+            infoType = infoModeParams[0];
+            infoSize = Number(infoModeParams[1]);
+            console.log(infoSize);
+        }
+        else {
+            infoType = this.infoMode;
+            if (infoType === "right") { infoSize = 200; }
+        }
+    }
+
+    iconWidth += infoSize;
+
+    // Set style
+    this.holderDiv.style.width = ((iconWidth / 100) * this.hybiconSize).toString() + "px";
+    this.holderDiv.style.height = this.hybiconSize + "px";
+
+    switch (this.hybiconAlign) {
+        case "left":
+            this.holderDiv.style.marginRight = "auto";
+            break;
+        case "right":
+            this.holderDiv.style.marginLeft = "auto";
+            break;
+        default:
+            this.holderDiv.style.margin = "auto";
+    }
+
+    //this.holderDiv.setAttribute("style", "width:" + ((iconWidth / 100) * this.hybiconSize).toString() + "px;height:" + this.hybiconSize + "px");
+    this.raphael = new Raphael(this.holderId);
     this.raphael.setViewBox(0, 0, iconWidth, iconHeight, true);
 
     this.setDefaultProps();
@@ -139,24 +174,30 @@ hybicon.prototype.createIcon = function () {
         this.icon2.attr({ transform: this.icon2TransformAnim });
     }
 
-    if (this.infoMode !== null) {
-        if (this.infoMode === "" ||
-            this.infoMode === "bottomright") {
+    if (infoType !== null) {
+        if (infoType === "" ||
+            infoType === "bottomright") {
             this.infoFont = '100 12px Impact, Charcoal, sans-serif';
             this.info = this.raphael.path(icon.infobottomright);
             this.infotext = this.raphael.text(83, 83, this.infoText).attr({ transform: "r-45" });
         }
-        if (this.infoMode === "right") {
+
+        if (infoType === "right") {
             this.infoFont = '100 50px Impact, Charcoal, sans-serif';
-            this.info = this.raphael.path(icon.inforight);
-            this.infotext = this.raphael.text(205, 50, this.infoText);
+            var infoScaleX = (infoSize / 200);
+            var infoTranslateX = ((infoSize - 200) / 2) - 3;
+            this.info = this.raphael.path(icon.inforight).attr({ transform: "s" + infoScaleX + ",1,T" + infoTranslateX + ",0" });
+            this.infotext = this.raphael.text(100 + (infoSize / 2), 50, this.infoText);
         }
-        this.info.attr({ stroke: this.infoStrokeColor, 'stroke-width': 2 });
-        this.infotext.attr({ font: this.infoFont, fill: this.infoTextColor, stroke: 'none' });
-        this.info.id = this.getInfoId();
-        this.info.node.id = this.info.id;
-        this.infotext.id = this.getInfoTextId();
-        this.infotext.node.id = this.infotext.id;
+
+        if (this.info != null) {
+            this.info.attr({ stroke: this.infoStrokeColor, 'stroke-width': 2 });
+            this.infotext.attr({ font: this.infoFont, fill: this.infoTextColor, stroke: 'none' });
+            this.info.id = this.getInfoId();
+            this.info.node.id = this.info.id;
+            this.infotext.id = this.getInfoTextId();
+            this.infotext.node.id = this.infotext.id;
+        }
     }
 
     this.icon1.id = this.getIcon1Id();
@@ -258,14 +299,14 @@ hybicon.prototype.getIconSizeTransform = function (icon, iconWidth, iconHeight, 
 };
 
 //Parse html5 data- attributes, the onmouseup event and anchor link
-hybicon.prototype.parseIcon = function (holderDiv) {
-    if (holderDiv !== undefined &&
-        holderDiv !== null) {
+hybicon.prototype.parseIcon = function () {
+    if (this.holderDiv !== undefined &&
+        this.holderDiv !== null) {
         //data-hybicon attribute is required
-        var hybiconHasData = holderDiv.hasAttribute("data-hybicon");
+        var hybiconHasData = this.holderDiv.hasAttribute("data-hybicon");
         if (hybiconHasData) {
 
-            var hybiconData = holderDiv.getAttribute("data-hybicon");
+            var hybiconData = this.holderDiv.getAttribute("data-hybicon");
 
             // set primary and secondary icons
             var icons = hybiconData.split("-");
@@ -292,33 +333,45 @@ hybicon.prototype.parseIcon = function (holderDiv) {
             //set predefined icons
             this.setIcon(hybiconData);
 
+            //data-hybicon-size
+            var hybiconSize = this.holderDiv.getAttribute("data-hybicon-size");
+            if (hybiconSize !== null) {
+                this.hybiconSize = hybiconSize;
+            }
+
+            //data-hybicon-align
+            var hybiconAlign = this.holderDiv.getAttribute("data-hybicon-align");
+            if (hybiconAlign !== null) {
+                this.hybiconAlign = hybiconAlign;
+            }
+
             //data-hybicon-color
-            var hybiconColor = holderDiv.getAttribute("data-hybicon-color");
+            var hybiconColor = this.holderDiv.getAttribute("data-hybicon-color");
             if (hybiconColor !== null) {
                 this.icon1Color = hybiconColor;
                 this.icon2Color = hybiconColor;
             }
 
             //data-hybicon-hovermode
-            var hybiconHovermode = holderDiv.getAttribute("data-hybicon-hovermode");
+            var hybiconHovermode = this.holderDiv.getAttribute("data-hybicon-hovermode");
             if (hybiconHovermode !== null) {
                 this.hoverMode = hybiconHovermode;
             }
 
             //data-hybicon-clickmode
-            var hybiconClickmode = holderDiv.getAttribute("data-hybicon-clickmode");
+            var hybiconClickmode = this.holderDiv.getAttribute("data-hybicon-clickmode");
             if (hybiconClickmode !== null) {
                 this.clickMode = hybiconClickmode;
             }
 
             //data-hybicon-infomode
-            var hybiconInfomode = holderDiv.getAttribute("data-hybicon-infomode");
+            var hybiconInfomode = this.holderDiv.getAttribute("data-hybicon-infomode");
             if (hybiconInfomode !== null) {
                 this.infoMode = hybiconInfomode;
             }
 
             //data-hybicon-infotext
-            var hybiconInfotext = holderDiv.getAttribute("data-hybicon-infotext");
+            var hybiconInfotext = this.holderDiv.getAttribute("data-hybicon-infotext");
             if (hybiconInfotext !== null) {
                 this.infoText = hybiconInfotext;
             }
@@ -327,14 +380,14 @@ hybicon.prototype.parseIcon = function (holderDiv) {
         }
 
         var removeChildrens = [];
-        for (var i = 0; i < holderDiv.children.length; i++) {
-            if (holderDiv.children[i].localName !== "svg") {
-                removeChildrens.push(holderDiv.children[i]);
+        for (var i = 0; i < this.holderDiv.children.length; i++) {
+            if (this.holderDiv.children[i].localName !== "svg") {
+                removeChildrens.push(this.holderDiv.children[i]);
             }
         }
 
         for (var i = 0; i < removeChildrens.length; i++) {
-            holderDiv.removeChild(removeChildrens[i]);
+            this.holderDiv.removeChild(removeChildrens[i]);
         }
     }
 };
@@ -343,7 +396,25 @@ hybicon.prototype.parseAll = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
 
     for (var i = 0; i < hybicons.length; i++) {
-        new hybicon(hybicons[i].id);
+        var hybiconid = hybicons[i].id;
+        if (hybiconid === "")
+        {
+            hybiconid = hybicons[i].getAttribute("data-hybicon");
+            if (hybiconid === "") { hybiconid = "hybicon"; };
+            if (document.getElementById(hybiconid)) {
+                thishybicon = document.getElementById(hybiconid);
+                var counter = 1;
+                while (thishybicon) {
+                    counter++;
+                    var newhybiconid = hybiconid + counter;
+                    thishybicon = document.getElementById(newhybiconid);
+                }
+                hybiconid += counter;
+            }
+            hybicons[i].id = hybiconid;
+        }
+
+        new hybicon(hybiconid);
     }
 };
 
@@ -459,12 +530,6 @@ hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
 hybicon.prototype.setIcon = function (iconName) {
 
     switch (iconName) {
-        case "github-star-fix":
-            this.icon1Path = icon.githubalt;
-            this.icon2Size = 35;
-        case "github-star":
-            this.icon2RotateAnim = 360;
-            break;
         case "twitter-bubble":
             this.icon1CenterX = 36;
             this.icon1Size = 65;
@@ -474,7 +539,7 @@ hybicon.prototype.setIcon = function (iconName) {
             break;
         case "linkedin-link":
             this.icon2Rotate = 90;
-        case "gplus-plus":1
+        case "gplus-plus":
         case "facebook-like":
             this.icon1Size = 65;
             this.icon2SizeAnim = 25;
@@ -511,12 +576,13 @@ hybicon.prototype.setIcon = function (iconName) {
         case "left-right":
             this.icon1Path = icon.dockouter;
             this.icon2Path = icon.dockinner;
-            this.icon2Size = 40;
+            this.icon1Size = 95;
+            this.icon2Size = 33;
             this.icon1CenterX = 50;
             this.icon1CenterY = 50;
-            this.icon2CenterX = 40;
+            this.icon2CenterX = 24;
             this.icon2CenterY = 50;
-            this.icon2CenterXAnim = 60;
+            this.icon2CenterXAnim = 76;
             this.icon2CenterYAnim = 50;
             break;
     }
@@ -529,7 +595,7 @@ hybicon.prototype.setIcon = function (iconName) {
 var icon = {
     infobottomright: "M100,50,L50,100,L100,100,z",
     inforight: "m 297.34441,21.317398 q 0,-9.703729 -12.41277,-9.703729 l -161.36591,0 q -12.41276,0 -12.41276,9.703729 l 0,19.407449 -11.112757,9.703727 11.112757,9.703722 0,19.407453 q 0,9.703728 12.41276,9.703728 l 161.36591,0 q 12.41277,0 12.41277,-9.703728 z",
-    empty: "M0,0", 
+    empty: "M0,0",
     //Author of these icons: http://raphaeljs.com/icons
     githubalt: "M23.356,17.485c-0.004,0.007-0.007,0.013-0.01,0.021l0.162,0.005c0.107,0.004,0.218,0.01,0.33,0.016c-0.046-0.004-0.09-0.009-0.136-0.013L23.356,17.485zM15.5,1.249C7.629,1.25,1.25,7.629,1.249,15.5C1.25,23.371,7.629,29.75,15.5,29.751c7.871-0.001,14.25-6.38,14.251-14.251C29.75,7.629,23.371,1.25,15.5,1.249zM3.771,17.093c0.849-0.092,1.833-0.148,2.791-0.156c0.262,0,0.507-0.006,0.717-0.012c0.063,0.213,0.136,0.419,0.219,0.613H7.492c-0.918,0.031-2.047,0.152-3.134,0.335c-0.138,0.023-0.288,0.051-0.441,0.08C3.857,17.67,3.81,17.383,3.771,17.093zM12.196,22.224c-0.1,0.028-0.224,0.07-0.357,0.117c-0.479,0.169-0.665,0.206-1.15,0.206c-0.502,0.015-0.621-0.019-0.921-0.17C9.33,22.171,8.923,21.8,8.651,21.353c-0.453-0.746-1.236-1.275-1.889-1.275c-0.559,0-0.664,0.227-0.261,0.557c0.608,0.496,1.062,0.998,1.248,1.385c0.105,0.215,0.266,0.546,0.358,0.744c0.099,0.206,0.311,0.474,0.511,0.676c0.472,0.441,0.928,0.659,1.608,0.772c0.455,0.06,0.567,0.06,1.105-0.004c0.26-0.03,0.479-0.067,0.675-0.118v0.771c0,1.049-0.008,1.628-0.031,1.945c-1.852-0.576-3.507-1.595-4.848-2.934c-1.576-1.578-2.706-3.592-3.195-5.848c0.952-0.176,2.073-0.32,3.373-0.43l0.208-0.018c0.398,0.925,1.011,1.631,1.876,2.179c0.53,0.337,1.38,0.685,1.808,0.733c0.118,0.02,0.46,0.09,0.76,0.16c0.302,0.066,0.89,0.172,1.309,0.236h0.009c-0.007,0.018-0.014,0.02-0.022,0.02C12.747,21.169,12.418,21.579,12.196,22.224zM13.732,27.207c-0.168-0.025-0.335-0.056-0.5-0.087c0.024-0.286,0.038-0.785,0.054-1.723c0.028-1.767,0.041-1.94,0.156-2.189c0.069-0.15,0.17-0.32,0.226-0.357c0.095-0.078,0.101,0.076,0.101,2.188C13.769,26.143,13.763,26.786,13.732,27.207zM15.5,27.339c-0.148,0-0.296-0.006-0.443-0.012c0.086-0.562,0.104-1.428,0.106-2.871l0.003-1.82l0.197,0.019l0.199,0.02l0.032,2.365c0.017,1.21,0.027,1.878,0.075,2.296C15.613,27.335,15.558,27.339,15.5,27.339zM17.006,27.24c-0.039-0.485-0.037-1.243-0.027-2.553c0.019-1.866,0.019-1.866,0.131-1.769c0.246,0.246,0.305,0.623,0.305,2.373c0,0.928,0.011,1.497,0.082,1.876C17.334,27.196,17.17,27.22,17.006,27.24zM27.089,17.927c-0.155-0.029-0.307-0.057-0.446-0.08c-0.96-0.162-1.953-0.275-2.804-0.32c1.25,0.108,2.327,0.248,3.246,0.418c-0.479,2.289-1.618,4.33-3.214,5.928c-1.402,1.4-3.15,2.448-5.106,3.008c-0.034-0.335-0.058-1.048-0.066-2.212c-0.03-2.167-0.039-2.263-0.17-2.602c-0.181-0.458-0.47-0.811-0.811-1.055c-0.094-0.057-0.181-0.103-0.301-0.14c0.145-0.02,0.282-0.021,0.427-0.057c1.418-0.188,2.168-0.357,2.772-0.584c1.263-0.492,2.129-1.301,2.606-2.468c0.044-0.103,0.088-0.2,0.123-0.279l0.011,0.001c0.032-0.07,0.057-0.118,0.064-0.125c0.02-0.017,0.036-0.085,0.038-0.151c0-0.037,0.017-0.157,0.041-0.317c0.249,0.01,0.58,0.018,0.938,0.02c0.959,0.008,1.945,0.064,2.794,0.156C27.194,17.356,27.148,17.644,27.089,17.927zM25.823,16.87c-0.697-0.049-1.715-0.064-2.311-0.057c0.02-0.103,0.037-0.218,0.059-0.336c0.083-0.454,0.111-0.912,0.113-1.823c0.002-1.413-0.074-1.801-0.534-2.735c-0.188-0.381-0.399-0.705-0.655-0.998c0.225-0.659,0.207-1.68-0.02-2.575c-0.19-0.734-0.258-0.781-0.924-0.64c-0.563,0.12-1.016,0.283-1.598,0.576c-0.274,0.138-0.652,0.354-0.923,0.522c-0.715-0.251-1.451-0.419-2.242-0.508c-0.799-0.092-2.759-0.04-3.454,0.089c-0.681,0.126-1.293,0.28-1.848,0.462c-0.276-0.171-0.678-0.4-0.964-0.547C9.944,8.008,9.491,7.846,8.925,7.727c-0.664-0.144-0.732-0.095-0.922,0.64c-0.235,0.907-0.237,1.945-0.004,2.603c0.026,0.075,0.043,0.129,0.05,0.17c-0.942,1.187-1.25,2.515-1.046,4.367c0.053,0.482,0.136,0.926,0.251,1.333c-0.602-0.004-1.457,0.018-2.074,0.057c-0.454,0.031-0.957,0.076-1.418,0.129c-0.063-0.5-0.101-1.008-0.101-1.524c0-3.273,1.323-6.225,3.468-8.372c2.146-2.144,5.099-3.467,8.371-3.467c3.273,0,6.226,1.323,8.371,3.467c2.145,2.147,3.468,5.099,3.468,8.372c0,0.508-0.036,1.008-0.098,1.499C26.78,16.946,26.276,16.899,25.823,16.87z",
     star: "M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375z",
@@ -557,8 +623,10 @@ var icon = {
     safari: "M16.154,5.135c-0.504,0-1,0.031-1.488,0.089l-0.036-0.18c-0.021-0.104-0.06-0.198-0.112-0.283c0.381-0.308,0.625-0.778,0.625-1.306c0-0.927-0.751-1.678-1.678-1.678s-1.678,0.751-1.678,1.678c0,0.745,0.485,1.376,1.157,1.595c-0.021,0.105-0.021,0.216,0,0.328l0.033,0.167C7.645,6.95,3.712,11.804,3.712,17.578c0,6.871,5.571,12.441,12.442,12.441c6.871,0,12.441-5.57,12.441-12.441C28.596,10.706,23.025,5.135,16.154,5.135zM16.369,8.1c4.455,0,8.183,3.116,9.123,7.287l-0.576,0.234c-0.148-0.681-0.755-1.191-1.48-1.191c-0.837,0-1.516,0.679-1.516,1.516c0,0.075,0.008,0.148,0.018,0.221l-2.771-0.028c-0.054-0.115-0.114-0.226-0.182-0.333l3.399-5.11l0.055-0.083l-4.766,4.059c-0.352-0.157-0.74-0.248-1.148-0.256l0.086-0.018l-1.177-2.585c0.64-0.177,1.111-0.763,1.111-1.459c0-0.837-0.678-1.515-1.516-1.515c-0.075,0-0.147,0.007-0.219,0.018l0.058-0.634C15.357,8.141,15.858,8.1,16.369,8.1zM12.146,3.455c0-0.727,0.591-1.318,1.318-1.318c0.727,0,1.318,0.591,1.318,1.318c0,0.425-0.203,0.802-0.516,1.043c-0.183-0.123-0.413-0.176-0.647-0.13c-0.226,0.045-0.413,0.174-0.535,0.349C12.542,4.553,12.146,4.049,12.146,3.455zM7.017,17.452c0-4.443,3.098-8.163,7.252-9.116l0.297,0.573c-0.61,0.196-1.051,0.768-1.051,1.442c0,0.837,0.678,1.516,1.515,1.516c0.068,0,0.135-0.006,0.2-0.015l-0.058,2.845l0.052-0.011c-0.442,0.204-0.824,0.513-1.116,0.895l0.093-0.147l-1.574-0.603l1.172,1.239l0.026-0.042c-0.19,0.371-0.306,0.788-0.324,1.229l-0.003-0.016l-2.623,1.209c-0.199-0.604-0.767-1.041-1.438-1.041c-0.837,0-1.516,0.678-1.516,1.516c0,0.064,0.005,0.128,0.013,0.191l-0.783-0.076C7.063,18.524,7.017,17.994,7.017,17.452zM16.369,26.805c-4.429,0-8.138-3.078-9.106-7.211l0.691-0.353c0.146,0.686,0.753,1.2,1.482,1.2c0.837,0,1.515-0.679,1.515-1.516c0-0.105-0.011-0.207-0.031-0.307l2.858,0.03c0.045,0.095,0.096,0.187,0.15,0.276l-3.45,5.277l0.227-0.195l4.529-3.92c0.336,0.153,0.705,0.248,1.094,0.266l-0.019,0.004l1.226,2.627c-0.655,0.166-1.142,0.76-1.142,1.468c0,0.837,0.678,1.515,1.516,1.515c0.076,0,0.151-0.007,0.225-0.018l0.004,0.688C17.566,26.746,16.975,26.805,16.369,26.805zM18.662,26.521l-0.389-0.6c0.661-0.164,1.152-0.759,1.152-1.47c0-0.837-0.68-1.516-1.516-1.516c-0.066,0-0.13,0.005-0.193,0.014v-2.86l-0.025,0.004c0.409-0.185,0.77-0.459,1.055-0.798l1.516,0.659l-1.104-1.304c0.158-0.335,0.256-0.704,0.278-1.095l2.552-1.164c0.19,0.618,0.766,1.068,1.447,1.068c0.838,0,1.516-0.679,1.516-1.516c0-0.069-0.006-0.137-0.016-0.204l0.65,0.12c0.089,0.517,0.136,1.049,0.136,1.591C25.722,21.826,22.719,25.499,18.662,26.521z",
     checkbox: "M26,27.5H6c-0.829,0-1.5-0.672-1.5-1.5V6c0-0.829,0.671-1.5,1.5-1.5h20c0.828,0,1.5,0.671,1.5,1.5v20C27.5,26.828,26.828,27.5,26,27.5zM7.5,24.5h17v-17h-17V24.5z",
     checked: "M29.548,3.043c-1.081-0.859-2.651-0.679-3.513,0.401L16,16.066l-3.508-4.414c-0.859-1.081-2.431-1.26-3.513-0.401c-1.081,0.859-1.261,2.432-0.401,3.513l5.465,6.875c0.474,0.598,1.195,0.944,1.957,0.944c0.762,0,1.482-0.349,1.957-0.944L29.949,6.556C30.809,5.475,30.629,3.902,29.548,3.043zM24.5,24.5h-17v-17h12.756l2.385-3H6C5.171,4.5,4.5,5.171,4.5,6v20c0,0.828,0.671,1.5,1.5,1.5h20c0.828,0,1.5-0.672,1.5-1.5V12.851l-3,3.773V24.5z",
-    dockouter: "M3.084,7.333v16.334h24.832V7.333H3.084z",
-    dockinner: "M11.667,10.332h13.251v10.336H11.667V10.332z",
+    dockoutersquare: "M3.084,7.333v16.334h24.832V7.333H3.084z",
+    dockinnersquare: "M11.667,10.332h13.251v10.336H11.667V10.332z",
+    dockouter: "m 37.937156,21.906019 -23.753574,0 c -5.7008582,0 -10.2932159,-4.46503 -10.2932159,-10.007826 l 0,0 c 0,-5.5427966 4.5923577,-10.0078269 10.2932159,-10.0078269 l 23.753574,0 c 5.700858,0 10.293215,4.4650303 10.293215,10.0078269 l 0,0 c 0,5.542796 -4.592357,10.007826 -10.293215,10.007826 z",
+    dockinner: "M 21.514665,11.936796 A 7.589529,7.589529 0 0 1 13.925136,19.526325 7.589529,7.589529 0 0 1 6.3356066,11.936796 7.589529,7.589529 0 0 1 13.925136,4.3472672 7.589529,7.589529 0 0 1 21.514665,11.936796 Z",
     view: "M16,8.286C8.454,8.286,2.5,16,2.5,16s5.954,7.715,13.5,7.715c5.771,0,13.5-7.715,13.5-7.715S21.771,8.286,16,8.286zM16,20.807c-2.649,0-4.807-2.157-4.807-4.807s2.158-4.807,4.807-4.807s4.807,2.158,4.807,4.807S18.649,20.807,16,20.807zM16,13.194c-1.549,0-2.806,1.256-2.806,2.806c0,1.55,1.256,2.806,2.806,2.806c1.55,0,2.806-1.256,2.806-2.806C18.806,14.451,17.55,13.194,16,13.194z",
     noview: "M11.478,17.568c-0.172-0.494-0.285-1.017-0.285-1.568c0-2.65,2.158-4.807,4.807-4.807c0.552,0,1.074,0.113,1.568,0.285l2.283-2.283C18.541,8.647,17.227,8.286,16,8.286C8.454,8.286,2.5,16,2.5,16s2.167,2.791,5.53,5.017L11.478,17.568zM23.518,11.185l-3.056,3.056c0.217,0.546,0.345,1.138,0.345,1.76c0,2.648-2.158,4.807-4.807,4.807c-0.622,0-1.213-0.128-1.76-0.345l-2.469,2.47c1.327,0.479,2.745,0.783,4.229,0.783c5.771,0,13.5-7.715,13.5-7.715S26.859,13.374,23.518,11.185zM25.542,4.917L4.855,25.604L6.27,27.02L26.956,6.332L25.542,4.917z",
     book: "M25.754,4.626c-0.233-0.161-0.536-0.198-0.802-0.097L12.16,9.409c-0.557,0.213-1.253,0.316-1.968,0.316c-0.997,0.002-2.029-0.202-2.747-0.48C7.188,9.148,6.972,9.04,6.821,8.943c0.056-0.024,0.12-0.05,0.193-0.075L18.648,4.43l1.733,0.654V3.172c0-0.284-0.14-0.554-0.374-0.714c-0.233-0.161-0.538-0.198-0.802-0.097L6.414,7.241c-0.395,0.142-0.732,0.312-1.02,0.564C5.111,8.049,4.868,8.45,4.872,8.896c0,0.012,0.004,0.031,0.004,0.031v17.186c0,0.008-0.003,0.015-0.003,0.021c0,0.006,0.003,0.01,0.003,0.016v0.017h0.002c0.028,0.601,0.371,0.983,0.699,1.255c1.034,0.803,2.769,1.252,4.614,1.274c0.874,0,1.761-0.116,2.583-0.427l12.796-4.881c0.337-0.128,0.558-0.448,0.558-0.809V5.341C26.128,5.057,25.988,4.787,25.754,4.626zM5.672,11.736c0.035,0.086,0.064,0.176,0.069,0.273l0.004,0.054c0.016,0.264,0.13,0.406,0.363,0.611c0.783,0.626,2.382,1.08,4.083,1.093c0.669,0,1.326-0.083,1.931-0.264v1.791c-0.647,0.143-1.301,0.206-1.942,0.206c-1.674-0.026-3.266-0.353-4.509-1.053V11.736zM10.181,24.588c-1.674-0.028-3.266-0.354-4.508-1.055v-2.712c0.035,0.086,0.065,0.176,0.07,0.275l0.002,0.053c0.018,0.267,0.13,0.408,0.364,0.613c0.783,0.625,2.381,1.079,4.083,1.091c0.67,0,1.327-0.082,1.932-0.262v1.789C11.476,24.525,10.821,24.588,10.181,24.588z",
@@ -577,7 +645,11 @@ var icon = {
     watch: "M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z",
     forked: "M8 1c-1.11 0-2 0.89-2 2 0 0.73 0.41 1.38 1 1.72v1.28L5 8 3 6v-1.28c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v1.78l3 3v1.78c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V9.5l3-3V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2zM2 4.2c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3 10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3-10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z",
     downloaded: "M9 13h2l-3 3-3-3h2V8h2v5z m3-8c0-0.44-0.91-3-4.5-3-2.42 0-4.5 1.92-4.5 4C1.02 6 0 7.52 0 9c0 1.53 1 3 3 3 0.44 0 2.66 0 3 0v-1.3H3C1.38 10.7 1.3 9.28 1.3 9c0-0.17 0.05-1.7 1.7-1.7h1.3v-1.3c0-1.39 1.56-2.7 3.2-2.7 2.55 0 3.13 1.55 3.2 1.8v1.2h1.3c0.81 0 2.7 0.22 2.7 2.2 0 2.09-2.25 2.2-2.7 2.2H10v1.3c0.38 0 1.98 0 2 0 2.08 0 4-1.16 4-3.5 0-2.44-1.92-3.5-4-3.5z",
-    starred: "M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"
+    starred: "M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z",
+    //Author of these icons: https://nucleoapp.com/
+    beer_outline: "m 34,35 c -0.6,0 -1,0.4 -1,1 l 0,16 c 0,0.6 0.4,1 1,1 0.6,0 1,-0.4 1,-1 l 0,-16 c 0,-0.6 -0.4,-1 -1,-1 z M 22,47 c -0.6,0 -1,0.4 -1,1 l 0,4 c 0,0.6 0.4,1 1,1 0.6,0 1,-0.4 1,-1 l 0,-4 c 0,-0.6 -0.4,-1 -1,-1 z M 9,25.5 9,56 c 0,3.9 3.1,7 7,7 l 24,0 c 3.9,0 7,-3.1 7,-7 l 0,-9 3,0 c 2.8,0 5,-2.2 5,-5 l 0,-12 c 0,-0.6 -0.4,-1 -1,-1 l -7,0 0,-3.5 C 49.4,23.9 51,21.1 51,18 51,13 47,9 42,9 41.3,9 40.7,9.1 40.1,9.2 38.2,4.3 33.3,1 28,1 22.7,1 17.8,4.3 15.9,9.2 15.3,9.1 14.7,9 14,9 9,9 5,13 5,18 c 0,3.1 1.6,5.9 4,7.5 z m 44,5.5 0,11 c 0,1.7 -1.3,3 -3,3 l -3,0 0,-14 6,0 z m -8,25 c 0,2.8 -2.2,5 -5,5 l -24,0 c -2.8,0 -5,-2.2 -5,-5 l 0,-29.5 c 0.9,0.3 1.9,0.5 3,0.5 l 3,0 0,11 c 0,2.8 2.2,5 5,5 2.8,0 5,-2.2 5,-5 l 0,-11 15,0 c 1.1,0 2.1,-0.2 3,-0.5 L 45,56 Z M 14,11 c 0.8,0 1.5,0.2 2.3,0.4 0.5,0.1 1,-0.2 1.2,-0.7 C 18.9,6.2 23.2,3 28,3 c 4.8,0 9.1,3.2 10.5,7.7 0.2,0.5 0.7,0.8 1.2,0.7 0.8,-0.2 1.5,-0.4 2.3,-0.4 3.9,0 7,3.1 7,7 0,2.5 -1.4,4.7 -3.4,6 0,0 -0.1,0.1 -0.1,0.1 -1,0.6 -2.2,0.9 -3.5,0.9 l -16,0 c -0.6,0 -1,0.4 -1,1 l 0,12 c 0,1.7 -1.3,3 -3,3 -1.7,0 -3,-1.3 -3,-3 l 0,-12 c 0,-0.6 -0.4,-1 -1,-1 l -4,0 c -1.3,0 -2.5,-0.3 -3.5,-0.9 0,0 -0.1,-0.1 -0.1,-0.1 C 8.4,22.8 7,20.6 7,18 c 0,-3.9 3.1,-7 7,-7 z",
+    beer: "m 54,29 -7,0 0,-3.5 C 49.4,23.9 51,21.1 51,18 51,13 47,9 42,9 41.4,9 40.7,9.1 40.1,9.2 38.2,4.3 33.4,1 28,1 22.6,1 17.8,4.3 15.9,9.2 15.3,9.1 14.6,9 14,9 9,9 5,13 5,18 c 0,3.1 1.6,5.9 4,7.5 L 9,56 c 0,3.9 3.1,7 7,7 l 24,0 c 3.9,0 7,-3.1 7,-7 l 0,-9 3,0 c 2.8,0 5,-2.2 5,-5 l 0,-12 c 0,-0.6 -0.4,-1 -1,-1 z M 7,18 c 0,-3.9 3.1,-7 7,-7 0.7,0 1.4,0.1 2.2,0.4 0.3,0.1 0.5,0.1 0.8,-0.1 0.2,-0.1 0.4,-0.3 0.5,-0.6 C 18.9,6.1 23.1,3 28,3 c 4.9,0 9.1,3.1 10.5,7.7 0.1,0.3 0.3,0.5 0.5,0.6 0.2,0.1 0.5,0.1 0.8,0.1 0.8,-0.3 1.5,-0.4 2.2,-0.4 3.9,0 7,3.1 7,7 0,3.9 -3.1,7 -7,7 l -16,0 c -0.6,0 -1,0.4 -1,1 l 0,12 c 0,1.7 -1.3,3 -3,3 -1.7,0 -3,-1.3 -3,-3 l 0,-12 c 0,-0.6 -0.4,-1 -1,-1 l -4,0 C 10.1,25 7,21.9 7,18 Z m 16,34 c 0,0.6 -0.4,1 -1,1 -0.6,0 -1,-0.4 -1,-1 l 0,-4 c 0,-0.6 0.4,-1 1,-1 0.6,0 1,0.4 1,1 l 0,4 z m 12,0 c 0,0.6 -0.4,1 -1,1 -0.6,0 -1,-0.4 -1,-1 l 0,-16 c 0,-0.6 0.4,-1 1,-1 0.6,0 1,0.4 1,1 l 0,16 z M 53,42 c 0,1.7 -1.3,3 -3,3 l -3,0 0,-14 6,0 0,11 z",
+    pizza: "m 5.6194922,32.356222 c 4.4196418,1.988507 9.1055278,2.982761 13.8979098,2.982761 4.792383,0 9.478269,-0.994254 13.897911,-2.982761 0.106497,-0.05233 0.212995,-0.156987 0.266243,-0.313975 0.05325,-0.156987 0.05325,-0.261645 -0.05325,-0.418633 L 19.996641,5.249728 c -0.159746,-0.366304 -0.745482,-0.366304 -0.958477,0 L 5.3532487,31.623614 C 5.3,31.728272 5.3,31.88526 5.3,32.042247 c 0.053249,0.156988 0.1597461,0.261646 0.3194922,0.313975 z M 19.517402,6.6626147 30.113893,27.070979 c -3.301419,1.255899 -7.028828,1.988507 -10.596491,1.988507 -3.567662,0 -7.295071,-0.732608 -10.5964905,-1.988507 l 2.6624345,-5.180585 c 0.319493,1.098912 1.331218,1.936178 2.555938,1.936178 1.490963,0 2.662435,-1.151241 2.662435,-2.616457 0,-1.465215 -1.171472,-2.616457 -2.662435,-2.616457 -0.319492,0 -0.638984,0.05233 -0.958477,0.156988 L 19.517402,6.6626147 Z M 14.192533,19.640241 c 0.905228,0 1.597461,0.680279 1.597461,1.569874 0,0.889596 -0.692233,1.569875 -1.597461,1.569875 -0.905228,0 -1.597461,-0.680279 -1.597461,-1.569875 0,-0.889595 0.692233,-1.569874 1.597461,-1.569874 z m -5.7508598,8.320333 c 3.4079168,1.412887 7.3483208,2.145495 11.0757288,2.145495 3.727409,0 7.667813,-0.732608 11.07573,-2.145495 l 1.916953,3.66304 c -4.153399,1.779191 -8.519792,2.668786 -12.992683,2.668786 -4.47289,0 -8.839283,-0.889595 -12.9394332,-2.668786 l 1.8637044,-3.66304 z M 19.517402,17.547076 c 0.905228,0 1.597461,-0.680279 1.597461,-1.569874 0,-0.889596 -0.692233,-1.569875 -1.597461,-1.569875 -0.905227,0 -1.59746,0.680279 -1.59746,1.569875 0,0.889595 0.692233,1.569874 1.59746,1.569874 z m 0,-2.093166 c 0.319493,0 0.532487,0.209317 0.532487,0.523292 0,0.313974 -0.212994,0.523291 -0.532487,0.523291 -0.319492,0 -0.532487,-0.209317 -0.532487,-0.523291 0,-0.313975 0.212995,-0.523292 0.532487,-0.523292 z m 0.532487,8.895954 c 0,1.465216 1.171472,2.616457 2.662435,2.616457 1.490964,0 2.662435,-1.151241 2.662435,-2.616457 0,-1.465216 -1.171471,-2.616457 -2.662435,-2.616457 -1.490963,0 -2.662435,1.151241 -2.662435,2.616457 z m 2.662435,-1.569874 c 0.905228,0 1.597461,0.680278 1.597461,1.569874 0,0.889595 -0.692233,1.569874 -1.597461,1.569874 -0.905227,0 -1.597461,-0.680279 -1.597461,-1.569874 0,-0.889596 0.692234,-1.569874 1.597461,-1.569874 z"
 };
 
 var hybicons = function () {
