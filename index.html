@@ -24,13 +24,6 @@
     <script src="js/required/raphael.min.js"></script>
     <script src="js/for-doc/index.min.js"></script>
     <script src="js/hybicon.min.js"></script>
-    <script type="text/javascript">
-
-        //window.onload = function () {
-        //    hybicons();
-        //};
-
-    </script>
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -38,17 +31,19 @@
     <header class="inverse">
         <div class="row">
             <div class="col-xs-5">
-                <div id="userideaheaderintro" data-hybicon="user-idea-change" data-hybicon-align="right" data-hybicon-hovermode ></div>
+                <div id="userideaheaderintro" data-hybicon="user-idea" data-hybicon-size="150" data-hybicon-align="right" data-hybicon-hovermode="switch"></div>
             </div>
-            <div class="col-xs-5">
+            <div class="col-xs-7">
                 <h1 class="fontface pull-left">&nbsp;&nbsp;HYBICON&nbsp;&nbsp;</h1><br />
-                <h5 class="fontface" style="margin: auto;">JavaScript library to use SVG icons together.</h5>
             </div>
         </div>
     </header>
     <br />
     <div class="container" id="modes">
-        <br />
+        <h2 class="fontface">Hybrid icons. Better together.</h2>
+        <h5 class="fontface" style="text-align:center;text-decoration:underline;">JavaScript library for synergistic SVG icons</h5>
+        <p class="fontface" style="text-align:center;">Please click the icons below for details</p>
+        <br /><br />
         <div class="row">
             <div class="col-sm-4">
                 <div class="smalltitle">Hover</div>
@@ -56,17 +51,17 @@
             </div>
             <div class="col-sm-4">
                 <div class="smalltitle">Click</div>
-                <div id="iconBrightness" data-hybicon="left-right" data-hybicon-size="200" data-hybicon-clickmode onclick="setStyle(); setDetails('click');"></div>
+                <div id="iconBrightness" data-hybicon="switch-vertical" data-hybicon-size="200" data-hybicon-clickmode onclick="setStyle(); setDetails('click');"></div>
             </div>
             <div class="col-sm-4">
                 <div class="smalltitle">Info</div>
-                <div id="iconGitHub" class="hybicon-rounded hybicon-border" data-hybicon-size="200" data-hybicon="github-starred" data-hybicon-infomode data-hybicon-infotext="99999" data-hybicon-hovermode="rotate" onclick="setDetails('info');"></div>
+                <div id="iconGitHub" data-hybicon="github-starred" data-hybicon-size="200" data-hybicon-borderradius="15%" data-hybicon-infomode data-hybicon-infotext="99999" data-hybicon-hovermode="rotate" onclick="setDetails('info');"></div>
             </div>
         </div>
     </div>
     <br />
     <br />
-    <h3 id="details" class="fontface">Please click the icons above for details</h3>
+    <h3 id="details" class="fontface"></h3>
     <br />
     <br />
     <div class="container inverse rounded" id="download">
@@ -93,7 +88,7 @@
         <table style="margin:auto;">
             <tr>
                 <td>HYBICON v1.0&nbsp;&nbsp;</td>
-                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" data-hybicon-size="25" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!" ></div></a></td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" data-hybicon-size="25" data-hybicon="mail-mention" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!" ></div></a></td>
                 <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
             </tr>
         </table>

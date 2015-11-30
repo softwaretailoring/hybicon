@@ -65,7 +65,7 @@ footer a:hover {
 
 .sourceResult {
     width: 80%;
-    margin: auto;
+    margin: 15px auto 15px auto;
 }
 
 
@@ -166,7 +166,7 @@ hr {
     padding-bottom: 24px;
 }
 
-#using a {
+#using a.linkbutton {
     background-color: #EAFDF8;
     color: #222;
     border: solid #222 1px;
@@ -174,7 +174,7 @@ hr {
     padding: 10px;
 }
 
-#using a:hover {
+#using a.linkbutton:hover {
     background-color: #222;
     color: #35CE8D;
     text-decoration: none;
@@ -453,6 +453,11 @@ svg > #hybicon-iconMail-icon2 {
         margin-right: 15px;
         padding-bottom: 25px;
     }
+
+    #details {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
 
 .centered {
@@ -474,10 +479,3 @@ svg > [id$=infotext] > tspan {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.hybicon-border > svg {
-    border: solid;
-}
-
-.hybicon-rounded > svg {
-    border-radius: 15%;
-}
