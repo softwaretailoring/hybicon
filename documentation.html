@@ -24,13 +24,6 @@
     <script src="js/required/raphael.min.js"></script>
     <script src="js/for-doc/index.min.js"></script>
     <script src="js/hybicon.min.js"></script>
-    <script type="text/javascript">
-
-        window.onload = function () {
-            hybicons();
-        };
-
-    </script>
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -38,7 +31,7 @@
     <header>
         <div class="row">
             <div class="col-xs-5">
-                <div id="userideaheader" data-hybicon="user-idea" data-hybicon-align="right"></div>
+                <div id="userideaheader" data-hybicon="user-idea" data-hybicon-align="right" data-hybicon-size="150"></div>
             </div>
             <div class="col-xs-7">
                 <h1 class="fontface pull-left">&nbsp;&nbsp;<a href="index.html" title="Back to intro">HYBICON</a>&nbsp;&nbsp;</h1>
@@ -52,28 +45,28 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-12 col-xs-12"></div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="githubstarmain" class="hybicon-rounded" data-hybicon="" data-hybicon-size="100"></div>
+                    <div id="githubstarmain" data-hybicon="user-idea" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="twittertweetmain" class="hybicon-rounded" data-hybicon="twitter-bubble" data-hybicon-size="100"></div>
+                    <div id="twittertweetmain" data-hybicon="twitter-bubble" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="facebooklikemain" class="hybicon-rounded" data-hybicon="facebook-like" data-hybicon-size="100"></div>
+                    <div id="facebooklikemain" data-hybicon="facebook-like" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="gplusplusmain" class="hybicon-rounded" data-hybicon="gplus-plus" data-hybicon-size="100"></div>
+                    <div id="gplusplusmain" data-hybicon="google-plus" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="linkedinconnectmain" class="hybicon-rounded" data-hybicon="linkedin-link" data-hybicon-size="100"></div>
+                    <div id="linkedinconnectmain" data-hybicon="linkedin-link" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="skypecallmain" class="hybicon-rounded" data-hybicon="skype-phone" data-hybicon-size="100"></div>
+                    <div id="skypecallmain" data-hybicon="skype-phone" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="mailsendmain" class="hybicon-rounded" data-hybicon="mail-paper" data-hybicon-size="100"></div>
+                    <div id="mailsendmain" data-hybicon="mail-mention" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="githubforkmain" class="hybicon-rounded" data-hybicon="github-fork" data-hybicon-size="100"></div>
+                    <div id="githubforkmain" data-hybicon="github-fork" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-2 col-sm-12 col-xs-12"></div>
             </div>
@@ -106,21 +99,11 @@
                     <div class="col-lg-12">
                         <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preIconHtml');" title="Select all"></span></div>
                         <div id="preIconHtmlDiv" class="sourceResult">
-                            <pre id="preIconHtml">&lt;div  data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                            <pre id="preIconHtml">&lt;div data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="smalltitle">JavaScript&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preIconJavaScript');" title="Select all"></span></div>
-                        <div id="preIconJavaScriptDiv" class="sourceResult">
-                            <pre id="preIconJavaScript">window.onload = function () {
-    hybicons();
-};</pre>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -135,63 +118,161 @@
                     <div class="usingtext">
                         You can use predefined hybrid icons with <strong>data-hybicon</strong> attribute.
                     </div>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
                     <div class="sourceResult">
-                        <pre>&lt;div  <strong class="usingpre">data-hybicon="github-star"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div <strong class="usingpre">data-hybicon="github-star"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
-                    <div class="usinglink"><a href='icons.html'>See available icons</a></div>
-
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="github-star"></div>
+                        </div>
+                    </div>
+                    <div class="usinglink"><a href='icons.html' class="linkbutton">See available icons</a></div>
+                    <hr />
+                    <h3 class="fontface">Hover mode</h3>
+                    <div class="usingtext">
+                        The secondary icon animated on hover when set <strong>data-hybicon-hovermode</strong> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-hovermode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div data-hybicon="code-fave" data-hybicon-hovermode></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div data-hybicon="github-fork" data-hybicon-hovermode="rotate"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div data-hybicon="book-search" data-hybicon-hovermode="switch"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Click mode</h3>
+                    <div class="usingtext">
+                        The secondary icon animated on click when set <strong>data-hybicon-clickmode</strong> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-clickmode="show|switch"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div data-hybicon="checkbox-check" data-hybicon-clickmode></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div data-hybicon="view-noview" data-hybicon-clickmode="switch"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Info mode</h3>
+                    <div class="usingtext">
+                        The info field appears when set <strong>data-hybicon-infomode</strong> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-infomode="show|right-*width*"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode data-hybicon-infotext="v1.0"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode="right" data-hybicon-infotext="v1.0.0"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode="right-300" data-hybicon-infotext="download"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Hyperlink</h3>
+                    <div class="usingtext">
+                        Simple add an anchor tag around hybicon's div.
+                    </div>
+                    <div class="sourceResult">
+                        <pre><strong class="usingpre">&lt;a href="https://github.com/softwaretailoring/hybicon"&gt;</strong>
+    &lt;div data-hybicon="github-star"&gt;&lt;/div&gt;
+<strong class="usingpre">&lt;/a&gt;</strong>
+</pre>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="https://github.com/softwaretailoring/hybicon"><div data-hybicon="github-star"></div></a>
+                        </div>
+                    </div>
+                    </div>
+                    <hr />
                     <h3 class="fontface">Size</h3>
                     <div class="usingtext">
                         Here are some predefined sizes in <strong>hybicon</strong> classes.
                     </div>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
                     <div class="sourceResult">
-                        <pre>&lt;div id="githubstar" <strong class="usingpre">class="hybicon100"</strong> data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-size="unit in px|'R' as responsive"</strong>" &gt;&lt;/div&gt;</pre>
                     </div>
-                    <div class="usinglink"><a href='sizes.html'>See available sizes</a></div>
-
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="32" title="data-hybicon-size='32'"></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="48" title="data-hybicon-size='48'"></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="64" title="data-hybicon-size='64'"></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="80" title="data-hybicon-size='80'"></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="96" title="data-hybicon-size='96'"></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="128" title="data-hybicon-size='128'"></div>
+                        </div>
+                    </div>
+                    <hr />
                     <h3 class="fontface">Alignment</h3>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
                     <div class="sourceResult">
-                        <pre>&lt;div id="githubstar" class="hybicon100 <strong class="usingpre">hybicon-center</strong>" data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-align="left|center|right"</strong>" &gt;&lt;/div&gt;</pre>
                     </div>
-                    <div class="usinglink"><a href='align.html'>See available alignments</a></div>
-
-                    <h3 class="fontface">Hover mode</h3>
-                    <div class="usingtext">
-                        The secondary icon appears on hover when set <strong>data-hybicon-hovermode</strong> attribute.
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div data-hybicon data-hybicon-align="left" title="data-hybicon-align='left'"></div>
+                        </div>
+                        <div class="col-sm-4" style="border-left:solid 1px;border-right:solid 1px;">
+                            <div data-hybicon data-hybicon-align="center" title="data-hybicon-align='center'"></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div data-hybicon data-hybicon-align="right" title="data-hybicon-align='right'"></div>
+                        </div>
                     </div>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div class="sourceResult">
-                        <pre>&lt;div  data-hybicon="github-star" <strong class="usingpre">data-hybicon-hovermode</strong>&gt;&lt;/div&gt;</pre>
-                    </div>
-                    <div class="usinglink"><a href='icons.html?hovermode'>See available icons in hovermode</a></div>
-
-                    <h3 class="fontface">Click mode</h3>
-                    <div class="usingtext">
-                        The secondary icon appears on click when set <strong>data-hybicon-clickmode</strong> attribute.
-                    </div>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div class="sourceResult">
-                        <pre>&lt;div  data-hybicon="github-star" <strong class="usingpre">data-hybicon-clickmode</strong>&gt;&lt;/div&gt;</pre>
-                    </div>
-                    <div class="usinglink"><a href='icons.html?clickmode'>See available icons in clickmode</a></div>
-
-                    <h3 class="fontface">Hyperlink</h3>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
-                    <div class="sourceResult">
-                        <pre>&lt;div  data-hybicon="github-star"&gt;
-    <strong class="usingpre">&lt;a href="sizes.html?hybicon=github-star"&gt;&lt;/a&gt;</strong>
-&lt;/div&gt;</pre>
-                    </div>
-
+                    <hr />
                     <h3 class="fontface">Color</h3>
-                    <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;</div>
                     <div class="sourceResult">
-                        <pre>&lt;div  data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="#777"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-background="#fff" data-hybicon-color="#4183c4"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
-                    <div class="smalltitle">CSS&nbsp;&nbsp;&nbsp;</div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-color="#4183c4"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Border</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-border="solid 3px #333333"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-border="solid 3px #333333"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Border's radius</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-borderradius="15%"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-border="solid 3px #333333" data-hybicon-borderradius="15%"></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">CSS</h3>
                     <div class="sourceResult">
                         <pre>#githubstar > svg > [id$=icon1],
 #githubstar > svg > [id$=icon2] { 
@@ -210,21 +291,21 @@
             <div class="row">
                 <div class="col-xs-4">
                     <div class="smalltitle">Tweet for it</div>
-                    <div id="iconTwitter" class="hybicon125 hybicon-center" data-hybicon="twitter-bubble" data-hybicon-hovermode>
-                        <a href="https://twitter.com/intent/tweet?url=http://hybicon.softwaretailoring.net&hashtags=hybicon&text=SVG based hybrid icons - Better together!&nbsp;" target="_blank"></a>
-                    </div>
+                    <a href="https://twitter.com/intent/tweet?url=http://hybicon.softwaretailoring.net&hashtags=hybicon&text=SVG based hybrid icons - Better together!&nbsp;" target="_blank">
+                        <div id="iconTwitter" data-hybicon="twitter-bubble" data-hybicon-hovermode data-hybicon-size="150"></div>
+                    </a>
                 </div>
                 <div class="col-xs-4">
                     <div class="smalltitle">Beer for it</div>
-                    <div id="iconDonate" class="hybicon125 hybicon-center" data-hybicon="beer-like" data-hybicon-hovermode>
-                        <a href="https://github.com/softwaretailoring/hybicon/stargazers" target="_blank"></a>
-                    </div>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BQE2NCJ5R5QP4" target="_blank">
+                        <div id="iconDonate" data-hybicon="beer-pizza" data-hybicon-hovermode data-hybicon-size="150"></div>
+                    </a>
                 </div>
                 <div class="col-xs-4">
                     <div class="smalltitle">Star for it</div>
-                    <div id="iconGitHub" class="hybicon125 hybicon-center" data-hybicon="github-star" data-hybicon-hovermode>
-                        <a href="https://github.com/softwaretailoring/hybicon/stargazers" target="_blank"></a>
-                    </div>
+                    <a href="https://github.com/softwaretailoring/hybicon/stargazers" target="_blank">
+                        <div id="iconGitHub" data-hybicon="github-star" data-hybicon-hovermode data-hybicon-size="150"></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -235,7 +316,7 @@
         <table style="margin:auto;">
             <tr>
                 <td>HYBICON v1.0&nbsp;&nbsp;</td>
-                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" data-hybicon-size="25" data-hybicon="mail-paper" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!"></div></a></td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=Bug report - HYBICON v1.0"><div id="iconMail" data-hybicon-size="25" data-hybicon="mail-mention" data-hybicon-hovermode title="Did you find a bug? Please report that. Thank you!"></div></a></td>
                 <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
             </tr>
         </table>

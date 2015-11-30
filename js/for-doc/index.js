@@ -8,10 +8,8 @@ var setHybicons = function () {
         for (var i = 0; i < icons.length; i++) {
             var icon = document.getElementById(icons[i].id);
             icon.setAttribute('data-hybicon', iconname);
+            new hybicon(icons[i].id);
         }
-
-        diviconname = document.getElementById("iconname");
-        diviconname.innerText = iconname;
     }
 
     var hovermode = getQueryVariable("hovermode");
@@ -22,6 +20,8 @@ var setHybicons = function () {
 
     var infomode = getQueryVariable("infomode");
     if (infomode !== "") { setMode("infomode", infomode); }
+
+    createAvailableIcons();
 };
 
 var setMode = function (mode, modevalue) {
@@ -106,13 +106,31 @@ var setDetails = function (mode) {
             details = "Click mode is perfect for switchers and call a method inside the page.";
             break;
         case "info":
-            details = "Info mode when you want to show more. Psst. There is a <a href='github.html'>GitHub API</a>";
+            details = "Info mode when you want to show more. Psst... There is a <a href='github.html'>GitHub plugin</a>";
             break;
         default:
 
     }
 
     document.getElementById("details").innerHTML = details;
+};
+
+var createAvailableIcons = function (mode) {
+
+    var allhybicon = document.getElementById("allhybicon");
+
+    for (var property in icon) {
+        if (icon.hasOwnProperty(property)) {
+            console.log(property);
+            var icondiv = "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>";
+            icondiv += "     <div data-hybicon='" + property + "'></div>";
+            icondiv += "     <div class='smalltitle'>" + property + "</div>";
+            icondiv += "</div>";
+            allhybicon.innerHTML += icondiv;
+        }
+    }
+
+    new hybicon().parseAll();
 };
 
 var setGitHubSize = function () {
@@ -158,5 +176,5 @@ var setGitHubSize = function () {
     divGitHubIssue.setAttribute("data-hybicon-size", iconSize);
     divGitHubDownload.setAttribute("data-hybicon-size", iconSize);
 
-    hybiconsgithub();
+    new hybicongithub().parseAll();
 };
