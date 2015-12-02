@@ -24,6 +24,36 @@
     <script src="js/required/raphael.min.js"></script>
     <script src="js/for-doc/index.min.js"></script>
     <script src="js/hybicon.min.js"></script>
+    <script>
+        window.onload = function () {
+            hybiconJS = new hybicon("hybiconJS");
+            hybiconJS.icon1Path = "M10,5,L5,10,L10,10,z";
+            hybiconJS.icon2Path = "M99,50,L50,99,L99,99,z";
+            hybiconJS.icon1CenterX = 20;
+            hybiconJS.icon1CenterY = 20;
+            hybiconJS.icon1Size = 25;
+            hybiconJS.icon1Rotate = 180;
+            hybiconJS.icon1CenterXAnim = 30;
+            hybiconJS.icon1CenterYAnim = 30;
+            hybiconJS.icon1SizeAnim = 35;
+            hybiconJS.icon1RotateAnim = 0;
+            hybiconJS.icon2CenterX = 80;
+            hybiconJS.icon2CenterY = 80;
+            hybiconJS.icon2Size = 25;
+            hybiconJS.icon2Rotate = 0;
+            hybiconJS.icon2CenterXAnim = 70;
+            hybiconJS.icon2CenterYAnim = 70;
+            hybiconJS.icon2SizeAnim = 35;
+            hybiconJS.icon2RotateAnim = 180;
+            hybiconJS.hoverMode = "show";
+            hybiconJS.clickMode = "show";
+            hybiconJS.infoMode = "right-350";
+            hybiconJS.infoText = "JavaScript";
+            hybiconJS.hybiconAlign = "right";
+            hybiconJS.hybiconSize = "50";
+            hybiconJS.createIcon();
+        };
+    </script>
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -63,7 +93,7 @@
                     <div id="skypecallmain" data-hybicon="skype-phone" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="mailsendmain" data-hybicon="mail-mention" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="pinterestpin" data-hybicon="pinterest-pin" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
                     <div id="githubforkmain" data-hybicon="github-fork" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
@@ -97,9 +127,18 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="smalltitle">HTML&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors selectsource" aria-hidden="true" onclick="selectSource('preIconHtml');" title="Select all"></span></div>
-                        <div id="preIconHtmlDiv" class="sourceResult">
-                            <pre id="preIconHtml">&lt;div data-hybicon="github-star"&gt;&lt;/div&gt;</pre>
+                        <div class="smalltitle">Head&nbsp;&nbsp;&nbsp;</div>
+                        <div id="preIconHtmlHeadDiv" class="sourceResult">
+                            <pre id="preIconHtml">&lt;head&gt;
+    &lt;script src="https://cdn.jsdelivr.net/raphael/2.1.4/raphael.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/hybicon/1.0.0/hybicon.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</pre>
+                        </div>
+                        <div class="smalltitle">Body&nbsp;&nbsp;&nbsp;</div>
+                        <div id="preIconHtmlBodyDiv" class="sourceResult">
+                            <pre>&lt;body&gt;
+    &lt;div data-hybicon="github-star"&gt;&lt;/div&gt;
+&lt;/body&gt;</pre>
                         </div>
                     </div>
                 </div>
@@ -119,11 +158,20 @@
                         You can use predefined hybrid icons with <strong>data-hybicon</strong> attribute.
                     </div>
                     <div class="sourceResult">
-                        <pre>&lt;div <strong class="usingpre">data-hybicon="github-star"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div <strong class="usingpre">data-hybicon="icon1-icon2"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-4">
+                            <div data-hybicon="github"></div>
+                            <div class="smalltitle">github</div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div data-hybicon="star"></div>
+                            <div class="smalltitle">star</div>
+                        </div>
+                        <div class="col-xs-4">
                             <div data-hybicon="github-star"></div>
+                            <div class="smalltitle">github-star</div>
                         </div>
                     </div>
                     <div class="usinglink"><a href='icons.html' class="linkbutton">See available icons</a></div>
@@ -133,17 +181,20 @@
                         The secondary icon animated on hover when set <strong>data-hybicon-hovermode</strong> attribute.
                     </div>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-hovermode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="code-fave" <strong class="usingpre">data-hybicon-hovermode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <div data-hybicon="code-fave" data-hybicon-hovermode></div>
+                            <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-4">
-                            <div data-hybicon="github-fork" data-hybicon-hovermode="rotate"></div>
+                            <div data-hybicon="code-fave" data-hybicon-hovermode="rotate"></div>
+                            <div class="smalltitle">rotate</div>
                         </div>
                         <div class="col-sm-4">
-                            <div data-hybicon="book-search" data-hybicon-hovermode="switch"></div>
+                            <div data-hybicon="code-fave" data-hybicon-hovermode="switch"></div>
+                            <div class="smalltitle">switch</div>
                         </div>
                     </div>
                     <hr />
@@ -157,9 +208,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div data-hybicon="checkbox-check" data-hybicon-clickmode></div>
+                            <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-6">
                             <div data-hybicon="view-noview" data-hybicon-clickmode="switch"></div>
+                            <div class="smalltitle">switch</div>
                         </div>
                     </div>
                     <hr />
@@ -168,17 +221,23 @@
                         The info field appears when set <strong>data-hybicon-infomode</strong> attribute.
                     </div>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-infomode="show|right-*width*"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="download-code" 
+                        <strong class="usingpre">data-hybicon-infomode="show|right-*width*"</strong>
+                        <strong class="usingpre">data-hybicon-infotext="*your text*"</strong>&gt;
+&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode data-hybicon-infotext="v1.0"></div>
+                            <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-4">
                             <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode="right" data-hybicon-infotext="v1.0.0"></div>
+                            <div class="smalltitle">right</div>
                         </div>
                         <div class="col-sm-4">
                             <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-infomode="right-300" data-hybicon-infotext="download"></div>
+                            <div class="smalltitle">right-300</div>
                         </div>
                     </div>
                     <hr />
@@ -187,42 +246,15 @@
                         Simple add an anchor tag around hybicon's div.
                     </div>
                     <div class="sourceResult">
-                        <pre><strong class="usingpre">&lt;a href="https://github.com/softwaretailoring/hybicon"&gt;</strong>
+                        <pre><strong class="usingpre">&lt;a href="https://github.com/softwaretailoring/hybicon" target="_blank"&gt;</strong>
     &lt;div data-hybicon="github-star"&gt;&lt;/div&gt;
 <strong class="usingpre">&lt;/a&gt;</strong>
 </pre>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <a href="https://github.com/softwaretailoring/hybicon"><div data-hybicon="github-star"></div></a>
-                        </div>
-                    </div>
-                    </div>
-                    <hr />
-                    <h3 class="fontface">Size</h3>
-                    <div class="usingtext">
-                        Here are some predefined sizes in <strong>hybicon</strong> classes.
-                    </div>
-                    <div class="sourceResult">
-                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-size="unit in px|'R' as responsive"</strong>" &gt;&lt;/div&gt;</pre>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="32" title="data-hybicon-size='32'"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="48" title="data-hybicon-size='48'"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="64" title="data-hybicon-size='64'"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="80" title="data-hybicon-size='80'"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="96" title="data-hybicon-size='96'"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="128" title="data-hybicon-size='128'"></div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="https://github.com/softwaretailoring/hybicon" target="_blank"><div data-hybicon="github-star"></div></a>
+                                <div class="smalltitle">click it :)</div>
+                            </div>
                         </div>
                     </div>
                     <hr />
@@ -233,52 +265,164 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div data-hybicon data-hybicon-align="left" title="data-hybicon-align='left'"></div>
+                            <div class="smalltitle">left</div>
                         </div>
                         <div class="col-sm-4" style="border-left:solid 1px;border-right:solid 1px;">
                             <div data-hybicon data-hybicon-align="center" title="data-hybicon-align='center'"></div>
+                            <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-4">
                             <div data-hybicon data-hybicon-align="right" title="data-hybicon-align='right'"></div>
+                            <div class="smalltitle">right</div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Size</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-size="unit in px|'css' for responsive behaviour"</strong>" &gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="40" title="data-hybicon-size='40'"></div>
+                            <div class="smalltitle">40</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="60" title="data-hybicon-size='60'"></div>
+                            <div class="smalltitle">60</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="80" title="data-hybicon-size='80'"></div>
+                            <div class="smalltitle">80</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon title="data-hybicon-size='100'"></div>
+                            <div class="smalltitle">default</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="120" title="data-hybicon-size='120'"></div>
+                            <div class="smalltitle">120</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div data-hybicon data-hybicon-size="140" title="data-hybicon-size='140'"></div>
+                            <div class="smalltitle">140</div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">Background</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-background="as CSS background"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="github-star" data-hybicon-background="#fff"></div>
+                            <div class="smalltitle">#FFF</div>
                         </div>
                     </div>
                     <hr />
                     <h3 class="fontface">Color</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-background="#fff" data-hybicon-color="#4183c4"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="as CSS color"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-color="#4183c4"></div>
+                            <div class="smalltitle">#4183c4</div>
                         </div>
                     </div>
                     <hr />
                     <h3 class="fontface">Border</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-border="solid 3px #333333"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-border="as CSS border"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-border="solid 3px #333333"></div>
+                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-color="#4183c4" data-hybicon-border="solid 3px #333"></div>
+                            <div class="smalltitle">solid 3px #333</div>
                         </div>
                     </div>
                     <hr />
                     <h3 class="fontface">Border's radius</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-borderradius="15%"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-borderradius="as CSS border-radius"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-border="solid 3px #333333" data-hybicon-borderradius="15%"></div>
+                            <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-color="#4183c4" data-hybicon-border="solid 3px #333" data-hybicon-borderradius="15%"></div>
+                            <div class="smalltitle">15%</div>
                         </div>
                     </div>
                     <hr />
                     <h3 class="fontface">CSS</h3>
                     <div class="sourceResult">
-                        <pre>#githubstar > svg > [id$=icon1],
-#githubstar > svg > [id$=icon2] { 
-    fill: #777;
-    stroke: #FFF;
+                        <pre>&lt;div id="hybiconCSS" 
+    data-hybicon="user-idea" 
+    data-hybicon-hovermode="switch" 
+    data-hybicon-infomode 
+    data-hybicon-size="css"&gt;
+&lt;/div&gt;</pre>
+                        <pre>#hybiconCSS > svg {
+    background: #FFF;
+    border: solid 4px #333;
+    border-radius: 15%;
+}
+#hybiconCSS > svg > [id$=icon1] { 
+    fill: #333;
+}
+#hybiconCSS > svg > [id$=icon2] { 
+    fill: #FFF;
+    stroke: #F6921E;
+    stroke-width: 0.5;
+}
+#hybiconCSS > svg > [id$=info] { 
+    fill: #8c3d2f;
+    stroke: #8c3d2f;
+    stroke-width: 3;
+}
+#hybiconCSS > svg > [id$=infotext] > tspan {
+    fill: #FFF;
+    font: 13px Impact, sans-serif;
 }</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="hybiconCSS" data-hybicon="user-idea" data-hybicon-size="css" data-hybicon-hovermode="switch" data-hybicon-infomode></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">JavaScript</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div id="hybiconJS"&gt;&lt;/div&gt;</pre>
+                        <pre>hybiconJS = new hybicon("hybiconJS");
+hybiconJS.icon1Path = "M10,5,L5,10,L10,10,z";
+hybiconJS.icon2Path = "M99,50,L50,99,L99,99,z";
+hybiconJS.icon1CenterX = 20;
+hybiconJS.icon1CenterY = 20;
+hybiconJS.icon1Size = 25;
+hybiconJS.icon1Rotate = 180;
+hybiconJS.icon1CenterXAnim = 30;
+hybiconJS.icon1CenterYAnim = 30;
+hybiconJS.icon1SizeAnim = 35;
+hybiconJS.icon1RotateAnim = 0;
+hybiconJS.icon2CenterX = 80;
+hybiconJS.icon2CenterY = 80;
+hybiconJS.icon2Size = 25;
+hybiconJS.icon2Rotate = 0;
+hybiconJS.icon2CenterXAnim = 70;
+hybiconJS.icon2CenterYAnim = 70;
+hybiconJS.icon2SizeAnim = 35;
+hybiconJS.icon2RotateAnim = 180;
+hybiconJS.hoverMode = "show";
+hybiconJS.clickMode = "show";
+hybiconJS.infoMode = "right-350";
+hybiconJS.infoText = "JavaScript";
+hybiconJS.hybiconAlign = "right";
+hybiconJS.hybiconSize = "50";
+hybiconJS.createIcon();</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="hybiconJS"></div>
+                        </div>
                     </div>
                 </div>
             </div>
