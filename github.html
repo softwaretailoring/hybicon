@@ -45,36 +45,75 @@
             <h2 class="fontface" id="iconname">GitHub plugin</h2>
             <div class="row centered">
                 <div class="col-sm-3 hidden-xs"></div>
-                <div class="col-sm-2 col-xs-4"><h2>large</h2></div>
+                <div class="col-sm-2 col-xs-4"><h4 class="fontface pull-right" style="padding-top:15px;">large</h4></div>
                 <div class="col-sm-2 col-xs-4">
                     <div id="iconSize" class="hybicon-center" data-hybicon="switch-horizontal" data-hybicon-clickmode data-hybicon-size="80" onclick="setGitHubSize();"></div>
                 </div>
-                <div class="col-sm-2 col-xs-4"><h2>small</h2></div>
+                <div class="col-sm-2 col-xs-4"><h4 class="fontface pull-left" style="padding-top:15px;">small</h4></div>
                 <div class="col-sm-3 hidden-xs"></div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    <div id="divGitHubStar" data-hybicon="github-starred" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" title="star"></div>
+                    <div id="divGitHubStar" data-hybicon="github-starred" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" data-hybicon-infotext="star"></div>
+                    <div class="smalltitle">github-<br />starred</div>
                 </div>
                 <div class="col-sm-2">
-                    <div id="divGitHubFork" data-hybicon="github-forked" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" title="fork"></div>
+                    <div id="divGitHubFork" data-hybicon="github-forked" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" data-hybicon-infotext="fork"></div>
+                    <div class="smalltitle">github-<br />forked</div>
                 </div>
                 <div class="col-sm-2">
-                    <div id="divGitHubWatch" data-hybicon="github-watch" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" title="watch"></div>
+                    <div id="divGitHubWatch" data-hybicon="github-watch" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" data-hybicon-infotext="watch"></div>
+                    <div class="smalltitle">github-<br />watch</div>
                 </div>
                 <div class="col-sm-2">
-                    <div id="divGitHubIssue" data-hybicon="github-issue" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" title="issue"></div>
+                    <div id="divGitHubIssue" data-hybicon="github-issue" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-infomode data-hybicon-hovermode="rotate" data-hybicon-infotext="issue"></div>
+                    <div class="smalltitle">github-<br />issue</div>
                 </div>
                 <div class="col-sm-2">
-                    <div id="divGitHubDownload" data-hybicon="github-downloaded" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-github-repotag="v3.2.0" data-hybicon-infomode data-hybicon-hovermode="rotate" title="download"></div>
+                    <div id="divGitHubDownload" data-hybicon="github-downloaded" data-hybicon-size="150" data-hybicon-borderradius="15%" data-hybicon-github-user="github" data-hybicon-github-repo="octicons" data-hybicon-github-repotag="v3.2.0" data-hybicon-infomode data-hybicon-hovermode="rotate" data-hybicon-infotext="release"></div>
+                    <div class="smalltitle">github-<br />downloaded</div>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
             <hr />
             <div class="sourceResult">
-                <pre>&lt;div data-hybicon="github-starred" <strong class="usingpre">data-hybicon-github-user="**username**" data-hybicon-github-repo="**reponame**"</strong>&gt;&lt;/div&gt;</pre>
+                <pre id="preIconHtml">&lt;head&gt;
+    &lt;script src="https://cdn.jsdelivr.net/raphael/2.1.4/raphael.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/hybicon/1.0.0/hybicon.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</pre>
+                <pre>&lt;body&gt;
+    &lt;div data-hybicon="github-starred"
+         data-hybicon-github-user="**username**"
+         data-hybicon-github-repo="**reponame**"
+         data-hybicon-github-repotag="**tagname**" &gt; &lt;!--For releases. Without this all of the releases count.--&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</pre>
             </div>
+            <hr />
+            <h3 class="fontface" id="iconname">For more customization</h3>
+            <br /><br />
+            <div class="row">
+                <div class="col-sm-3 hidden-xs"></div>
+                <div class="col-xs-4 col-sm-2">
+                    <a href="documentation.html">
+                        <div data-hybicon="book" data-hybicon-hovermode data-hybicon-size="75" data-hybicon-background="#8c3d2f" data-hybicon-color="#fff" data-hybicon-borderradius="50%" title="See documentation"></div>
+                    </a>
+                </div>
+                <div class="col-xs-4 col-sm-2">
+                    <a href="https://twitter.com/intent/tweet?url=http://hybicon.softwaretailoring.net&hashtags=hybicon&text=SVG based hybrid icons - Better together!&nbsp;" target="_blank">
+                        <div data-hybicon="twitter" data-hybicon-hovermode="rotate" data-hybicon-size="75" data-hybicon-background="#55ACEE" data-hybicon-color="#fff" data-hybicon-borderradius="50%" title="Tweet for it"></div>
+                    </a>
+                </div>
+                <div class="col-xs-4 col-sm-2">
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BQE2NCJ5R5QP4" target="_blank">
+                        <div data-hybicon="beer" data-hybicon-hovermode data-hybicon-size="75" data-hybicon-background="#F6921E" data-hybicon-color="#fff" data-hybicon-borderradius="50%" title="Beer for it"></div>
+                    </a>
+                </div>
+                <div class="col-sm-3 hidden-xs"></div>
+            </div>
+            <br />
         </div>
     </div>
 

@@ -1,101 +1,6 @@
 ﻿
-var setHybicons = function () {
-    var iconname = getQueryVariable("hybicon");
-
-    if (iconname !== "") {
-        var icons = document.querySelectorAll('[data-hybicon]');
-
-        for (var i = 0; i < icons.length; i++) {
-            var icon = document.getElementById(icons[i].id);
-            icon.setAttribute('data-hybicon', iconname);
-            new hybicon(icons[i].id);
-        }
-    }
-
-    var hovermode = getQueryVariable("hovermode");
-    if (hovermode !== "") { setMode("hovermode", hovermode); }
-
-    var clickmode = getQueryVariable("clickmode");
-    if (clickmode !== "") { setMode("clickmode", clickmode); }
-
-    var infomode = getQueryVariable("infomode");
-    if (infomode !== "") { setMode("infomode", infomode); }
-
-    createAvailableIcons();
-};
-
-var setMode = function (mode, modevalue) {
-    var hybicons = document.querySelectorAll('[data-hybicon]');
-
-    if (modevalue === undefined) { modevalue = ""; }
-    
-    for (var i = 0; i < hybicons.length; i++) {
-        var hybiconId = hybicons[i].id;
-        if (hybiconId !== 'userideaheader' &&
-            hybiconId !== 'checkboxHover' &&
-            hybiconId !== 'checkboxClick' &&
-            hybiconId !== 'checkboxInfo' &&
-            hybiconId !== 'iconGitHub' &&
-            hybiconId !== 'iconTwitter' &&
-            hybiconId !== 'iconMail') {
-            var icon = document.getElementById(hybiconId);
-            if (icon.hasAttribute('data-hybicon-' + mode )) {
-                icon.removeAttribute('data-hybicon-' + mode );
-            }
-            else {
-                icon.setAttribute('data-hybicon-' + mode, modevalue);
-                if (mode === "infomode") {
-                    icon.setAttribute('data-hybicon-infotext', 'info');
-                }
-            }
-            new hybicon(hybiconId);
-        }
-    }
-};
-
-var selectSource = function (element) {
-    var doc = document
-        , text = doc.getElementById(element)
-        , range, selection
-    ;
-    if (doc.body.createTextRange) {
-        range = document.body.createTextRange();
-        range.moveToElementText(text);
-        range.select();
-    } else if (window.getSelection) {
-        selection = window.getSelection();
-        range = document.createRange();
-        range.selectNodeContents(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    }
-};
-
-var getQueryVariable = function (variable) {
-    var query = window.location.search.substring(1);
-    var queryString = query.split("&");
-    for (var i = 0; i < queryString.length; i++) {
-        var pair = queryString[i].split("=");
-        if (pair[0] == variable) { return pair[1]; }
-    }
-    return ("");
-};
-
-var setStyle = function () {
-    var classname = document.body.getAttribute("class");
-    footer = document.getElementById("footer");
-    if (classname === "styledark") {
-        document.body.setAttribute("class", "stylelight");
-        footer.setAttribute("class", "stylelight");
-    }
-    else {
-        document.body.setAttribute("class", "styledark");
-        footer.setAttribute("class", "styledark");
-    }
-};
-
 var setDetails = function (mode) {
-    
+
     var details = "Please click the icons above for details";
 
     switch (mode) {
@@ -113,6 +18,49 @@ var setDetails = function (mode) {
     }
 
     document.getElementById("details").innerHTML = details;
+};
+
+var setMode = function (mode, modevalue) {
+    var hybicons = document.querySelectorAll('[data-hybicon]');
+
+    if (modevalue === undefined) { modevalue = ""; }
+    
+    for (var i = 0; i < hybicons.length; i++) {
+        var hybiconId = hybicons[i].id;
+        if (hybiconId === 'githubstarmain' ||
+            hybiconId === 'twittertweetmain' ||
+            hybiconId === 'facebooklikemain' ||
+            hybiconId === 'gplusplusmain' ||
+            hybiconId === 'linkedinconnectmain' ||
+            hybiconId === 'skypecallmain' ||
+            hybiconId === 'pinterestpin' ||
+            hybiconId === 'githubforkmain') {
+            var icon = document.getElementById(hybiconId);
+            if (icon.hasAttribute('data-hybicon-' + mode )) {
+                icon.removeAttribute('data-hybicon-' + mode );
+            }
+            else {
+                icon.setAttribute('data-hybicon-' + mode, modevalue);
+                if (mode === "infomode") {
+                    icon.setAttribute('data-hybicon-infotext', 'info');
+                }
+            }
+            new hybicon(hybiconId);
+        }
+    }
+};
+
+var setStyle = function () {
+    var classname = document.body.getAttribute("class");
+    footer = document.getElementById("footer");
+    if (classname === "styledark") {
+        document.body.setAttribute("class", "stylelight");
+        footer.setAttribute("class", "stylelight");
+    }
+    else {
+        document.body.setAttribute("class", "styledark");
+        footer.setAttribute("class", "styledark");
+    }
 };
 
 var createAvailableIcons = function (mode) {

@@ -103,14 +103,15 @@ hybicon = function (divId) {
     this.clickMode = null;
     this.clicked = false;
     this.infoMode = null;
-    this.infoText = "hybicon";
-    this.infoStrokeColor = "#222";
-    this.infoTextColor = "#222";
+    this.infoText = "HYBICON";
+    this.infoFillColor = "#939393";
+    this.infoStrokeColor = "#939393";
+    this.infoTextColor = "#FFF";
 
     this.hybiconSize = 100;
     this.hybiconAlign = "center";
-    this.hybiconBorder = "none";
-    this.hybiconBorderRadius = "0%";
+    this.hybiconBorder = "";
+    this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
 
     this.parseIcon();
@@ -131,7 +132,6 @@ hybicon.prototype.createIcon = function () {
         if (infoModeParams.length > 1) {
             infoType = infoModeParams[0];
             infoSize = Number(infoModeParams[1]);
-            console.log(infoSize);
         }
         else {
             infoType = this.infoMode;
@@ -142,7 +142,7 @@ hybicon.prototype.createIcon = function () {
     iconWidth += infoSize;
 
     // Set style
-    if (this.hybiconSize !== "R") { // When not responsive
+    if (this.hybiconSize !== "css") { // When size via JavaScript
         this.holderDiv.style.width = ((iconWidth / 100) * this.hybiconSize).toString() + "px";
         this.holderDiv.style.height = this.hybiconSize + "px";
     }
@@ -162,7 +162,7 @@ hybicon.prototype.createIcon = function () {
     this.raphael.setViewBox(0, 0, iconWidth, iconHeight, true);
 
     // Set style of svg
-    if (this.hybiconSize === "R") { // Responsive behaviour
+    if (this.hybiconSize === "css") { // Responsive behaviour is possible via CSS
         this.holderDiv.firstChild.style.width = "100%";
         this.holderDiv.firstChild.style.height = "100%";
     }
@@ -175,32 +175,38 @@ hybicon.prototype.createIcon = function () {
 
     this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Rotate);
     this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1RotateAnim);
-    this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
-    this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+    if (this.icon2Path !== null) {
+        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
+        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+    }
 
     if ((this.hoverMode !== null) || (this.clickMode != null)) {
         this.icon1 = this.raphael.path(this.icon1Path);
         this.icon1.attr({ transform: this.icon1Transform });
-        this.icon2 = this.raphael.path(this.icon2Path);
-        this.icon2.attr({ transform: this.icon2Transform });
+        if (this.icon2Path !== null) {
+            this.icon2 = this.raphael.path(this.icon2Path);
+            this.icon2.attr({ transform: this.icon2Transform });
+        }
     }
     else {
         this.icon1 = this.raphael.path(this.icon1PathAnim);
         this.icon1.attr({ transform: this.icon1TransformAnim });
-        this.icon2 = this.raphael.path(this.icon2PathAnim);
-        this.icon2.attr({ transform: this.icon2TransformAnim });
+        if (this.icon2PathAnim !== null) {
+            this.icon2 = this.raphael.path(this.icon2PathAnim);
+            this.icon2.attr({ transform: this.icon2TransformAnim });
+        }
     }
 
     if (infoType !== null) {
         if (infoType === "" ||
             infoType === "bottomright") {
-            this.infoFont = '100 12px Impact, Charcoal, sans-serif';
+            this.infoFont = '100 12px Arial, Helvetica, sans-serif';
             this.info = this.raphael.path(privateicons.infobottomright);
             this.infotext = this.raphael.text(83, 83, this.infoText).attr({ transform: "r-45" });
         }
 
         if (infoType === "right") {
-            this.infoFont = '100 50px Impact, Charcoal, sans-serif';
+            this.infoFont = '100 50px Arial, Helvetica, sans-serif';
             var infoScaleX = (infoSize / 200);
             var infoTranslateX = ((infoSize - 200) / 2) - 3;
             this.info = this.raphael.path(privateicons.inforight).attr({ transform: "s" + infoScaleX + ",1,T" + infoTranslateX + ",0" });
@@ -208,7 +214,7 @@ hybicon.prototype.createIcon = function () {
         }
 
         if (this.info != null) {
-            this.info.attr({ stroke: this.infoStrokeColor, 'stroke-width': 2 });
+            this.info.attr({ fill: this.infoFillColor, stroke: this.infoStrokeColor, 'stroke-width': 2 });
             this.infotext.attr({ font: this.infoFont, fill: this.infoTextColor, stroke: 'none' });
             this.info.id = this.getInfoId();
             this.info.node.id = this.info.id;
@@ -219,22 +225,32 @@ hybicon.prototype.createIcon = function () {
 
     this.icon1.id = this.getIcon1Id();
     this.icon1.node.id = this.icon1.id;
-    this.icon2.id = this.getIcon2Id();
-    this.icon2.node.id = this.icon2.id;
-
     this.icon1.attr({ fill: this.icon1Color, stroke: this.icon1Stroke, 'stroke-width': this.icon1StrokeWidth });
-    this.icon2.attr({ fill: this.icon2Color, stroke: this.icon2Stroke, 'stroke-width': this.icon2StrokeWidth });
+
+    if (this.icon2 !== undefined) {
+        this.icon2.id = this.getIcon2Id();
+        this.icon2.node.id = this.icon2.id;
+        this.icon2.attr({ fill: this.icon2Color, stroke: this.icon2Stroke, 'stroke-width': this.icon2StrokeWidth });
+    }
 
     this.iconRect = this.raphael.rect(0, 0, iconWidth, iconHeight);
     this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: "pointer" });
 
     this.iconHolder = this.raphael.set();
 
-    this.iconHolder.push(
-        this.icon1,
-        this.icon2,
-        this.iconRect
-    );
+    if (this.icon2 !== undefined) {
+        this.iconHolder.push(
+            this.icon1,
+            this.icon2,
+            this.iconRect
+        );
+    }
+    else {
+        this.iconHolder.push(
+            this.icon1,
+            this.iconRect
+        );
+    }
 
     var thishybicon = this;
 
@@ -273,11 +289,15 @@ hybicon.prototype.createIcon = function () {
 hybicon.prototype.hoverHandler = function (hovered) {
     if (hovered === true) {
         this.icon1.animate({ path: this.icon1PathAnim, transform: this.icon1TransformAnim }, this.animateTime, this.animateEffect);
-        this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEffect);
+        if (this.icon2PathAnim !== null) {
+            this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEffect);
+        }
     }
     else {
         this.icon1.animate({ path: this.icon1Path, transform: this.icon1Transform }, this.animateTime, this.animateEffect);
-        this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEffect);
+        if (this.icon2Path !== null) {
+            this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEffect);
+        }
     }
 };
 
@@ -343,7 +363,7 @@ hybicon.prototype.parseIcon = function () {
                     this.icon1Path = icon[hybiconData];
                     this.icon1CenterX = 50;
                     this.icon1CenterY = 50;
-                    this.icon2Path = privateicons.empty;
+                    this.icon2Path = null;
                 }
             }
 
@@ -458,6 +478,10 @@ hybicon.prototype.setDefaultProps = function () {
 
     // default values
     var icon1SizeDefault = 77;
+    if (this.icon2Path === null) {
+        icon1SizeDefault = 60;
+        if (this.icon1SizeAnim === null) { this.icon1SizeAnim = 70; }
+    }
     var icon2SizeDefault = 33;
 
     if (this.icon1Size === null) { this.icon1Size = icon1SizeDefault; }
@@ -486,7 +510,12 @@ hybicon.prototype.setDefaultProps = function () {
         this.clickMode === "rotate") {
         if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
         else { this.icon2Size = this.icon2SizeAnim; }
-        this.icon2RotateAnim = "360";
+        if (this.icon2Path !== null) {
+            this.icon2RotateAnim = "360";
+        }
+        else {
+            this.icon1RotateAnim = "360";
+        }
         this.animateTime = 300;
     }
 
@@ -516,10 +545,12 @@ hybicon.prototype.setDefaultProps = function () {
     this.icon1YAnim = sizeTransformAnim.iconY;
 
     // icon2
-    var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
-    this.icon2Scale = sizeTransform2.scale;
-    this.icon2X = sizeTransform2.iconX;
-    this.icon2Y = sizeTransform2.iconY;
+    if (this.icon2Path !== null) {
+        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
+        this.icon2Scale = sizeTransform2.scale;
+        this.icon2X = sizeTransform2.iconX;
+        this.icon2Y = sizeTransform2.iconY;
+    }
 
     if (this.icon2SizeAnim === null) {
         if (this.icon2Size === 0) { this.icon2SizeAnim = 33; }
@@ -531,11 +562,13 @@ hybicon.prototype.setDefaultProps = function () {
     if (this.icon2CenterYAnim === null) { this.icon2CenterYAnim = this.icon2CenterY; }
     if (this.icon2PathAnim === null) { this.icon2PathAnim = this.icon2Path; }
     if (this.icon2RotateAnim === null) { this.icon2RotateAnim = this.icon2Rotate; }
-
-    var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
-    this.icon2ScaleAnim = sizeTransform2Anim.scale;
-    this.icon2XAnim = sizeTransform2Anim.iconX;
-    this.icon2YAnim = sizeTransform2Anim.iconY;
+    
+    if (this.icon2PathAnim !== null) {
+        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
+        this.icon2ScaleAnim = sizeTransform2Anim.scale;
+        this.icon2XAnim = sizeTransform2Anim.iconX;
+        this.icon2YAnim = sizeTransform2Anim.iconY;
+    }
 };
 
 hybicon.prototype.getIcon1Id = function () {

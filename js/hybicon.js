@@ -104,14 +104,15 @@ hybicon = function (divId) {
     this.clickMode = null;
     this.clicked = false;
     this.infoMode = null;
-    this.infoText = "hybicon";
-    this.infoStrokeColor = "#222";
-    this.infoTextColor = "#222";
+    this.infoText = "HYBICON";
+    this.infoFillColor = "#939393";
+    this.infoStrokeColor = "#939393";
+    this.infoTextColor = "#FFF";
 
     this.hybiconSize = 100;
     this.hybiconAlign = "center";
-    this.hybiconBorder = "none";
-    this.hybiconBorderRadius = "0%";
+    this.hybiconBorder = "";
+    this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
 
     this.parseIcon();
@@ -132,7 +133,6 @@ hybicon.prototype.createIcon = function () {
         if (infoModeParams.length > 1) {
             infoType = infoModeParams[0];
             infoSize = Number(infoModeParams[1]);
-            console.log(infoSize);
         }
         else {
             infoType = this.infoMode;
@@ -143,7 +143,7 @@ hybicon.prototype.createIcon = function () {
     iconWidth += infoSize;
 
     // Set style
-    if (this.hybiconSize !== "R") { // When not responsive
+    if (this.hybiconSize !== "css") { // When size via JavaScript
         this.holderDiv.style.width = ((iconWidth / 100) * this.hybiconSize).toString() + "px";
         this.holderDiv.style.height = this.hybiconSize + "px";
     }
@@ -163,7 +163,7 @@ hybicon.prototype.createIcon = function () {
     this.raphael.setViewBox(0, 0, iconWidth, iconHeight, true);
 
     // Set style of svg
-    if (this.hybiconSize === "R") { // Responsive behaviour
+    if (this.hybiconSize === "css") { // Responsive behaviour is possible via CSS
         this.holderDiv.firstChild.style.width = "100%";
         this.holderDiv.firstChild.style.height = "100%";
     }
@@ -176,32 +176,38 @@ hybicon.prototype.createIcon = function () {
 
     this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Rotate);
     this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1RotateAnim);
-    this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
-    this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+    if (this.icon2Path !== null) {
+        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
+        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+    }
 
     if ((this.hoverMode !== null) || (this.clickMode != null)) {
         this.icon1 = this.raphael.path(this.icon1Path);
         this.icon1.attr({ transform: this.icon1Transform });
-        this.icon2 = this.raphael.path(this.icon2Path);
-        this.icon2.attr({ transform: this.icon2Transform });
+        if (this.icon2Path !== null) {
+            this.icon2 = this.raphael.path(this.icon2Path);
+            this.icon2.attr({ transform: this.icon2Transform });
+        }
     }
     else {
         this.icon1 = this.raphael.path(this.icon1PathAnim);
         this.icon1.attr({ transform: this.icon1TransformAnim });
-        this.icon2 = this.raphael.path(this.icon2PathAnim);
-        this.icon2.attr({ transform: this.icon2TransformAnim });
+        if (this.icon2PathAnim !== null) {
+            this.icon2 = this.raphael.path(this.icon2PathAnim);
+            this.icon2.attr({ transform: this.icon2TransformAnim });
+        }
     }
 
     if (infoType !== null) {
         if (infoType === "" ||
             infoType === "bottomright") {
-            this.infoFont = '100 12px Impact, Charcoal, sans-serif';
+            this.infoFont = '100 12px Arial, Helvetica, sans-serif';
             this.info = this.raphael.path(privateicons.infobottomright);
             this.infotext = this.raphael.text(83, 83, this.infoText).attr({ transform: "r-45" });
         }
 
         if (infoType === "right") {
-            this.infoFont = '100 50px Impact, Charcoal, sans-serif';
+            this.infoFont = '100 50px Arial, Helvetica, sans-serif';
             var infoScaleX = (infoSize / 200);
             var infoTranslateX = ((infoSize - 200) / 2) - 3;
             this.info = this.raphael.path(privateicons.inforight).attr({ transform: "s" + infoScaleX + ",1,T" + infoTranslateX + ",0" });
@@ -209,7 +215,7 @@ hybicon.prototype.createIcon = function () {
         }
 
         if (this.info != null) {
-            this.info.attr({ stroke: this.infoStrokeColor, 'stroke-width': 2 });
+            this.info.attr({ fill: this.infoFillColor, stroke: this.infoStrokeColor, 'stroke-width': 2 });
             this.infotext.attr({ font: this.infoFont, fill: this.infoTextColor, stroke: 'none' });
             this.info.id = this.getInfoId();
             this.info.node.id = this.info.id;
@@ -220,22 +226,32 @@ hybicon.prototype.createIcon = function () {
 
     this.icon1.id = this.getIcon1Id();
     this.icon1.node.id = this.icon1.id;
-    this.icon2.id = this.getIcon2Id();
-    this.icon2.node.id = this.icon2.id;
-
     this.icon1.attr({ fill: this.icon1Color, stroke: this.icon1Stroke, 'stroke-width': this.icon1StrokeWidth });
-    this.icon2.attr({ fill: this.icon2Color, stroke: this.icon2Stroke, 'stroke-width': this.icon2StrokeWidth });
+
+    if (this.icon2 !== undefined) {
+        this.icon2.id = this.getIcon2Id();
+        this.icon2.node.id = this.icon2.id;
+        this.icon2.attr({ fill: this.icon2Color, stroke: this.icon2Stroke, 'stroke-width': this.icon2StrokeWidth });
+    }
 
     this.iconRect = this.raphael.rect(0, 0, iconWidth, iconHeight);
     this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: "pointer" });
 
     this.iconHolder = this.raphael.set();
 
-    this.iconHolder.push(
-        this.icon1,
-        this.icon2,
-        this.iconRect
-    );
+    if (this.icon2 !== undefined) {
+        this.iconHolder.push(
+            this.icon1,
+            this.icon2,
+            this.iconRect
+        );
+    }
+    else {
+        this.iconHolder.push(
+            this.icon1,
+            this.iconRect
+        );
+    }
 
     var thishybicon = this;
 
@@ -274,11 +290,15 @@ hybicon.prototype.createIcon = function () {
 hybicon.prototype.hoverHandler = function (hovered) {
     if (hovered === true) {
         this.icon1.animate({ path: this.icon1PathAnim, transform: this.icon1TransformAnim }, this.animateTime, this.animateEffect);
-        this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEffect);
+        if (this.icon2PathAnim !== null) {
+            this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEffect);
+        }
     }
     else {
         this.icon1.animate({ path: this.icon1Path, transform: this.icon1Transform }, this.animateTime, this.animateEffect);
-        this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEffect);
+        if (this.icon2Path !== null) {
+            this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEffect);
+        }
     }
 };
 
@@ -344,7 +364,7 @@ hybicon.prototype.parseIcon = function () {
                     this.icon1Path = icon[hybiconData];
                     this.icon1CenterX = 50;
                     this.icon1CenterY = 50;
-                    this.icon2Path = privateicons.empty;
+                    this.icon2Path = null;
                 }
             }
 
@@ -459,6 +479,10 @@ hybicon.prototype.setDefaultProps = function () {
 
     // default values
     var icon1SizeDefault = 77;
+    if (this.icon2Path === null) {
+        icon1SizeDefault = 60;
+        if (this.icon1SizeAnim === null) { this.icon1SizeAnim = 70; }
+    }
     var icon2SizeDefault = 33;
 
     if (this.icon1Size === null) { this.icon1Size = icon1SizeDefault; }
@@ -487,7 +511,12 @@ hybicon.prototype.setDefaultProps = function () {
         this.clickMode === "rotate") {
         if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
         else { this.icon2Size = this.icon2SizeAnim; }
-        this.icon2RotateAnim = "360";
+        if (this.icon2Path !== null) {
+            this.icon2RotateAnim = "360";
+        }
+        else {
+            this.icon1RotateAnim = "360";
+        }
         this.animateTime = 300;
     }
 
@@ -517,10 +546,12 @@ hybicon.prototype.setDefaultProps = function () {
     this.icon1YAnim = sizeTransformAnim.iconY;
 
     // icon2
-    var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
-    this.icon2Scale = sizeTransform2.scale;
-    this.icon2X = sizeTransform2.iconX;
-    this.icon2Y = sizeTransform2.iconY;
+    if (this.icon2Path !== null) {
+        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
+        this.icon2Scale = sizeTransform2.scale;
+        this.icon2X = sizeTransform2.iconX;
+        this.icon2Y = sizeTransform2.iconY;
+    }
 
     if (this.icon2SizeAnim === null) {
         if (this.icon2Size === 0) { this.icon2SizeAnim = 33; }
@@ -532,11 +563,13 @@ hybicon.prototype.setDefaultProps = function () {
     if (this.icon2CenterYAnim === null) { this.icon2CenterYAnim = this.icon2CenterY; }
     if (this.icon2PathAnim === null) { this.icon2PathAnim = this.icon2Path; }
     if (this.icon2RotateAnim === null) { this.icon2RotateAnim = this.icon2Rotate; }
-
-    var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
-    this.icon2ScaleAnim = sizeTransform2Anim.scale;
-    this.icon2XAnim = sizeTransform2Anim.iconX;
-    this.icon2YAnim = sizeTransform2Anim.iconY;
+    
+    if (this.icon2PathAnim !== null) {
+        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
+        this.icon2ScaleAnim = sizeTransform2Anim.scale;
+        this.icon2XAnim = sizeTransform2Anim.iconX;
+        this.icon2YAnim = sizeTransform2Anim.iconY;
+    }
 };
 
 hybicon.prototype.getIcon1Id = function () {
@@ -640,11 +673,10 @@ hybicon.prototype.setIcon = function (iconName) {
 /* =========================== */
 
 var privateicons = {
-    infobottomright: "M100,50,L50,100,L100,100,z",
+    infobottomright: "M99,50,L50,99,L99,99,z",
     inforight: "m 297.34441,21.317398 q 0,-9.703729 -12.41277,-9.703729 l -161.36591,0 q -12.41276,0 -12.41276,9.703729 l 0,19.407449 -11.112757,9.703727 11.112757,9.703722 0,19.407453 q 0,9.703728 12.41276,9.703728 l 161.36591,0 q 12.41277,0 12.41277,-9.703728 z",
     switchouter: "M 10.787109 0.44726562 C 5.0862506 0.44726562 0.4921875 4.9122809 0.4921875 10.455078 C 0.4921875 15.997874 5.0862506 20.462891 10.787109 20.462891 L 34.539062 20.462891 C 40.239921 20.462891 44.833984 15.997874 44.833984 10.455078 C 44.833984 4.9122809 40.23992 0.44726562 34.539062 0.44726562 L 10.787109 0.44726562 z M 11.416016 1.5488281 L 33.863281 1.5488281 C 39.250751 1.5488281 43.589844 5.5065856 43.589844 10.419922 C 43.589844 15.333256 39.250751 19.291016 33.863281 19.291016 L 11.416016 19.291016 C 6.028544 19.291016 1.6875 15.333256 1.6875 10.419922 C 1.6875 5.5065856 6.028544 1.5488281 11.416016 1.5488281 z ",
-    switchinner: "M 21.514665,11.936796 A 7.589529,7.589529 0 0 1 13.925136,19.526325 7.589529,7.589529 0 0 1 6.3356066,11.936796 7.589529,7.589529 0 0 1 13.925136,4.3472672 7.589529,7.589529 0 0 1 21.514665,11.936796 Z",
-    empty: "M0,0"
+    switchinner: "M 21.514665,11.936796 A 7.589529,7.589529 0 0 1 13.925136,19.526325 7.589529,7.589529 0 0 1 6.3356066,11.936796 7.589529,7.589529 0 0 1 13.925136,4.3472672 7.589529,7.589529 0 0 1 21.514665,11.936796 Z"
 };
 
 var icon = {
@@ -762,38 +794,40 @@ hybicongithub = function (divId) {
         var githubUrl = 'https://github.com/' + this.githubUser + '/' + this.githubRepo;
         var githubApiUrl = 'https://api.github.com/repos/' + this.githubUser + '/' + this.githubRepo;
 
+        // set type
         var icons = holderDiv.getAttribute("data-hybicon").split("-");
+        var callbacktype = null;
 
         if (icons[0] === "github" ||
             icons[0] === "githubalt") {
 
             if (icons[1] === "starred" ||
                 icons[1] === "star") {
-                callbacktype = "star";
+                callbacktype = "stars";
                 dividstar = divId;
                 githubUrl += "/stargazers";
             }
             if (icons[1] === "forked" ||
                 icons[1] === "fork") {
-                callbacktype = "fork";
+                callbacktype = "forks";
                 dividfork = divId;
-                githubUrl += "/network";
+                githubUrl += "/network/members";
             }
             if (icons[1] === "watch" ||
                 icons[1] === "view") {
-                callbacktype = "watch";
+                callbacktype = "watchers";
                 dividwatch = divId;
                 githubUrl += "/watchers";
             }
             if (icons[1] === "issue" ||
                 icons[1] === "question") {
-                callbacktype = "issue";
+                callbacktype = "issues";
                 dividissue = divId;
                 githubUrl += "/issues";
             }
             if (icons[1] === "downloaded" ||
                 icons[1] === "download") {
-                callbacktype = "download";
+                callbacktype = "releases";
                 dividdownload = divId;
                 githubUrl += "/releases";
                 githubApiUrl += "/releases";
@@ -803,35 +837,52 @@ hybicongithub = function (divId) {
                 }
             }
         }
-        // set hyperlink
-        holderDiv.outerHTML = "<a href='" + githubUrl + "' target='_blank'>" + holderDiv.outerHTML + "</a>";
 
         // set GitHub API
-        var githubApi = document.createElement('script');
-        githubApi.src = githubApiUrl + '?callback=hybicongithubcallback' + callbacktype;
-        document.head.insertBefore(githubApi, document.head.firstChild);
+        if (callbacktype !== null) {
+            if (!holderDiv.hasAttribute("data-hybicon-infomode")) {
+                holderDiv.setAttribute("data-hybicon-infomode", "");
+            }
+            if (!holderDiv.hasAttribute("title")) {
+                var githubtitle = this.githubUser + "/" + this.githubRepo + " - " + callbacktype;
+                if (this.githubRepoTag !== null &&
+                    callbacktype === "release") {
+                    githubtitle += " " + this.githubRepoTag;
+                }
+                holderDiv.setAttribute("title", githubtitle);
+            }
+
+            var githubApi = document.createElement('script');
+            githubApi.src = githubApiUrl + '?callback=hybicongithubcallback' + callbacktype;
+            document.head.insertBefore(githubApi, document.head.firstChild);
+        }
+
+        // set hyperlink
+        if (holderDiv.parentNode.tagName.toUpperCase() !== "A") {
+            holderDiv.outerHTML = "<a href='" + githubUrl + "' target='_blank'>" + holderDiv.outerHTML + "</a>";
+        }
     }
 
     return this;
 };
 
-function hybicongithubcallbackstar(obj) {
+function hybicongithubcallbackstars(obj) {
     createhybicongithub(dividstar, (obj.data.stargazers_count ? obj.data.stargazers_count : "star"));
 };
 
-function hybicongithubcallbackfork(obj) {
+function hybicongithubcallbackforks(obj) {
     createhybicongithub(dividfork, (obj.data.network_count ? obj.data.network_count : "fork"));
 };
 
-function hybicongithubcallbackwatch(obj) {
+function hybicongithubcallbackwatchers(obj) {
     createhybicongithub(dividwatch, (obj.data.subscribers_count ? obj.data.subscribers_count : "watch"));
 };
 
-function hybicongithubcallbackissue(obj) {
+function hybicongithubcallbackissues(obj) {
     createhybicongithub(dividissue, (obj.data.open_issues_count ? obj.data.open_issues_count : "issue"));
 };
 
-function hybicongithubcallbackdownload(obj) {
+function hybicongithubcallbackreleases(obj) {
     var download = 0;
     var objdata = obj.data;
 

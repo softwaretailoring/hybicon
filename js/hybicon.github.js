@@ -43,38 +43,40 @@ hybicongithub = function (divId) {
         var githubUrl = 'https://github.com/' + this.githubUser + '/' + this.githubRepo;
         var githubApiUrl = 'https://api.github.com/repos/' + this.githubUser + '/' + this.githubRepo;
 
+        // set type
         var icons = holderDiv.getAttribute("data-hybicon").split("-");
+        var callbacktype = null;
 
         if (icons[0] === "github" ||
             icons[0] === "githubalt") {
 
             if (icons[1] === "starred" ||
                 icons[1] === "star") {
-                callbacktype = "star";
+                callbacktype = "stars";
                 dividstar = divId;
                 githubUrl += "/stargazers";
             }
             if (icons[1] === "forked" ||
                 icons[1] === "fork") {
-                callbacktype = "fork";
+                callbacktype = "forks";
                 dividfork = divId;
-                githubUrl += "/network";
+                githubUrl += "/network/members";
             }
             if (icons[1] === "watch" ||
                 icons[1] === "view") {
-                callbacktype = "watch";
+                callbacktype = "watchers";
                 dividwatch = divId;
                 githubUrl += "/watchers";
             }
             if (icons[1] === "issue" ||
                 icons[1] === "question") {
-                callbacktype = "issue";
+                callbacktype = "issues";
                 dividissue = divId;
                 githubUrl += "/issues";
             }
             if (icons[1] === "downloaded" ||
                 icons[1] === "download") {
-                callbacktype = "download";
+                callbacktype = "releases";
                 dividdownload = divId;
                 githubUrl += "/releases";
                 githubApiUrl += "/releases";
@@ -84,35 +86,52 @@ hybicongithub = function (divId) {
                 }
             }
         }
-        // set hyperlink
-        holderDiv.outerHTML = "<a href='" + githubUrl + "' target='_blank'>" + holderDiv.outerHTML + "</a>";
 
         // set GitHub API
-        var githubApi = document.createElement('script');
-        githubApi.src = githubApiUrl + '?callback=hybicongithubcallback' + callbacktype;
-        document.head.insertBefore(githubApi, document.head.firstChild);
+        if (callbacktype !== null) {
+            if (!holderDiv.hasAttribute("data-hybicon-infomode")) {
+                holderDiv.setAttribute("data-hybicon-infomode", "");
+            }
+            if (!holderDiv.hasAttribute("title")) {
+                var githubtitle = this.githubUser + "/" + this.githubRepo + " - " + callbacktype;
+                if (this.githubRepoTag !== null &&
+                    callbacktype === "release") {
+                    githubtitle += " " + this.githubRepoTag;
+                }
+                holderDiv.setAttribute("title", githubtitle);
+            }
+
+            var githubApi = document.createElement('script');
+            githubApi.src = githubApiUrl + '?callback=hybicongithubcallback' + callbacktype;
+            document.head.insertBefore(githubApi, document.head.firstChild);
+        }
+
+        // set hyperlink
+        if (holderDiv.parentNode.tagName.toUpperCase() !== "A") {
+            holderDiv.outerHTML = "<a href='" + githubUrl + "' target='_blank'>" + holderDiv.outerHTML + "</a>";
+        }
     }
 
     return this;
 };
 
-function hybicongithubcallbackstar(obj) {
+function hybicongithubcallbackstars(obj) {
     createhybicongithub(dividstar, (obj.data.stargazers_count ? obj.data.stargazers_count : "star"));
 };
 
-function hybicongithubcallbackfork(obj) {
+function hybicongithubcallbackforks(obj) {
     createhybicongithub(dividfork, (obj.data.network_count ? obj.data.network_count : "fork"));
 };
 
-function hybicongithubcallbackwatch(obj) {
+function hybicongithubcallbackwatchers(obj) {
     createhybicongithub(dividwatch, (obj.data.subscribers_count ? obj.data.subscribers_count : "watch"));
 };
 
-function hybicongithubcallbackissue(obj) {
+function hybicongithubcallbackissues(obj) {
     createhybicongithub(dividissue, (obj.data.open_issues_count ? obj.data.open_issues_count : "issue"));
 };
 
-function hybicongithubcallbackdownload(obj) {
+function hybicongithubcallbackreleases(obj) {
     var download = 0;
     var objdata = obj.data;
 
