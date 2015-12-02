@@ -72,31 +72,25 @@ hybicon = function (divId) {
     this.icon1Stroke = "none";
     this.icon1StrokeWidth = 0;
     this.icon1Path = icon.user;
-    this.icon1Rotate = null;
-    this.icon1Size = null;
-    this.icon1CenterX = null;
-    this.icon1CenterY = null;
-
     this.icon1PathAnim = null;
-    this.icon1RotateAnim = null;
-    this.icon1SizeAnim = null;
-    this.icon1CenterXAnim = null;
-    this.icon1CenterYAnim = null;
+
+    this.icon1InitSettings = null;
+    this.icon1Init = new this.hybiconSettings();
+
+    this.icon1AnimSettings = null;
+    this.icon1Anim = new this.hybiconSettings();
 
     this.icon2Color = "#222";
     this.icon2Stroke = "none";
     this.icon2StrokeWidth = 0;
     this.icon2Path = icon.idea;
-    this.icon2Rotate = null;
-    this.icon2Size = null;
-    this.icon2CenterX = null;
-    this.icon2CenterY = null;
-
     this.icon2PathAnim = null;
-    this.icon2RotateAnim = null;
-    this.icon2SizeAnim = null;
-    this.icon2CenterXAnim = null;
-    this.icon2CenterYAnim = null;
+
+    this.icon2InitSettings = null;
+    this.icon2Init = new this.hybiconSettings();
+    
+    this.icon2AnimSettings = null;
+    this.icon2Anim = new this.hybiconSettings();
 
     this.animateTime = 200;
     this.animateEffect = "linear";
@@ -174,11 +168,11 @@ hybicon.prototype.createIcon = function () {
     this.setDefaultProps();
     this.hovered = false;
 
-    this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Rotate);
-    this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1RotateAnim);
+    this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Init.rotate);
+    this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1Anim.rotate);
     if (this.icon2Path !== null) {
-        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
-        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Init.rotate);
+        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2Anim.rotate);
     }
 
     if ((this.hoverMode !== null) || (this.clickMode != null)) {
@@ -362,8 +356,8 @@ hybicon.prototype.parseIcon = function () {
                 if (icon[hybiconData] !== undefined &&
                     icon[hybiconData] !== null) {
                     this.icon1Path = icon[hybiconData];
-                    this.icon1CenterX = 50;
-                    this.icon1CenterY = 50;
+                    this.icon1Init.centerX = 50;
+                    this.icon1Init.centerY = 50;
                     this.icon2Path = null;
                 }
             }
@@ -397,7 +391,8 @@ hybicon.prototype.parseIcon = function () {
 
             //data-hybicon-color
             var hybiconColor = this.holderDiv.getAttribute("data-hybicon-color");
-            if (hybiconColor !== null) {
+            if (hybiconColor !== null &&
+                hybiconColor !== "") {
                 this.icon1Color = hybiconColor;
                 this.icon2Color = hybiconColor;
             }
@@ -432,6 +427,12 @@ hybicon.prototype.parseIcon = function () {
                 this.infoText = hybiconInfotext;
             }
 
+            //data-hybicon-icon1init
+            var hybiconIcon1Init = this.holderDiv.getAttribute("data-hybicon-icon1init");
+            if (hybiconIcon1Init !== null) {
+                this.icon1InitSettings = hybiconIcon1Init;
+            }
+
             this.createIcon();
         }
 
@@ -447,6 +448,24 @@ hybicon.prototype.parseIcon = function () {
         }
     }
 };
+
+hybicon.prototype.setIconSettings = function (iconSet, iconSettings) {
+    if (iconSettings !== null) {
+        var iconsettings = iconSettings.split(",");
+        if (iconsettings.length > 0) {
+            if (iconsettings[0] !== "") { iconSet.centerX = iconsettings[0]; }
+        }
+        if (iconsettings.length > 1) {
+            if (iconsettings[1] !== "") { iconSet.centerY = iconsettings[1]; }
+        }
+        if (iconsettings.length > 2) {
+            if (iconsettings[2] !== "") { iconSet.size = iconsettings[2]; }
+        }
+        if (iconsettings.length > 3) {
+            if (iconsettings[3] !== "") { iconSet.rotate = iconsettings[3]; }
+        }
+    }
+}
 
 hybicon.prototype.parseAll = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
@@ -477,100 +496,109 @@ hybicon.prototype.parseAll = function () {
 //Set default properties
 hybicon.prototype.setDefaultProps = function () {
 
+    this.setIconSettings(this.icon1Init, this.icon1InitSettings);
+    this.setIconSettings(this.icon1Anim, this.icon1AnimSettings);
+    this.setIconSettings(this.icon2Init, this.icon2InitSettings);
+    this.setIconSettings(this.icon2Anim, this.icon2AnimSettings);
+
     // default values
     var icon1SizeDefault = 77;
     if (this.icon2Path === null) {
         icon1SizeDefault = 60;
-        if (this.icon1SizeAnim === null) { this.icon1SizeAnim = 70; }
+        if (this.icon1Anim.size === null) { this.icon1Anim.size = 70; }
     }
     var icon2SizeDefault = 33;
 
-    if (this.icon1Size === null) { this.icon1Size = icon1SizeDefault; }
-    if (this.icon1CenterX === null) { this.icon1CenterX = 45; }
-    if (this.icon1CenterY === null) { this.icon1CenterY = 55; }
-    if (this.icon1Rotate === null) { this.icon1Rotate = 0; }
-    if (this.icon2Size === null) { this.icon2Size = 0; }
-    if (this.icon2CenterX === null) { this.icon2CenterX = 80; }
-    if (this.icon2CenterY === null) { this.icon2CenterY = 20; }
-    if (this.icon2Rotate === null) { this.icon2Rotate = 0; }
+    if (this.icon1Init.size === null) { this.icon1Init.size = icon1SizeDefault; }
+    if (this.icon1Init.centerX === null) { this.icon1Init.centerX = 45; }
+    if (this.icon1Init.centerY === null) { this.icon1Init.centerY = 55; }
+    if (this.icon1Init.rotate === null) { this.icon1Init.rotate = 0; }
+    if (this.icon2Init.size === null) { this.icon2Init.size = 0; }
+    if (this.icon2Init.centerX === null) { this.icon2Init.centerX = 80; }
+    if (this.icon2Init.centerY === null) { this.icon2Init.centerY = 20; }
+    if (this.icon2Init.rotate === null) { this.icon2Init.rotate = 0; }
 
     // handle hover and click modes
     if (this.hoverMode === "switch" ||
         this.clickMode === "switch") {
-        this.icon1CenterXAnim = this.icon2CenterX;
-        this.icon1CenterYAnim = this.icon2CenterY;
-        this.icon2CenterXAnim = this.icon1CenterX;
-        this.icon2CenterYAnim = this.icon1CenterY;
-        if (this.icon2Size === 0) { this.icon1SizeAnim = icon2SizeDefault; }
-        else { this.icon1SizeAnim = this.icon2Size; }
-        if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
-        else { this.icon2Size = this.icon2SizeAnim; }
-        this.icon2SizeAnim = this.icon1Size;
+        this.icon1Anim.centerX = this.icon2Init.centerX;
+        this.icon1Anim.centerY = this.icon2Init.centerY;
+        this.icon2Anim.centerX = this.icon1Init.centerX;
+        this.icon2Anim.centerY = this.icon1Init.centerY;
+        if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
+        else { this.icon1Anim.size = this.icon2Init.size; }
+        if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+        else { this.icon2Init.size = this.icon2Anim.size; }
+        this.icon2Anim.size = this.icon1Init.size;
     }
     if (this.hoverMode === "rotate" ||
         this.clickMode === "rotate") {
-        if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
-        else { this.icon2Size = this.icon2SizeAnim; }
+        if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+        else { this.icon2Init.size = this.icon2Anim.size; }
         if (this.icon2Path !== null) {
-            this.icon2RotateAnim = "360";
+            this.icon2Anim.rotate = "360";
         }
         else {
-            this.icon1RotateAnim = "360";
+            this.icon1Anim.rotate = "360";
         }
         this.animateTime = 300;
     }
 
     // set width and height
-    if (this.icon1Height === null) { this.icon1Height = this.icon1Size; }
-    if (this.icon1Width === null) { this.icon1Width = this.icon1Size; }
-    if (this.icon2Height === null) { this.icon2Height = this.icon2Size; }
-    if (this.icon2Width === null) { this.icon2Width = this.icon2Size; }
+    if (this.icon1Height === null) { this.icon1Height = this.icon1Init.size; }
+    if (this.icon1Width === null) { this.icon1Width = this.icon1Init.size; }
+    if (this.icon2Height === null) { this.icon2Height = this.icon2Init.size; }
+    if (this.icon2Width === null) { this.icon2Width = this.icon2Init.size; }
 
     // icon1
-    var sizeTransform = this.getIconSizeTransform(this.icon1Path, this.icon1Width, this.icon1Height, this.icon1CenterX, this.icon1CenterY);
+    var sizeTransform = this.getIconSizeTransform(this.icon1Path, this.icon1Width, this.icon1Height, this.icon1Init.centerX, this.icon1Init.centerY);
     this.icon1Scale = sizeTransform.scale;
     this.icon1X = sizeTransform.iconX;
     this.icon1Y = sizeTransform.iconY;
 
-    if (this.icon1SizeAnim === null) { this.icon1SizeAnim = this.icon1Size; }
-    if (this.icon1HeightAnim === null) { this.icon1HeightAnim = this.icon1SizeAnim; }
-    if (this.icon1WidthAnim === null) { this.icon1WidthAnim = this.icon1SizeAnim; }
-    if (this.icon1CenterXAnim === null) { this.icon1CenterXAnim = this.icon1CenterX; }
-    if (this.icon1CenterYAnim === null) { this.icon1CenterYAnim = this.icon1CenterY; }
+    if (this.icon1Anim.size === null) { this.icon1Anim.size = this.icon1Init.size; }
+    if (this.icon1HeightAnim === null) { this.icon1HeightAnim = this.icon1Anim.size; }
+    if (this.icon1WidthAnim === null) { this.icon1WidthAnim = this.icon1Anim.size; }
+    if (this.icon1Anim.centerX === null) { this.icon1Anim.centerX = this.icon1Init.centerX; }
+    if (this.icon1Anim.centerY === null) { this.icon1Anim.centerY = this.icon1Init.centerY; }
     if (this.icon1PathAnim === null) { this.icon1PathAnim = this.icon1Path; }
-    if (this.icon1RotateAnim === null) { this.icon1RotateAnim = this.icon1Rotate; }
+    if (this.icon1Anim.rotate === null) { this.icon1Anim.rotate = this.icon1Init.rotate; }
 
-    var sizeTransformAnim = this.getIconSizeTransform(this.icon1PathAnim, this.icon1WidthAnim, this.icon1HeightAnim, this.icon1CenterXAnim, this.icon1CenterYAnim);
+    var sizeTransformAnim = this.getIconSizeTransform(this.icon1PathAnim, this.icon1WidthAnim, this.icon1HeightAnim, this.icon1Anim.centerX, this.icon1Anim.centerY);
     this.icon1ScaleAnim = sizeTransformAnim.scale;
     this.icon1XAnim = sizeTransformAnim.iconX;
     this.icon1YAnim = sizeTransformAnim.iconY;
 
     // icon2
     if (this.icon2Path !== null) {
-        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
+        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2Init.centerX, this.icon2Init.centerY);
         this.icon2Scale = sizeTransform2.scale;
         this.icon2X = sizeTransform2.iconX;
         this.icon2Y = sizeTransform2.iconY;
     }
 
-    if (this.icon2SizeAnim === null) {
-        if (this.icon2Size === 0) { this.icon2SizeAnim = 33; }
-        else { this.icon2SizeAnim = this.icon2Size; }
+    if (this.icon2Anim.size === null) {
+        if (this.icon2Init.size === 0) { this.icon2Anim.size = 33; }
+        else { this.icon2Anim.size = this.icon2Init.size; }
     }
-    if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2SizeAnim; }
-    if (this.icon2WidthAnim === null) { this.icon2WidthAnim = this.icon2SizeAnim; }
-    if (this.icon2CenterXAnim === null) { this.icon2CenterXAnim = this.icon2CenterX; }
-    if (this.icon2CenterYAnim === null) { this.icon2CenterYAnim = this.icon2CenterY; }
+    if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2Anim.size; }
+    if (this.icon2WidthAnim === null) { this.icon2WidthAnim = this.icon2Anim.size; }
+    if (this.icon2Anim.centerX === null) { this.icon2Anim.centerX = this.icon2Init.centerX; }
+    if (this.icon2Anim.centerY === null) { this.icon2Anim.centerY = this.icon2Init.centerY; }
     if (this.icon2PathAnim === null) { this.icon2PathAnim = this.icon2Path; }
-    if (this.icon2RotateAnim === null) { this.icon2RotateAnim = this.icon2Rotate; }
+    if (this.icon2Anim.rotate === null) { this.icon2Anim.rotate = this.icon2Init.rotate; }
     
     if (this.icon2PathAnim !== null) {
-        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
+        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2Anim.centerX, this.icon2Anim.centerY);
         this.icon2ScaleAnim = sizeTransform2Anim.scale;
         this.icon2XAnim = sizeTransform2Anim.iconX;
         this.icon2YAnim = sizeTransform2Anim.iconY;
     }
 };
+
+hybicon.prototype.hybiconSettings = function () {
+    return { centerX: null, centerY: null, size: null, rotate: null };
+}
 
 hybicon.prototype.getIcon1Id = function () {
     return "hybicon-" + this.holderId + "-icon1";
@@ -624,20 +652,19 @@ hybicon.prototype.setIcon = function (iconName) {
 
     switch (iconName) {
         case "twitter-bubble":
-            this.icon1CenterX = 36;
-            this.icon1Size = 65;
-            this.icon2SizeAnim = 31;
-            this.icon2CenterX = 82;
-            this.icon2CenterY = 23;
+            this.icon1Init.centerX = 36;
+            this.icon1Init.size = 65;
+            this.icon2Init.centerX = 82;
+            this.icon2Init.centerY = 23;
+            this.icon2Anim.size = 31;
             break;
         case "linkedin-link":
-            this.icon2Rotate = 90;
         case "google-plus":
         case "facebook-like":
         case "pinterest-pin":
         case "instagram-fave":
-            this.icon1Size = 65;
-            this.icon2SizeAnim = 25;
+            this.icon1Init.size = 65;
+            this.icon2Anim.size = 25;
             break;
         case "user-idea":
             this.icon1Size = 85;
@@ -646,24 +673,16 @@ hybicon.prototype.setIcon = function (iconName) {
             this.icon2CenterY = 25;
             break;
         case "checkbox-check":
-            this.icon1Size = 70;
-            this.icon1CenterX = 50;
-            this.icon1CenterY = 50;
-            this.icon2CenterX = 50;
-            this.icon2CenterY = 50;
-            this.icon2SizeAnim = 50;
+            this.icon1InitSettings = "50,50,70";
+            this.icon2InitSettings = "50,50";
+            this.icon2Anim.size = 50;
             break;
         case "switch-horizontal":
             this.icon1Path = privateicons.switchouter;
             this.icon2Path = privateicons.switchinner;
-            this.icon1Size = 95;
-            this.icon2Size = 33;
-            this.icon1CenterX = 50;
-            this.icon1CenterY = 50;
-            this.icon2CenterX = 24;
-            this.icon2CenterY = 50;
-            this.icon2CenterXAnim = 76;
-            this.icon2CenterYAnim = 50;
+            this.icon1InitSettings = "50,50,95";
+            this.icon2InitSettings = "24,50,33";
+            this.icon2AnimSettings = "76";
             break;
     }
 };
@@ -689,7 +708,7 @@ var icon = {
     skype: "M28.777,18.438c0.209-0.948,0.318-1.934,0.318-2.944c0-7.578-6.144-13.722-13.724-13.722c-0.799,0-1.584,0.069-2.346,0.2C11.801,1.199,10.35,0.75,8.793,0.75c-4.395,0-7.958,3.562-7.958,7.958c0,1.47,0.399,2.845,1.094,4.024c-0.183,0.893-0.277,1.814-0.277,2.76c0,7.58,6.144,13.723,13.722,13.723c0.859,0,1.699-0.078,2.515-0.23c1.119,0.604,2.399,0.945,3.762,0.945c4.395,0,7.957-3.562,7.957-7.959C29.605,20.701,29.309,19.502,28.777,18.438zM22.412,22.051c-0.635,0.898-1.573,1.609-2.789,2.115c-1.203,0.5-2.646,0.754-4.287,0.754c-1.971,0-3.624-0.346-4.914-1.031C9.5,23.391,8.74,22.717,8.163,21.885c-0.583-0.842-0.879-1.676-0.879-2.479c0-0.503,0.192-0.939,0.573-1.296c0.375-0.354,0.857-0.532,1.432-0.532c0.471,0,0.878,0.141,1.209,0.422c0.315,0.269,0.586,0.662,0.805,1.174c0.242,0.558,0.508,1.027,0.788,1.397c0.269,0.355,0.656,0.656,1.151,0.89c0.497,0.235,1.168,0.354,1.992,0.354c1.135,0,2.064-0.241,2.764-0.721c0.684-0.465,1.016-1.025,1.016-1.711c0-0.543-0.173-0.969-0.529-1.303c-0.373-0.348-0.865-0.621-1.465-0.807c-0.623-0.195-1.47-0.404-2.518-0.623c-1.424-0.306-2.634-0.668-3.596-1.076c-0.984-0.419-1.777-1-2.357-1.727c-0.59-0.736-0.889-1.662-0.889-2.75c0-1.036,0.314-1.971,0.933-2.776c0.613-0.8,1.51-1.423,2.663-1.849c1.139-0.422,2.494-0.635,4.027-0.635c1.225,0,2.303,0.141,3.201,0.421c0.904,0.282,1.668,0.662,2.267,1.13c0.604,0.472,1.054,0.977,1.335,1.5c0.284,0.529,0.43,1.057,0.43,1.565c0,0.49-0.189,0.937-0.563,1.324c-0.375,0.391-0.851,0.589-1.408,0.589c-0.509,0-0.905-0.124-1.183-0.369c-0.258-0.227-0.523-0.58-0.819-1.09c-0.342-0.65-0.756-1.162-1.229-1.523c-0.463-0.351-1.232-0.529-2.292-0.529c-0.984,0-1.784,0.197-2.379,0.588c-0.572,0.375-0.85,0.805-0.85,1.314c0,0.312,0.09,0.574,0.273,0.799c0.195,0.238,0.471,0.447,0.818,0.621c0.36,0.182,0.732,0.326,1.104,0.429c0.382,0.106,1.021,0.263,1.899,0.466c1.11,0.238,2.131,0.506,3.034,0.793c0.913,0.293,1.703,0.654,2.348,1.072c0.656,0.429,1.178,0.979,1.547,1.635c0.369,0.658,0.558,1.471,0.558,2.416C23.371,20.119,23.049,21.148,22.412,22.051z",
     phone: "M22.065,18.53c-0.467-0.29-1.167-0.21-1.556,0.179l-3.093,3.092c-0.389,0.389-1.025,0.389-1.414,0L9.05,14.848c-0.389-0.389-0.389-1.025,0-1.414l2.913-2.912c0.389-0.389,0.447-1.075,0.131-1.524L6.792,1.485C6.476,1.036,5.863,0.948,5.433,1.29c0,0-4.134,3.281-4.134,6.295c0,12.335,10,22.334,22.334,22.334c3.015,0,5.948-5.533,5.948-5.533c0.258-0.486,0.087-1.122-0.38-1.412L22.065,18.53z",
     linkedin: "m 27.351695,3.125 -22.0000001,0 c -1.104,0 -2,0.896 -2,2 l 0,22 c 0,1.104 0.896,2 2,2 l 22.0000001,0 c 1.104,0 2,-0.896 2,-2 l 0,-22 c 0,-1.104 -0.896,-2 -2,-2 z m -16.031,23.656 -4.0000001,0 0,-14 4.0000001,0 0,14 z m -2.0000001,-15.5 c -1.383,0 -2.5,-1.119 -2.5,-2.5 0,-1.381 1.117,-2.5 2.5,-2.5 1.3830001,0 2.5000001,1.119 2.5000001,2.5 0,1.381 -1.117,2.5 -2.5000001,2.5 z m 16.0000001,15.5 -4,0 0,-8.5 c 0,-0.4 -0.403,-1.055 -0.687,-1.213 -0.375,-0.211 -1.261,-0.229 -1.665,-0.034 l -1.648,0.793 0,8.954 -4,0 0,-14 4,0 0,0.614 c 1.583,-0.723 3.78,-0.652 5.27,0.184 1.582,0.886 2.73,2.864 2.73,4.702 l 0,8.5 z",
-    link: "M16.45,18.085l-2.47,2.471c0.054,1.023-0.297,2.062-1.078,2.846c-1.465,1.459-3.837,1.459-5.302-0.002c-1.461-1.465-1.46-3.836-0.001-5.301c0.783-0.781,1.824-1.131,2.847-1.078l2.469-2.469c-2.463-1.057-5.425-0.586-7.438,1.426c-2.634,2.637-2.636,6.907,0,9.545c2.638,2.637,6.909,2.635,9.545,0l0.001,0.002C17.033,23.511,17.506,20.548,16.45,18.085zM14.552,12.915l2.467-2.469c-0.053-1.023,0.297-2.062,1.078-2.848C19.564,6.139,21.934,6.137,23.4,7.6c1.462,1.465,1.462,3.837,0,5.301c-0.783,0.783-1.822,1.132-2.846,1.079l-2.469,2.468c2.463,1.057,5.424,0.584,7.438-1.424c2.634-2.639,2.633-6.91,0-9.546c-2.639-2.636-6.91-2.637-9.545-0.001C13.967,7.489,13.495,10.451,14.552,12.915zM18.152,10.727l-7.424,7.426c-0.585,0.584-0.587,1.535,0,2.121c0.585,0.584,1.536,0.584,2.121-0.002l7.425-7.424c0.584-0.586,0.584-1.535,0-2.121C19.687,10.141,18.736,10.142,18.152,10.727z",
+    link: "m 12.914734,16.450766 -2.471,-2.47 c -1.0229999,0.054 -2.0619999,-0.297 -2.8459999,-1.078 -1.459,-1.465 -1.459,-3.8370001 0.002,-5.3020001 1.465,-1.461 3.8359999,-1.46 5.3009999,-10e-4 0.781,0.783 1.131,1.824 1.078,2.8470001 l 2.469,2.469 c 1.057,-2.463 0.586,-5.4250001 -1.426,-7.4380001 -2.637,-2.634 -6.9069999,-2.636 -9.5449999,0 -2.637,2.638 -2.635,6.9090001 0,9.5450001 l -0.002,10e-4 c 2.014,2.01 4.9769999,2.483 7.4399999,1.427 z m 5.17,-1.898 2.469,2.467 c 1.023,-0.053 2.062,0.297 2.848,1.078 1.459,1.467 1.461,3.837 -0.002,5.303 -1.465,1.462 -3.837,1.462 -5.301,0 -0.783,-0.783 -1.132,-1.822 -1.079,-2.846 l -2.468,-2.469 c -1.057,2.463 -0.584,5.424 1.424,7.438 2.639,2.634 6.91,2.633 9.546,0 2.636,-2.639 2.637,-6.91 0.001,-9.545 -2.012,-2.011 -4.974,-2.483 -7.438,-1.426 z m 2.188,3.6 -7.426,-7.424 c -0.584,-0.585 -1.535,-0.587 -2.121,0 -0.584,0.585 -0.584,1.536 0.002,2.121 l 7.424,7.425 c 0.586,0.584 1.535,0.584 2.121,0 0.586,-0.587 0.585,-1.538 0,-2.122 z",
     user: "M20.771,12.364c0,0,0.849-3.51,0-4.699c-0.85-1.189-1.189-1.981-3.058-2.548s-1.188-0.454-2.547-0.396c-1.359,0.057-2.492,0.792-2.492,1.188c0,0-0.849,0.057-1.188,0.397c-0.34,0.34-0.906,1.924-0.906,2.321s0.283,3.058,0.566,3.624l-0.337,0.113c-0.283,3.283,1.132,3.68,1.132,3.68c0.509,3.058,1.019,1.756,1.019,2.548s-0.51,0.51-0.51,0.51s-0.452,1.245-1.584,1.698c-1.132,0.452-7.416,2.886-7.927,3.396c-0.511,0.511-0.453,2.888-0.453,2.888h26.947c0,0,0.059-2.377-0.452-2.888c-0.512-0.511-6.796-2.944-7.928-3.396c-1.132-0.453-1.584-1.698-1.584-1.698s-0.51,0.282-0.51-0.51s0.51,0.51,1.02-2.548c0,0,1.414-0.397,1.132-3.68H20.771z",
     idea: "M12.75,25.498h5.5v-5.164h-5.5V25.498zM15.5,28.166c1.894,0,2.483-1.027,2.667-1.666h-5.334C13.017,27.139,13.606,28.166,15.5,28.166zM15.5,2.833c-3.866,0-7,3.134-7,7c0,3.859,3.945,4.937,4.223,9.499h1.271c-0.009-0.025-0.024-0.049-0.029-0.078L11.965,8.256c-0.043-0.245,0.099-0.485,0.335-0.563c0.237-0.078,0.494,0.026,0.605,0.25l0.553,1.106l0.553-1.106c0.084-0.17,0.257-0.277,0.446-0.277c0.189,0,0.362,0.107,0.446,0.277l0.553,1.106l0.553-1.106c0.084-0.17,0.257-0.277,0.448-0.277c0.189,0,0.36,0.107,0.446,0.277l0.554,1.106l0.553-1.106c0.111-0.224,0.368-0.329,0.604-0.25s0.377,0.318,0.333,0.563l-1.999,10.998c-0.005,0.029-0.02,0.053-0.029,0.078h1.356c0.278-4.562,4.224-5.639,4.224-9.499C22.5,5.968,19.366,2.833,15.5,2.833zM17.458,10.666c-0.191,0-0.364-0.107-0.446-0.275l-0.554-1.106l-0.553,1.106c-0.086,0.168-0.257,0.275-0.446,0.275c-0.191,0-0.364-0.107-0.449-0.275l-0.553-1.106l-0.553,1.106c-0.084,0.168-0.257,0.275-0.446,0.275c-0.012,0-0.025,0-0.037-0.001l1.454,8.001h1.167l1.454-8.001C17.482,10.666,17.47,10.666,17.458,10.666z",
     facebook: "m 25.309,16.916 -3.218,0 0,11.65 -4.819,0 0,-11.65 -2.409,0 0,-4.016 2.409,0 0,-2.411 c 0,-3.275 1.359,-5.224 5.229,-5.224 l 3.218,0 0,4.016 -2.011,0 c -1.504,0 -1.604,0.562 -1.604,1.608 l -0.013,2.011 3.644,0 -0.426,4.016 z",

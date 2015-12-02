@@ -71,31 +71,25 @@ hybicon = function (divId) {
     this.icon1Stroke = "none";
     this.icon1StrokeWidth = 0;
     this.icon1Path = icon.user;
-    this.icon1Rotate = null;
-    this.icon1Size = null;
-    this.icon1CenterX = null;
-    this.icon1CenterY = null;
-
     this.icon1PathAnim = null;
-    this.icon1RotateAnim = null;
-    this.icon1SizeAnim = null;
-    this.icon1CenterXAnim = null;
-    this.icon1CenterYAnim = null;
+
+    this.icon1InitSettings = null;
+    this.icon1Init = new this.hybiconSettings();
+
+    this.icon1AnimSettings = null;
+    this.icon1Anim = new this.hybiconSettings();
 
     this.icon2Color = "#222";
     this.icon2Stroke = "none";
     this.icon2StrokeWidth = 0;
     this.icon2Path = icon.idea;
-    this.icon2Rotate = null;
-    this.icon2Size = null;
-    this.icon2CenterX = null;
-    this.icon2CenterY = null;
-
     this.icon2PathAnim = null;
-    this.icon2RotateAnim = null;
-    this.icon2SizeAnim = null;
-    this.icon2CenterXAnim = null;
-    this.icon2CenterYAnim = null;
+
+    this.icon2InitSettings = null;
+    this.icon2Init = new this.hybiconSettings();
+    
+    this.icon2AnimSettings = null;
+    this.icon2Anim = new this.hybiconSettings();
 
     this.animateTime = 200;
     this.animateEffect = "linear";
@@ -173,11 +167,11 @@ hybicon.prototype.createIcon = function () {
     this.setDefaultProps();
     this.hovered = false;
 
-    this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Rotate);
-    this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1RotateAnim);
+    this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Init.rotate);
+    this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1Anim.rotate);
     if (this.icon2Path !== null) {
-        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Rotate);
-        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2RotateAnim);
+        this.icon2Transform = this.getTransformString(this.icon2X, this.icon2Y, this.icon2Scale, this.icon2Init.rotate);
+        this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2Anim.rotate);
     }
 
     if ((this.hoverMode !== null) || (this.clickMode != null)) {
@@ -361,8 +355,8 @@ hybicon.prototype.parseIcon = function () {
                 if (icon[hybiconData] !== undefined &&
                     icon[hybiconData] !== null) {
                     this.icon1Path = icon[hybiconData];
-                    this.icon1CenterX = 50;
-                    this.icon1CenterY = 50;
+                    this.icon1Init.centerX = 50;
+                    this.icon1Init.centerY = 50;
                     this.icon2Path = null;
                 }
             }
@@ -396,7 +390,8 @@ hybicon.prototype.parseIcon = function () {
 
             //data-hybicon-color
             var hybiconColor = this.holderDiv.getAttribute("data-hybicon-color");
-            if (hybiconColor !== null) {
+            if (hybiconColor !== null &&
+                hybiconColor !== "") {
                 this.icon1Color = hybiconColor;
                 this.icon2Color = hybiconColor;
             }
@@ -431,6 +426,12 @@ hybicon.prototype.parseIcon = function () {
                 this.infoText = hybiconInfotext;
             }
 
+            //data-hybicon-icon1init
+            var hybiconIcon1Init = this.holderDiv.getAttribute("data-hybicon-icon1init");
+            if (hybiconIcon1Init !== null) {
+                this.icon1InitSettings = hybiconIcon1Init;
+            }
+
             this.createIcon();
         }
 
@@ -446,6 +447,24 @@ hybicon.prototype.parseIcon = function () {
         }
     }
 };
+
+hybicon.prototype.setIconSettings = function (iconSet, iconSettings) {
+    if (iconSettings !== null) {
+        var iconsettings = iconSettings.split(",");
+        if (iconsettings.length > 0) {
+            if (iconsettings[0] !== "") { iconSet.centerX = iconsettings[0]; }
+        }
+        if (iconsettings.length > 1) {
+            if (iconsettings[1] !== "") { iconSet.centerY = iconsettings[1]; }
+        }
+        if (iconsettings.length > 2) {
+            if (iconsettings[2] !== "") { iconSet.size = iconsettings[2]; }
+        }
+        if (iconsettings.length > 3) {
+            if (iconsettings[3] !== "") { iconSet.rotate = iconsettings[3]; }
+        }
+    }
+}
 
 hybicon.prototype.parseAll = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
@@ -476,100 +495,109 @@ hybicon.prototype.parseAll = function () {
 //Set default properties
 hybicon.prototype.setDefaultProps = function () {
 
+    this.setIconSettings(this.icon1Init, this.icon1InitSettings);
+    this.setIconSettings(this.icon1Anim, this.icon1AnimSettings);
+    this.setIconSettings(this.icon2Init, this.icon2InitSettings);
+    this.setIconSettings(this.icon2Anim, this.icon2AnimSettings);
+
     // default values
     var icon1SizeDefault = 77;
     if (this.icon2Path === null) {
         icon1SizeDefault = 60;
-        if (this.icon1SizeAnim === null) { this.icon1SizeAnim = 70; }
+        if (this.icon1Anim.size === null) { this.icon1Anim.size = 70; }
     }
     var icon2SizeDefault = 33;
 
-    if (this.icon1Size === null) { this.icon1Size = icon1SizeDefault; }
-    if (this.icon1CenterX === null) { this.icon1CenterX = 45; }
-    if (this.icon1CenterY === null) { this.icon1CenterY = 55; }
-    if (this.icon1Rotate === null) { this.icon1Rotate = 0; }
-    if (this.icon2Size === null) { this.icon2Size = 0; }
-    if (this.icon2CenterX === null) { this.icon2CenterX = 80; }
-    if (this.icon2CenterY === null) { this.icon2CenterY = 20; }
-    if (this.icon2Rotate === null) { this.icon2Rotate = 0; }
+    if (this.icon1Init.size === null) { this.icon1Init.size = icon1SizeDefault; }
+    if (this.icon1Init.centerX === null) { this.icon1Init.centerX = 45; }
+    if (this.icon1Init.centerY === null) { this.icon1Init.centerY = 55; }
+    if (this.icon1Init.rotate === null) { this.icon1Init.rotate = 0; }
+    if (this.icon2Init.size === null) { this.icon2Init.size = 0; }
+    if (this.icon2Init.centerX === null) { this.icon2Init.centerX = 80; }
+    if (this.icon2Init.centerY === null) { this.icon2Init.centerY = 20; }
+    if (this.icon2Init.rotate === null) { this.icon2Init.rotate = 0; }
 
     // handle hover and click modes
     if (this.hoverMode === "switch" ||
         this.clickMode === "switch") {
-        this.icon1CenterXAnim = this.icon2CenterX;
-        this.icon1CenterYAnim = this.icon2CenterY;
-        this.icon2CenterXAnim = this.icon1CenterX;
-        this.icon2CenterYAnim = this.icon1CenterY;
-        if (this.icon2Size === 0) { this.icon1SizeAnim = icon2SizeDefault; }
-        else { this.icon1SizeAnim = this.icon2Size; }
-        if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
-        else { this.icon2Size = this.icon2SizeAnim; }
-        this.icon2SizeAnim = this.icon1Size;
+        this.icon1Anim.centerX = this.icon2Init.centerX;
+        this.icon1Anim.centerY = this.icon2Init.centerY;
+        this.icon2Anim.centerX = this.icon1Init.centerX;
+        this.icon2Anim.centerY = this.icon1Init.centerY;
+        if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
+        else { this.icon1Anim.size = this.icon2Init.size; }
+        if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+        else { this.icon2Init.size = this.icon2Anim.size; }
+        this.icon2Anim.size = this.icon1Init.size;
     }
     if (this.hoverMode === "rotate" ||
         this.clickMode === "rotate") {
-        if (this.icon2SizeAnim === null) { this.icon2Size = icon2SizeDefault; }
-        else { this.icon2Size = this.icon2SizeAnim; }
+        if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+        else { this.icon2Init.size = this.icon2Anim.size; }
         if (this.icon2Path !== null) {
-            this.icon2RotateAnim = "360";
+            this.icon2Anim.rotate = "360";
         }
         else {
-            this.icon1RotateAnim = "360";
+            this.icon1Anim.rotate = "360";
         }
         this.animateTime = 300;
     }
 
     // set width and height
-    if (this.icon1Height === null) { this.icon1Height = this.icon1Size; }
-    if (this.icon1Width === null) { this.icon1Width = this.icon1Size; }
-    if (this.icon2Height === null) { this.icon2Height = this.icon2Size; }
-    if (this.icon2Width === null) { this.icon2Width = this.icon2Size; }
+    if (this.icon1Height === null) { this.icon1Height = this.icon1Init.size; }
+    if (this.icon1Width === null) { this.icon1Width = this.icon1Init.size; }
+    if (this.icon2Height === null) { this.icon2Height = this.icon2Init.size; }
+    if (this.icon2Width === null) { this.icon2Width = this.icon2Init.size; }
 
     // icon1
-    var sizeTransform = this.getIconSizeTransform(this.icon1Path, this.icon1Width, this.icon1Height, this.icon1CenterX, this.icon1CenterY);
+    var sizeTransform = this.getIconSizeTransform(this.icon1Path, this.icon1Width, this.icon1Height, this.icon1Init.centerX, this.icon1Init.centerY);
     this.icon1Scale = sizeTransform.scale;
     this.icon1X = sizeTransform.iconX;
     this.icon1Y = sizeTransform.iconY;
 
-    if (this.icon1SizeAnim === null) { this.icon1SizeAnim = this.icon1Size; }
-    if (this.icon1HeightAnim === null) { this.icon1HeightAnim = this.icon1SizeAnim; }
-    if (this.icon1WidthAnim === null) { this.icon1WidthAnim = this.icon1SizeAnim; }
-    if (this.icon1CenterXAnim === null) { this.icon1CenterXAnim = this.icon1CenterX; }
-    if (this.icon1CenterYAnim === null) { this.icon1CenterYAnim = this.icon1CenterY; }
+    if (this.icon1Anim.size === null) { this.icon1Anim.size = this.icon1Init.size; }
+    if (this.icon1HeightAnim === null) { this.icon1HeightAnim = this.icon1Anim.size; }
+    if (this.icon1WidthAnim === null) { this.icon1WidthAnim = this.icon1Anim.size; }
+    if (this.icon1Anim.centerX === null) { this.icon1Anim.centerX = this.icon1Init.centerX; }
+    if (this.icon1Anim.centerY === null) { this.icon1Anim.centerY = this.icon1Init.centerY; }
     if (this.icon1PathAnim === null) { this.icon1PathAnim = this.icon1Path; }
-    if (this.icon1RotateAnim === null) { this.icon1RotateAnim = this.icon1Rotate; }
+    if (this.icon1Anim.rotate === null) { this.icon1Anim.rotate = this.icon1Init.rotate; }
 
-    var sizeTransformAnim = this.getIconSizeTransform(this.icon1PathAnim, this.icon1WidthAnim, this.icon1HeightAnim, this.icon1CenterXAnim, this.icon1CenterYAnim);
+    var sizeTransformAnim = this.getIconSizeTransform(this.icon1PathAnim, this.icon1WidthAnim, this.icon1HeightAnim, this.icon1Anim.centerX, this.icon1Anim.centerY);
     this.icon1ScaleAnim = sizeTransformAnim.scale;
     this.icon1XAnim = sizeTransformAnim.iconX;
     this.icon1YAnim = sizeTransformAnim.iconY;
 
     // icon2
     if (this.icon2Path !== null) {
-        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2CenterX, this.icon2CenterY);
+        var sizeTransform2 = this.getIconSizeTransform(this.icon2Path, this.icon2Width, this.icon2Height, this.icon2Init.centerX, this.icon2Init.centerY);
         this.icon2Scale = sizeTransform2.scale;
         this.icon2X = sizeTransform2.iconX;
         this.icon2Y = sizeTransform2.iconY;
     }
 
-    if (this.icon2SizeAnim === null) {
-        if (this.icon2Size === 0) { this.icon2SizeAnim = 33; }
-        else { this.icon2SizeAnim = this.icon2Size; }
+    if (this.icon2Anim.size === null) {
+        if (this.icon2Init.size === 0) { this.icon2Anim.size = 33; }
+        else { this.icon2Anim.size = this.icon2Init.size; }
     }
-    if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2SizeAnim; }
-    if (this.icon2WidthAnim === null) { this.icon2WidthAnim = this.icon2SizeAnim; }
-    if (this.icon2CenterXAnim === null) { this.icon2CenterXAnim = this.icon2CenterX; }
-    if (this.icon2CenterYAnim === null) { this.icon2CenterYAnim = this.icon2CenterY; }
+    if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2Anim.size; }
+    if (this.icon2WidthAnim === null) { this.icon2WidthAnim = this.icon2Anim.size; }
+    if (this.icon2Anim.centerX === null) { this.icon2Anim.centerX = this.icon2Init.centerX; }
+    if (this.icon2Anim.centerY === null) { this.icon2Anim.centerY = this.icon2Init.centerY; }
     if (this.icon2PathAnim === null) { this.icon2PathAnim = this.icon2Path; }
-    if (this.icon2RotateAnim === null) { this.icon2RotateAnim = this.icon2Rotate; }
+    if (this.icon2Anim.rotate === null) { this.icon2Anim.rotate = this.icon2Init.rotate; }
     
     if (this.icon2PathAnim !== null) {
-        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2CenterXAnim, this.icon2CenterYAnim);
+        var sizeTransform2Anim = this.getIconSizeTransform(this.icon2PathAnim, this.icon2WidthAnim, this.icon2HeightAnim, this.icon2Anim.centerX, this.icon2Anim.centerY);
         this.icon2ScaleAnim = sizeTransform2Anim.scale;
         this.icon2XAnim = sizeTransform2Anim.iconX;
         this.icon2YAnim = sizeTransform2Anim.iconY;
     }
 };
+
+hybicon.prototype.hybiconSettings = function () {
+    return { centerX: null, centerY: null, size: null, rotate: null };
+}
 
 hybicon.prototype.getIcon1Id = function () {
     return "hybicon-" + this.holderId + "-icon1";
