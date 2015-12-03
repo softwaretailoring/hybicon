@@ -23,36 +23,41 @@
 
     <script src="js/required/raphael.min.js"></script>
     <script src="js/for-doc/index.min.js"></script>
-    <script src="js/hybicon.min.js"></script>
+    <script src="js/hybicon.js"></script>
     <script>
         window.onload = function () {
-            hybiconJS = new hybicon("hybiconJS");
-            hybiconJS.icon1Path = "M10,5,L5,10,L10,10,z";
-            hybiconJS.icon2Path = "M99,50,L50,99,L99,99,z";
-            hybiconJS.icon1CenterX = 20;
-            hybiconJS.icon1CenterY = 20;
-            hybiconJS.icon1Size = 25;
-            hybiconJS.icon1Rotate = 180;
-            hybiconJS.icon1CenterXAnim = 30;
-            hybiconJS.icon1CenterYAnim = 30;
-            hybiconJS.icon1SizeAnim = 35;
-            hybiconJS.icon1RotateAnim = 0;
-            hybiconJS.icon2CenterX = 80;
-            hybiconJS.icon2CenterY = 80;
-            hybiconJS.icon2Size = 25;
-            hybiconJS.icon2Rotate = 0;
-            hybiconJS.icon2CenterXAnim = 70;
-            hybiconJS.icon2CenterYAnim = 70;
-            hybiconJS.icon2SizeAnim = 35;
-            hybiconJS.icon2RotateAnim = 180;
-            hybiconJS.hoverMode = "show";
-            hybiconJS.clickMode = "show";
-            hybiconJS.infoMode = "right-350";
-            hybiconJS.infoText = "JavaScript";
-            hybiconJS.hybiconAlign = "right";
-            hybiconJS.hybiconSize = "50";
-            hybiconJS.createIcon();
+            //hybiconJS = new hybicon("hybiconJS");
+            //hybiconJS.icon1Path = "M10,5,L5,10,L10,10,z";
+            //hybiconJS.icon2Path = "M99,50,L50,99,L99,99,z";
+            //hybiconJS.icon1CenterX = 20;
+            //hybiconJS.icon1CenterY = 20;
+            //hybiconJS.icon1Size = 25;
+            //hybiconJS.icon1Rotate = 180;
+            //hybiconJS.icon1CenterXAnim = 30;
+            //hybiconJS.icon1CenterYAnim = 30;
+            //hybiconJS.icon1SizeAnim = 35;
+            //hybiconJS.icon1RotateAnim = 0;
+            //hybiconJS.icon2CenterX = 80;
+            //hybiconJS.icon2CenterY = 80;
+            //hybiconJS.icon2Size = 25;
+            //hybiconJS.icon2Rotate = 0;
+            //hybiconJS.icon2CenterXAnim = 70;
+            //hybiconJS.icon2CenterYAnim = 70;
+            //hybiconJS.icon2SizeAnim = 35;
+            //hybiconJS.icon2RotateAnim = 180;
+            //hybiconJS.hoverMode = "show";
+            //hybiconJS.clickMode = "show";
+            //hybiconJS.infoMode = "right-350";
+            //hybiconJS.infoText = "JavaScript";
+            //hybiconJS.hybiconAlign = "right";
+            //hybiconJS.hybiconSize = "50";
+            //hybiconJS.createIcon();
         };
+
+        var myIcons = {
+            triangle: "M0,100,L100,100,L50,20,z",
+            rectangle: "M0,0,L100,0,L100,100,L0,100,z"
+        }
     </script>
 </head>
 <!-- NAVBAR
@@ -184,15 +189,15 @@
                         <pre>&lt;div data-hybicon="code-fave" <strong class="usingpre">data-hybicon-hovermode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-xs-4">
                             <div data-hybicon="code-fave" data-hybicon-hovermode></div>
                             <div class="smalltitle">default</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-xs-4">
                             <div data-hybicon="code-fave" data-hybicon-hovermode="rotate"></div>
                             <div class="smalltitle">rotate</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-xs-4">
                             <div data-hybicon="code-fave" data-hybicon-hovermode="switch"></div>
                             <div class="smalltitle">switch</div>
                         </div>
@@ -206,11 +211,11 @@
                         <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-clickmode="show|switch"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-xs-6">
                             <div data-hybicon="checkbox-check" data-hybicon-clickmode></div>
                             <div class="smalltitle">default</div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-xs-6">
                             <div data-hybicon="view-noview" data-hybicon-clickmode="switch"></div>
                             <div class="smalltitle">switch</div>
                         </div>
@@ -267,7 +272,7 @@
                             <div data-hybicon data-hybicon-align="left" title="data-hybicon-align='left'"></div>
                             <div class="smalltitle">left</div>
                         </div>
-                        <div class="col-sm-4" style="border-left:solid 1px;border-right:solid 1px;">
+                        <div class="col-sm-4">
                             <div data-hybicon data-hybicon-align="center" title="data-hybicon-align='center'"></div>
                             <div class="smalltitle">default</div>
                         </div>
@@ -352,76 +357,92 @@
                         </div>
                     </div>
                     <hr />
+                    <h3 class="fontface">Animation</h3>
+                    <div class="usingtext">
+                        Hybicon works on a 100*100 matrix. Animation based on a following formula: "centerX, centerY, size, rotate".
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="arrowright-arrowleft"
+                        <strong class="usingpre">data-hybicon-icon1init</strong>="20,50,25,0" &lt;!-- default: "45,55,77,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon1anim</strong>="35,50,30,180" &lt;!-- default: "45,55,77,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon2init</strong>="80,50,25,0" &lt;!-- default: "80,20,33,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon2anim</strong>="65,50,30,-180" &lt;!-- default: "80,20,33,0" --&gt;
+     data-hybicon-clickmode&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="arrowright-arrowleft"
+                                 data-hybicon-icon1init="20,50,25,0"
+                                 data-hybicon-icon1anim="35,50,30,180"
+                                 data-hybicon-icon2init="80,50,25,0"
+                                 data-hybicon-icon2anim="65,50,30,-180"
+                                 data-hybicon-clickmode></div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="fontface">3rd party icon</h3>
+                    <div class="usingtext">
+                        Icons are predefined SVG paths. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>var <strong class="usingpre">myIcons</strong> = {
+    triangle: "M0,100,L100,100,L50,20,z",
+    rectangle: "M0,0,L100,0,L100,100,L0,100,z"
+}</pre>
+                        <pre>&lt;div <strong class="usingpre">data-hybicon-iconclass="myIcons"</strong>
+     data-hybicon="triangle-rectangle"
+     data-hybicon-hovermode="rotate" &gt;
+&lt;div&gt;
+</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon-iconclass="myIcons"
+                                 data-hybicon="triangle-rectangle"
+                                 data-hybicon-hovermode="rotate"></div>
+                        </div>
+                    </div>
+                    <hr />
                     <h3 class="fontface">CSS</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div id="hybiconCSS" 
-    data-hybicon="user-idea" 
-    data-hybicon-hovermode="switch" 
-    data-hybicon-infomode 
-    data-hybicon-size="css"&gt;
+                        <pre>&lt;div <strong class="usingpre">id="hybiconCSS"</strong>
+     data-hybicon="user-idea" 
+     data-hybicon-hovermode="switch" 
+     data-hybicon-infomode 
+     data-hybicon-size="css"&gt;
 &lt;/div&gt;</pre>
-                        <pre>#hybiconCSS > svg {
+                        <pre><strong class="usingpre">#hybiconCSS</strong> {
+    width: 222px;
+    height: 222px;
+}
+<strong class="usingpre">#hybiconCSS</strong> > svg {
     background: #FFF;
-    border: solid 4px #333;
+    border: solid 3px #333;
     border-radius: 15%;
 }
-#hybiconCSS > svg > [id$=icon1] { 
+<strong class="usingpre">#hybiconCSS</strong> > svg > [id$=icon1] { 
     fill: #333;
 }
-#hybiconCSS > svg > [id$=icon2] { 
+<strong class="usingpre">#hybiconCSS</strong> > svg > [id$=icon2] { 
     fill: #FFF;
     stroke: #F6921E;
     stroke-width: 0.5;
 }
-#hybiconCSS > svg > [id$=info] { 
-    fill: #8c3d2f;
-    stroke: #8c3d2f;
+<strong class="usingpre">#hybiconCSS</strong> > svg > [id$=info] { 
+    fill: #604c3b;
+    stroke: #604c3b;
     stroke-width: 3;
 }
-#hybiconCSS > svg > [id$=infotext] > tspan {
+<strong class="usingpre">#hybiconCSS</strong> > svg > [id$=infotext] > tspan {
     fill: #FFF;
-    font: 13px Impact, sans-serif;
+    font: 11px Impact, sans-serif;
 }</pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div id="hybiconCSS" data-hybicon="user-idea" data-hybicon-size="css" data-hybicon-hovermode="switch" data-hybicon-infomode></div>
-                        </div>
-                    </div>
-                    <hr />
-                    <h3 class="fontface">JavaScript</h3>
-                    <div class="sourceResult">
-                        <pre>&lt;div id="hybiconJS"&gt;&lt;/div&gt;</pre>
-                        <pre>hybiconJS = new hybicon("hybiconJS");
-hybiconJS.icon1Path = "M10,5,L5,10,L10,10,z";
-hybiconJS.icon2Path = "M99,50,L50,99,L99,99,z";
-hybiconJS.icon1CenterX = 20;
-hybiconJS.icon1CenterY = 20;
-hybiconJS.icon1Size = 25;
-hybiconJS.icon1Rotate = 180;
-hybiconJS.icon1CenterXAnim = 30;
-hybiconJS.icon1CenterYAnim = 30;
-hybiconJS.icon1SizeAnim = 35;
-hybiconJS.icon1RotateAnim = 0;
-hybiconJS.icon2CenterX = 80;
-hybiconJS.icon2CenterY = 80;
-hybiconJS.icon2Size = 25;
-hybiconJS.icon2Rotate = 0;
-hybiconJS.icon2CenterXAnim = 70;
-hybiconJS.icon2CenterYAnim = 70;
-hybiconJS.icon2SizeAnim = 35;
-hybiconJS.icon2RotateAnim = 180;
-hybiconJS.hoverMode = "show";
-hybiconJS.clickMode = "show";
-hybiconJS.infoMode = "right-350";
-hybiconJS.infoText = "JavaScript";
-hybiconJS.hybiconAlign = "right";
-hybiconJS.hybiconSize = "50";
-hybiconJS.createIcon();</pre>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="hybiconJS"></div>
                         </div>
                     </div>
                 </div>

@@ -67,14 +67,16 @@ var createAvailableIcons = function (mode) {
 
     var allhybicon = document.getElementById("allhybicon");
 
-    for (var property in icon) {
-        if (icon.hasOwnProperty(property)) {
-            console.log(property);
-            var icondiv = "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>";
-            icondiv += "     <div data-hybicon='" + property + "'></div>";
-            icondiv += "     <div class='smalltitle'>" + property + "</div>";
-            icondiv += "</div>";
-            allhybicon.innerHTML += icondiv;
+    for (var property in hybiconbase) {
+        if (hybiconbase.hasOwnProperty(property)) {
+            if (property !== "switch" &&
+                property !== "circle") {
+                var icondiv = "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>";
+                icondiv += "     <div data-hybicon='" + property + "'></div>";
+                icondiv += "     <div class='smalltitle'>" + property + "</div>";
+                icondiv += "</div>";
+                allhybicon.innerHTML += icondiv;
+            }
         }
     }
 

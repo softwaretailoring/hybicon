@@ -17,6 +17,10 @@ header {
     background-color: #4183c4;
 }
 
+.icons {
+    background-color: #116944;
+}
+
 @media (max-width: 768px) {
     header {
         margin-bottom: 0;
@@ -115,8 +119,8 @@ h2.fontface {
 .smalltitle {
     text-align: center;
     font: 24px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
-    margin-top: 11px;
-    margin-bottom: 13px;
+    margin-top: 7px;
+    margin-bottom: 28px;
     color: #111;
 }
 
@@ -125,10 +129,6 @@ h2.fontface {
         margin-top: 21px;
     }
 
-    .smalltitle {
-        margin-top: 33px;
-        margin-bottom: 14px;
-    }
 }
 
 hr {
@@ -182,6 +182,17 @@ hr {
     color: #35CE8D;
     text-decoration: none;
     padding: 10px;
+}
+
+#using hr {
+    border-color: #604c3b;
+    border-width: 3px;
+}
+
+#using svg > [id$=info] { 
+    fill: #604c3b;
+    stroke: #604c3b;
+    stroke-width: 3;
 }
 
 #useful {
@@ -319,8 +330,16 @@ pre {
     transition: ease-out 0.5s;
 }
 
+    .styledark .smalltitle {
+        color: #fff;
+    }
+
 .styledark .inverse {
     background-color: #fff;
+    color: #8c3d2f;
+}
+
+.styledark .inverse .smalltitle {
     color: #8c3d2f;
 }
 
@@ -394,8 +413,16 @@ svg > #hybicon-iconMail-icon2 {
     transition: ease-out 0.5s;
 }
 
+    .stylelight .smalltitle {
+        color: #8c3d2f;
+    }
+
 .stylelight .inverse {
     background-color: #8c3d2f;
+    color: #fff;
+}
+
+.stylelight .inverse .smalltitle {
     color: #fff;
 }
 
@@ -407,7 +434,7 @@ svg > #hybicon-iconMail-icon2 {
 .stylelight svg > [id$=info] { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
-    stroke-width: 0.6;
+    stroke-width: 2;
 }
 
 .stylelight svg > [id$=icon1] { 
@@ -490,13 +517,13 @@ svg > #hybicon-iconMail-icon2 {
 }
 
 #hybiconCSS {
-    width: 200px;
-    height: 200px;
+    width: 222px;
+    height: 222px;
 }
 
 #hybiconCSS > svg {
     background: #FFF;
-    border: solid 4px #333;
+    border: solid 3px #333;
     border-radius: 15%;
 }
 
@@ -511,12 +538,12 @@ svg > #hybicon-iconMail-icon2 {
 }
 
 #hybiconCSS > svg > [id$=info] { 
-    fill: #8c3d2f;
-    stroke: #8c3d2f;
+    fill: #604c3b;
+    stroke: #604c3b;
     stroke-width: 3;
 }
 
 #hybiconCSS > svg > [id$=infotext] > tspan {
     fill: #FFF;
-    font: 13px Impact, sans-serif;
+    font: 11px Impact, sans-serif;
 }
