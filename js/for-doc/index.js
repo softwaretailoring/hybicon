@@ -70,7 +70,8 @@ var createAvailableIcons = function (mode) {
     for (var property in hybiconbase) {
         if (hybiconbase.hasOwnProperty(property)) {
             if (property !== "switch" &&
-                property !== "circle") {
+                property !== "circle" &&
+                property !== "setpresets") {
                 var icondiv = "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>";
                 icondiv += "     <div data-hybicon='" + property + "'></div>";
                 icondiv += "     <div class='smalltitle'>" + property + "</div>";

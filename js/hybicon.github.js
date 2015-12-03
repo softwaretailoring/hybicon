@@ -1,5 +1,5 @@
 ﻿/* ======================================================================================= */
-/*                            hybicon.github.js - v1.0.0                                   */
+/*                                   hybicon.github.js                                     */
 /* ======================================================================================= */
 /* This is a small JavaScript library for GitHub API with hybicon.                         */
 /* Requires hybicon.js (http://hybicon.softwaretailoring.net)                              */
@@ -138,7 +138,8 @@ function hybicongithubcallbackreleases(obj) {
     // All downloads
     if (Array.isArray(objdata)) {
         for (var i = 0; i < objdata.length; i++) {
-            if (objdata[i].assets !== null) {
+            if (objdata[i].assets !== null &&
+                objdata[i].assets !== undefined) {
                 for (var j = 0; j < objdata[i].assets.length; j++) {
                     if (objdata[i].assets[j].download_count !== undefined) {
                         download += objdata[i].assets[j].download_count
@@ -149,7 +150,8 @@ function hybicongithubcallbackreleases(obj) {
     }
     // Downloads per tag
     else {
-        if (objdata.assets !== null) {
+        if (objdata.assets !== null &&
+            objdata.assets !== undefined) {
             for (var i = 0; i < objdata.assets.length; i++) {
                 if (objdata.assets[i].download_count !== undefined) {
                     download += objdata.assets[i].download_count

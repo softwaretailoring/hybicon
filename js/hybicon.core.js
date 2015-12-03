@@ -202,9 +202,9 @@ hybicon.prototype.createIcon = function () {
         if (infoType === "" ||
             infoType === "bottomright") {
             this.infoFont = '100 12px Arial, Helvetica, sans-serif';
-            var infobottomright = "M99,50,L50,99,L99,99,z";
+            var infobottomright = "M50,100,L100,50,L100,85,Q100,100,85,100,z";
             this.info = this.raphael.path(infobottomright);
-            this.infotext = this.raphael.text(83, 83, this.infoText).attr({ transform: "r-45" });
+            this.infotext = this.raphael.text(82, 82, this.infoText).attr({ transform: "r-45" });
         }
 
         if (infoType === "right") {
@@ -217,7 +217,7 @@ hybicon.prototype.createIcon = function () {
         }
 
         if (this.info != null) {
-            this.info.attr({ fill: this.infoFillColor, stroke: this.infoStrokeColor, 'stroke-width': 2 });
+            this.info.attr({ fill: this.infoFillColor, stroke: this.infoStrokeColor, 'stroke-width': 2, override: 'hidden' });
             this.infotext.attr({ font: this.infoFont, fill: this.infoTextColor, stroke: 'none' });
             this.info.id = this.getInfoId();
             this.info.node.id = this.info.id;
@@ -381,7 +381,9 @@ hybicon.prototype.parseIcon = function () {
                 }
 
                 //set predefined icons
-                this.setIcon(hybiconData);
+                if (iconClass.setpresets !== undefined) {
+                    iconClass.setpresets(this, hybiconData);
+                }
             }
 
             //data-hybicon-size
