@@ -186,13 +186,17 @@ hr {
 
 #using hr {
     border-color: #604c3b;
-    border-width: 3px;
+    border-width: 1px;
 }
 
 #using svg > [id$=info] { 
     fill: #604c3b;
     stroke: #604c3b;
     stroke-width: 3;
+}
+
+#using h3 {
+    margin-bottom: 11px;
 }
 
 #useful {
@@ -311,7 +315,7 @@ pre {
     margin-left: 0;
 }
 
-#iconMail {
+#iconMailFooter {
     display: inline-block;
 }
 
@@ -382,8 +386,8 @@ pre {
     stroke-width: 0.5;
 }
 
-svg > #hybicon-iconMail-icon1,
-svg > #hybicon-iconMail-icon2 { 
+svg > #hybicon-iconMailFooter-icon1,
+svg > #hybicon-iconMailFooter-icon2 { 
     fill: #fff;
     stroke: #fff;
 }
@@ -461,8 +465,8 @@ svg > #hybicon-iconMail-icon2 {
     stroke-width: 0.5;
 }
 
-.stylelight svg> #hybicon-iconMail-icon1,
-.stylelight svg> #hybicon-iconMail-icon2 { 
+.stylelight svg> #hybicon-iconMailFooter-icon1,
+.stylelight svg> #hybicon-iconMailFooter-icon2 { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
 }
@@ -481,11 +485,6 @@ svg > #hybicon-iconMail-icon2 {
     background-color: #fff;
     color: #8c3d2f;
     text-decoration: none;
-}
-
-#modes svg {
-    border: 2px solid #8c3d2f;
-    border-radius: 15%;
 }
 
 #download {
@@ -523,7 +522,6 @@ svg > #hybicon-iconMail-icon2 {
 
 #hybiconCSS > svg {
     background: #FFF;
-    border: solid 3px #333;
     border-radius: 15%;
 }
 
