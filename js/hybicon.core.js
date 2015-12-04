@@ -1,5 +1,5 @@
 ﻿/* ======================================================================================= */
-/*                                   hybicon.core.js - v1.0.0                              */
+/*                                   hybicon.core.js                                       */
 /* ======================================================================================= */
 /* This is a small JavaScript library for animated SVG based icons.                        */
 /* Requires Raphaël JavaScript Vector Library (http://raphaeljs.com)                       */
@@ -17,7 +17,7 @@
 
 hybicon = function (divId) {
 
-    this.version = "1.0.0";
+    this.version = "0.9.0";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
@@ -580,7 +580,7 @@ hybicon.prototype.setDefaultProps = function () {
         else {
             this.icon1Anim.rotate = "360";
         }
-        this.animateTime = 300;
+        this.animateTime = 400;
     }
 
     // set width and height

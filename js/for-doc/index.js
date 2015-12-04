@@ -5,13 +5,13 @@ var setDetails = function (mode) {
 
     switch (mode) {
         case "hover":
-            details = "Hover mode is suitable for links and navigate to outside the page.";
+            details = "Hover mode is suitable for links to navigate to other page.";
             break;
         case "click":
-            details = "Click mode is perfect for switchers and call a method inside the page.";
+            details = "Click mode is fine for toggles to call a method in the page.";
             break;
         case "info":
-            details = "Info mode when you want to show more. Psst... There is a <a href='github.html'>GitHub plugin</a>";
+            details = "When you want to show more. Psst... There is a <a href='github.html'>GitHub plugin</a>";
             break;
         default:
 
@@ -27,12 +27,12 @@ var setMode = function (mode, modevalue) {
     
     for (var i = 0; i < hybicons.length; i++) {
         var hybiconId = hybicons[i].id;
-        if (hybiconId === 'githubstarmain' ||
+        if (hybiconId === 'userideamain' ||
             hybiconId === 'twittertweetmain' ||
             hybiconId === 'facebooklikemain' ||
             hybiconId === 'gplusplusmain' ||
             hybiconId === 'linkedinconnectmain' ||
-            hybiconId === 'skypecallmain' ||
+            hybiconId === 'instagramfavemain' ||
             hybiconId === 'pinterestpin' ||
             hybiconId === 'githubforkmain') {
             var icon = document.getElementById(hybiconId);

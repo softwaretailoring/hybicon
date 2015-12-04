@@ -17,8 +17,6 @@
 
 hybicongithub = function (divId) {
 
-    this.version = "1.0.0";
-
     if (divId !== undefined &&
         divId !== null) {
         this.holderId = divId;
