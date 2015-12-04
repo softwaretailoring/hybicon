@@ -26,10 +26,6 @@ header {
         margin-bottom: 0;
     }
 }
-.titleicon {
-    font-size: 33%;
-    vertical-align: middle;
-}
 
 header a {
     color: #EAFDF8;
@@ -72,15 +68,6 @@ footer a:hover {
     margin: 25px auto 25px auto;
 }
 
-
-h3.fontface {
-    font: 35px/43px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
-    margin: auto;
-    text-align: center;
-}
-h4.fontface {font: 25px/33px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;}
-h5.fontface {font: 20px/28px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;}
-
 h1.fontface {
     font: 110px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 0;
@@ -110,11 +97,13 @@ h2.fontface {
 @media (max-width: 600px) { h2.fontface {font: 37px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;} }
 @media (max-width: 500px) { h2.fontface {font: 32px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;} }
 
-
-.settingtitle {
+h3.fontface {
+    font: 35px/43px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
+    margin: auto;
     text-align: center;
-    font: 20px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
 }
+h4.fontface {font: 25px/33px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;}
+h5.fontface {font: 20px/28px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;}
 
 .smalltitle {
     text-align: center;
@@ -122,13 +111,6 @@ h2.fontface {
     margin-top: 7px;
     margin-bottom: 28px;
     color: #111;
-}
-
-@media (max-width: 768px) {
-    .settingtitle {
-        margin-top: 21px;
-    }
-
 }
 
 hr {
@@ -184,6 +166,18 @@ hr {
     padding: 10px;
 }
 
+#using a {
+    background-color: #35CE8D;
+    color: #222;
+    text-decoration: underline;
+}
+
+#using a:hover {
+    background-color: #222;
+    color: #35CE8D;
+    text-decoration: none;
+}
+
 #using hr {
     border-color: #604c3b;
     border-width: 1px;
@@ -215,13 +209,9 @@ pre {
     padding: 2px;
 }
 
-.usefulicon {
-    width: 150px;
-    height: 100px;
-    margin: auto;
-}
-
 .usingtext {
+    width: 80%;
+    margin: auto;
     text-align: center;
     font-size: 130%;
     margin-bottom: 7px;
@@ -232,29 +222,6 @@ pre {
     font-size: 130%;
     margin-top: 21px;
     margin-bottom: 23px;
-}
-
-.switchbutton {
-    text-align: center;
-    font-size: 130%;
-    margin-top: 21px;
-    margin-bottom: 23px;
-    background-color: #604c3b;
-    color: #222;
-    cursor: pointer;
-}
-
-.hinttext {
-    text-align: center;
-    font-size: 110%;
-    margin-top: 17px;
-}
-
-.selectsource {
-    cursor: pointer;
-    font-size: smaller;
-    position: absolute;
-    padding-top: 2px;
 }
 
 #subheader {
@@ -290,26 +257,27 @@ pre {
 #facebooklikemain > svg > [id$=icon2] { 
     fill: #3B5998;
 }
-#gplusplusmain > svg > [id$=icon1],
-#gplusplusmain > svg > [id$=icon2] { 
+#gplusplusmain > svg > [id$=icon1] { 
     fill: #DD4B39;
 }
-#linkedinconnectmain > svg > [id$=icon1],
-#linkedinconnectmain > svg > [id$=icon2] { 
-    fill: #0077B5;
-}
-#skypecallmain > svg > [id$=icon1],
-#skypecallmain > svg > [id$=icon2] { 
-    fill: #00AFF0;
-}
-#mailsendmain > svg > [id$=icon1],
-#mailsendmain > svg > [id$=icon2] { 
-    fill: #0F9D58;
+#gplusplusmain > svg > [id$=icon2] { 
+    fill: #DD4B39;
+    stroke: #EAFDF8;
+    stroke-width: 2;
 }
 #pinterestpin > svg > [id$=icon1],
 #pinterestpin > svg > [id$=icon2] { 
     fill: #bd081c;
 }
+#linkedinconnectmain > svg > [id$=icon1],
+#linkedinconnectmain > svg > [id$=icon2] { 
+    fill: #0077B5;
+}
+#instagramfavemain > svg > [id$=icon1],
+#instagramfavemain > svg > [id$=icon2] { 
+    fill: #3f729b;
+}
+
 .row {
     margin-right: 0;
     margin-left: 0;
@@ -514,6 +482,8 @@ svg > #hybicon-iconMailFooter-icon2 {
     margin-top: 40px !important;
     margin-bottom: 30px !important;
 }
+
+/* CSS icon in documentation */
 
 #hybiconCSS {
     width: 222px;

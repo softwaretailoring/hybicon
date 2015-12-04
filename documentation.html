@@ -20,17 +20,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <script src="js/required/raphael.min.js"></script>
-    <script src="js/for-doc/index.min.js"></script>
-    <script src="js/hybicon.min.js"></script>
-
-    <script type="text/javascript">
-        var myIcons = {
-            triangle: "M0,100,L100,100,L50,20,z",
-            rectangle: "M0,0,L100,0,L100,100,L0,100,z"
-        }
-    </script>
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -38,42 +27,42 @@
     <header>
         <div class="row">
             <div class="col-xs-5">
-                <div id="userideaheader" data-hybicon="user-idea" data-hybicon-align="right" data-hybicon-size="150"></div>
+                <a href="index.html" title="Back to index"><div id="userideaheader" data-hybicon="user-book" data-hybicon-align="right" data-hybicon-size="150"></div></a>
             </div>
             <div class="col-xs-7">
-                <h1 class="fontface pull-left">&nbsp;&nbsp;<a href="index.html" title="Back to intro">HYBICON</a>&nbsp;&nbsp;</h1>
+                <h1 class="fontface pull-left">&nbsp;&nbsp;<a href="index.html" title="Back to index">HYBICON</a>&nbsp;&nbsp;</h1>
             </div>
         </div>
     </header>
 
     <div id="settings">
         <div class="container">
-            <h2 class="fontface">Hybrid icons. Better together.</h2>
+            <h2 class="fontface">Documentation</h2>
             <div class="row">
                 <div class="col-lg-2 col-sm-12 col-xs-12"></div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="githubstarmain" data-hybicon="user-idea" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="userideamain" data-hybicon="user-idea"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="twittertweetmain" data-hybicon="twitter-bubble" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="twittertweetmain" data-hybicon="twitter-bubble"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="facebooklikemain" data-hybicon="facebook-like" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="gplusplusmain" data-hybicon="google-plus"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="gplusplusmain" data-hybicon="google-plus" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="facebooklikemain" data-hybicon="facebook-like"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="linkedinconnectmain" data-hybicon="linkedin-link" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="instagramfavemain" data-hybicon="instagram-fave"></div>
+                </div>                
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="pinterestpin" data-hybicon="pinterest-pin"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="skypecallmain" data-hybicon="skype-phone" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="linkedinconnectmain" data-hybicon="linkedin-link"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="pinterestpin" data-hybicon="pinterest-pin" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
-                </div>
-                <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="githubforkmain" data-hybicon="github-fork" data-hybicon-size="100" data-hybicon-borderradius="15%"></div>
+                    <div id="githubforkmain" data-hybicon="github-fork"></div>
                 </div>
                 <div class="col-lg-2 col-sm-12 col-xs-12"></div>
             </div>
@@ -99,24 +88,23 @@
         <div id="sourcecode">
             <div class="container">
                 <h2 class="fontface">How to use?</h2>
+                <div class="usingtext">
+                    Hybicon is based on SVG and works with <a href="http://raphaeljs.com/" target="_blank">Raphaël.js</a>. Download and include these files into your HTML page and customize your icon with HTML5 data attributes.
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="smalltitle">Head&nbsp;&nbsp;&nbsp;</div>
-                        <div id="preIconHtmlHeadDiv" class="sourceResult">
-                            <pre id="preIconHtml">&lt;head&gt;
-    &lt;script src="https://cdn.jsdelivr.net/raphael/2.1.4/raphael.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://cdn.jsdelivr.net/hybicon/1.0.0/hybicon.min.js"&gt;&lt;/script&gt;
-&lt;/head&gt;</pre>
-                        </div>
-                        <div class="smalltitle">Body&nbsp;&nbsp;&nbsp;</div>
                         <div id="preIconHtmlBodyDiv" class="sourceResult">
                             <pre>&lt;body&gt;
-    &lt;div data-hybicon="github-star"&gt;&lt;/div&gt;
+    &lt;div <strong class="usingpre">data-hybicon</strong>&gt;&lt;/div&gt;
+
+    &lt;script src="js/required/raphael.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/hybicon.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;</pre>
                         </div>
                     </div>
                 </div>
-
+                <a href='icons.html'><div data-hybicon="download-code" data-hybicon-size="75"></div></a>
+                <div class="smalltitle">download</div>
             </div>
         </div>
     </div>
@@ -149,7 +137,7 @@
                         </div>
                     </div>
                     <div class="usinglink"><a href='icons.html' class="linkbutton">See available icons</a></div>
-                    <hr />
+                    <hr id="hovermode" />
                     <h3 class="fontface">Hover mode</h3>
                     <div class="usingtext">
                         The secondary icon animated on hover when set <strong>data-hybicon-hovermode</strong> attribute.
@@ -171,25 +159,29 @@
                             <div class="smalltitle">switch</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="clickmode" />
                     <h3 class="fontface">Click mode</h3>
                     <div class="usingtext">
                         The secondary icon animated on click when set <strong>data-hybicon-clickmode</strong> attribute.
                     </div>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="icon1-icon2" <strong class="usingpre">data-hybicon-clickmode="show|switch"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="icon1-icon2" <strong class="usingpre">data-hybicon-clickmode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div data-hybicon="checkbox-check" data-hybicon-clickmode></div>
                             <div class="smalltitle">default</div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <div data-hybicon="user-plus" data-hybicon-clickmode="rotate"></div>
+                            <div class="smalltitle">rotate</div>
+                        </div>
+                        <div class="col-xs-4">
                             <div data-hybicon="view-noview" data-hybicon-clickmode="switch"></div>
                             <div class="smalltitle">switch</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="infomode" />
                     <h3 class="fontface">Info mode</h3>
                     <div class="usingtext">
                         The info field appears when set <strong>data-hybicon-infomode</strong> attribute.
@@ -214,71 +206,72 @@
                             <div class="smalltitle">right-300</div>
                         </div>
                     </div>
-                    <hr />
+                    <div class="usinglink"><a href='github.html' class="linkbutton">See GitHub plugin</a></div>
+                    <hr id="hyperlink" />
                     <h3 class="fontface">Hyperlink</h3>
                     <div class="usingtext">
                         Simple add an anchor tag around hybicon's div.
                     </div>
                     <div class="sourceResult">
-                        <pre><strong class="usingpre">&lt;a href="github.html"&gt;</strong>&lt;div data-hybicon="githubalt-link"&gt;&lt;/div&gt;<strong class="usingpre">&lt;/a&gt;</strong></pre>
+                        <pre><strong class="usingpre">&lt;a href="documentation.html#hyperlink"&gt;</strong>&lt;div data-hybicon="link"&gt;&lt;/div&gt;<strong class="usingpre">&lt;/a&gt;</strong></pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="github.html"><div data-hybicon="githubalt-link"></div></a>
+                            <a href="documentation.html#hyperlink"><div data-hybicon="link"></div></a>
                             <div class="smalltitle">click it</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="alignment" />
                     <h3 class="fontface">Alignment</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-align="left|center|right"</strong>" &gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="icons" <strong class="usingpre">data-hybicon-align="left|center|right"</strong>"&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <div data-hybicon data-hybicon-align="left" title="data-hybicon-align='left'"></div>
+                            <div data-hybicon="icons" data-hybicon-align="left"></div>
                             <div class="smalltitle">left</div>
                         </div>
                         <div class="col-sm-4">
-                            <div data-hybicon data-hybicon-align="center" title="data-hybicon-align='center'"></div>
+                            <div data-hybicon="icons" data-hybicon-align="center"></div>
                             <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-4">
-                            <div data-hybicon data-hybicon-align="right" title="data-hybicon-align='right'"></div>
+                            <div data-hybicon="icons" data-hybicon-align="right"></div>
                             <div class="smalltitle">right</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="size" />
                     <h3 class="fontface">Size</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-size="unit in px|'css' for responsive behaviour"</strong>" &gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon <strong class="usingpre">data-hybicon-size="unit in px|'css' for responsive behaviour"</strong>"&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="40" title="data-hybicon-size='40'"></div>
+                            <div data-hybicon data-hybicon-size="40"></div>
                             <div class="smalltitle">40</div>
                         </div>
                         <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="60" title="data-hybicon-size='60'"></div>
+                            <div data-hybicon data-hybicon-size="60"></div>
                             <div class="smalltitle">60</div>
                         </div>
                         <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="80" title="data-hybicon-size='80'"></div>
+                            <div data-hybicon data-hybicon-size="80"></div>
                             <div class="smalltitle">80</div>
                         </div>
                         <div class="col-sm-2">
-                            <div data-hybicon title="data-hybicon-size='100'"></div>
+                            <div data-hybicon></div>
                             <div class="smalltitle">default</div>
                         </div>
                         <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="120" title="data-hybicon-size='120'"></div>
+                            <div data-hybicon data-hybicon-size="120"></div>
                             <div class="smalltitle">120</div>
                         </div>
                         <div class="col-sm-2">
-                            <div data-hybicon data-hybicon-size="140" title="data-hybicon-size='140'"></div>
+                            <div data-hybicon data-hybicon-size="140"></div>
                             <div class="smalltitle">140</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="background" />
                     <h3 class="fontface">Background</h3>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-background="as CSS background"</strong>&gt;&lt;/div&gt;</pre>
@@ -289,7 +282,7 @@
                             <div class="smalltitle">#FFF</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="color" />
                     <h3 class="fontface">Color</h3>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="as CSS color"</strong>&gt;&lt;/div&gt;</pre>
@@ -300,7 +293,7 @@
                             <div class="smalltitle">#4183c4</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="border" />
                     <h3 class="fontface">Border</h3>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-border="as CSS border"</strong>&gt;&lt;/div&gt;</pre>
@@ -311,7 +304,7 @@
                             <div class="smalltitle">solid 3px #333</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="borderradius" />
                     <h3 class="fontface">Border's radius</h3>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-borderradius="as CSS border-radius"</strong>&gt;&lt;/div&gt;</pre>
@@ -322,36 +315,36 @@
                             <div class="smalltitle">15%</div>
                         </div>
                     </div>
-                    <hr />
+                    <hr id="animation" />
                     <h3 class="fontface">Animation</h3>
                     <div class="usingtext">
-                        Hybicon works on a 100*100 matrix. Animation based on a following formula: "centerX, centerY, size, rotate".
+                        Hybicon works on a 100x100 matrix. Animation is based on the following formula:<br />"centerX, centerY, size, rotate"
                     </div>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="arrowright-arrowleft"
+                        <pre>&lt;div data-hybicon="arrowright-arrowright"
      <strong class="usingpre">data-hybicon-icon1init</strong>="20,50,25,0" &lt;!-- default: "45,55,77,0" --&gt;
      <strong class="usingpre">data-hybicon-icon1anim</strong>="35,50,30,180" &lt;!-- default: "45,55,77,0" --&gt;
-     <strong class="usingpre">data-hybicon-icon2init</strong>="80,50,25,0" &lt;!-- default: "80,20,33,0" --&gt;
-     <strong class="usingpre">data-hybicon-icon2anim</strong>="65,50,30,-180" &lt;!-- default: "80,20,33,0" --&gt;
+     <strong class="usingpre">data-hybicon-icon2init</strong>="80,50,25,180" &lt;!-- default: "80,20,33,0" --&gt;
+     <strong class="usingpre">data-hybicon-icon2anim</strong>="65,50,30,0" &lt;!-- default: "80,20,33,0" --&gt;
      data-hybicon-clickmode&gt;
 &lt;/div&gt;
 </pre>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div data-hybicon="arrowright-arrowleft"
+                            <div data-hybicon="arrowright-arrowright"
                                  data-hybicon-icon1init="20,50,25,0"
                                  data-hybicon-icon1anim="35,50,30,180"
-                                 data-hybicon-icon2init="80,50,25,0"
-                                 data-hybicon-icon2anim="65,50,30,-180"
+                                 data-hybicon-icon2init="80,50,25,180"
+                                 data-hybicon-icon2anim="65,50,30,0"
                                  data-hybicon-clickmode></div>
                         </div>
                         <div class="smalltitle">click it</div>
                     </div>
-                    <hr />
+                    <hr id="3rdpartyicon" />
                     <h3 class="fontface">3rd party icon</h3>
                     <div class="usingtext">
-                        Icons are predefined SVG paths. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
+                        Icons are predefined <a href="http://www.w3.org/TR/SVG/paths.html#PathDataGeneralInformation" target="_blank">SVG paths</a>. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
                     </div>
                     <div class="sourceResult">
                         <pre>var <strong class="usingpre">myIcons</strong> = {
@@ -360,7 +353,7 @@
 }</pre>
                         <pre>&lt;div <strong class="usingpre">data-hybicon-iconclass="myIcons"</strong>
      data-hybicon="triangle-rectangle"
-     data-hybicon-clickmode="rotate" &gt;
+     data-hybicon-clickmode="rotate"&gt;
 &lt;div&gt;
 </pre>
                     </div>
@@ -372,7 +365,7 @@
                         </div>
                         <div class="smalltitle">click it</div>
                     </div>
-                    <hr />
+                    <hr id="css" />
                     <h3 class="fontface">CSS</h3>
                     <div class="sourceResult">
                         <pre>&lt;div <strong class="usingpre">id="hybiconCSS"</strong>
@@ -448,7 +441,7 @@
         <table style="margin:auto;">
             <tr>
                 <td>HYBICON v1.0&nbsp;&nbsp;</td>
-                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=HYBICON"><div id="iconMailFooter" data-hybicon-size="25" data-hybicon="mail-mention" data-hybicon-hovermode></div></a></td>
+                <td><a href="mailto:gabor.berkesi@softwaretailoring.net?subject=HYBICON"><div id="iconMailFooter" data-hybicon-size="25" data-hybicon="mail" data-hybicon-hovermode></div></a></td>
                 <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
             </tr>
         </table>
@@ -459,5 +452,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/for-doc/jquery-1.10.2.min.js"></script>
     <script src="js/for-doc/bootstrap.min.js"></script>
+    <script src="js/required/raphael.min.js"></script>
+    <script src="js/for-doc/index.min.js"></script>
+    <script src="js/hybicon.min.js"></script>
+    <script type="text/javascript">
+        var myIcons = {
+            triangle: "M0,100,L100,100,L50,20,z",
+            rectangle: "M0,0,L100,0,L100,100,L0,100,z"
+        }
+    </script>
 </body>
 </html>
