@@ -97,8 +97,8 @@ hybicon = function (divId) {
     this.icon2AnimSettings = null;
     this.icon2Anim = new this.hybiconSettings();
 
-    this.animateTime = 200;
-    this.animateEffect = "linear";
+    this.animateTime = null;
+    this.animateEasing = null;
     this.hoverMode = null;
     this.clickMode = null;
     this.hovered = false;
@@ -162,6 +162,8 @@ hybicon.prototype.createIcon = function () {
     }
 
     this.raphael = new Raphael(this.holderId);
+    this.raphael.canvas.id = this.getSvgId();
+
     this.raphael.setViewBox(0, 0, iconWidth, iconHeight, true);
 
     // Set style of svg
@@ -224,7 +226,7 @@ hybicon.prototype.createIcon = function () {
             this.info.id = this.getInfoId();
             this.info.node.id = this.info.id;
             this.infotext.id = this.getInfoTextId();
-            this.infotext.node.id = this.infotext.id;
+            this.infotext.node.childNodes[0].id = this.infotext.id;
         }
     }
 
@@ -293,15 +295,15 @@ hybicon.prototype.createIcon = function () {
 
 hybicon.prototype.hoverHandler = function (hovered) {
     if (hovered === true) {
-        this.icon1.animate({ path: this.icon1PathAnim, transform: this.icon1TransformAnim }, this.animateTime, this.animateEffect);
+        this.icon1.animate({ path: this.icon1PathAnim, transform: this.icon1TransformAnim }, this.animateTime, this.animateEasing);
         if (this.icon2PathAnim !== null) {
-            this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEffect);
+            this.icon2.animate({ path: this.icon2PathAnim, transform: this.icon2TransformAnim }, this.animateTime, this.animateEasing);
         }
     }
     else {
-        this.icon1.animate({ path: this.icon1Path, transform: this.icon1Transform }, this.animateTime, this.animateEffect);
+        this.icon1.animate({ path: this.icon1Path, transform: this.icon1Transform }, this.animateTime, this.animateEasing);
         if (this.icon2Path !== null) {
-            this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEffect);
+            this.icon2.animate({ path: this.icon2Path, transform: this.icon2Transform }, this.animateTime, this.animateEasing);
         }
     }
 };
@@ -447,6 +449,20 @@ hybicon.prototype.parseIcon = function () {
                 this.icon2AnimSettings = hybiconIcon2Anim;
             }
 
+            //data-hybicon-animtime
+            var hybiconAnimatetime = this.holderDiv.getAttribute("data-hybicon-animtime");
+            if (hybiconAnimatetime !== null &&
+                hybiconAnimatetime !== "") {
+                this.animateTime = hybiconAnimatetime;
+            }
+
+            //data-hybicon-animease
+            var hybiconAnimateeasing = this.holderDiv.getAttribute("data-hybicon-animease");
+            if (hybiconAnimateeasing !== null &&
+                hybiconAnimateeasing !== "") {
+                this.animateEasing = hybiconAnimateeasing;
+            }
+
             this.createIcon();
         }
 
@@ -519,7 +535,7 @@ hybicon.prototype.setDefaultProps = function () {
         icon1CenterYDefault = 50;
         icon2CenterXDefault = 50;
         icon2CenterYDefault = 50;
-        icon2SizeDefault = 50;
+        icon2SizeDefault = 44;
     }
 
     if (this.icon1Init.size === null) { this.icon1Init.size = icon1SizeDefault; }
@@ -564,8 +580,6 @@ hybicon.prototype.setDefaultProps = function () {
         else {
             if (this.icon1Anim.rotate === null) { this.icon1Anim.rotate = rotatedeg; }
         }
-
-        if (this.hoverMode === "rotate") { this.animateTime = 400; }
     }
 
     // set width and height
@@ -618,6 +632,13 @@ hybicon.prototype.setDefaultProps = function () {
         this.icon2XAnim = sizeTransform2Anim.iconX;
         this.icon2YAnim = sizeTransform2Anim.iconY;
     }
+
+    // Animation
+    if (this.animateTime === null) {
+        if (this.hoverMode === "rotate") { this.animateTime = 400; }
+        else { this.animateTime = 200; }
+    }
+    if (this.animateEasing === null) { this.animateEasing = "linear"; }
 };
 
 hybicon.prototype.setIconSettings = function (iconSet, iconSettings) {
@@ -682,20 +703,24 @@ hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
 };
 
 //Identifiers
+hybicon.prototype.getSvgId = function () {
+    return this.holderId + "-svg";
+};
+
 hybicon.prototype.getIcon1Id = function () {
-    return "hybicon-" + this.holderId + "-icon1";
+    return this.holderId + "-icon1";
 };
 
 hybicon.prototype.getIcon2Id = function () {
-    return "hybicon-" + this.holderId + "-icon2";
+    return this.holderId + "-icon2";
 };
 
 hybicon.prototype.getInfoId = function () {
-    return "hybicon-" + this.holderId + "-info";
+    return this.holderId + "-info";
 };
 
 hybicon.prototype.getInfoTextId = function () {
-    return "hybicon-" + this.holderId + "-infotext";
+    return this.holderId + "-infotext";
 };
 
 //Automatic parse
