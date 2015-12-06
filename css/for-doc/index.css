@@ -32,7 +32,8 @@ header a {
     text-decoration: none;
 }
 
-header a:hover {
+header a:hover,
+header a:focus {
     color: #EAFDF8;
     text-decoration: underline;
 }
@@ -110,6 +111,14 @@ h5.fontface {font: 20px/28px Impact, Haettenschweiler, 'Arial Narrow Bold', sans
     font: 24px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
     margin-top: 7px;
     margin-bottom: 28px;
+    color: #111;
+}
+
+.smalltitletop {
+    text-align: center;
+    font: 24px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;letter-spacing: 0;
+    margin-top: 28px;
+    margin-bottom: 7px;
     color: #111;
 }
 
@@ -244,12 +253,12 @@ pre {
     margin-top: 15px;
 }
 
-#userideaheader > svg > [id$=icon1],
-#userideaheader > svg > [id$=icon2] { 
+#userideaheader-icon1,
+#userideaheader-icon2 { 
     fill: #EAFDF8;
 }
 
-#gplusplusmain > svg > [id$=icon2] { 
+#gplusplusmain-icon2 { 
     stroke: #EAFDF8;
     stroke-width: 2;
 }
@@ -282,7 +291,8 @@ pre {
     transition: ease-out 0.5s;
 }
 
-    .styledark .smalltitle {
+    .styledark .smalltitle,
+    .styledark .smalltitletop {
         color: #fff;
     }
 
@@ -291,7 +301,8 @@ pre {
     color: #8c3d2f;
 }
 
-.styledark .inverse .smalltitle {
+.styledark .inverse .smalltitle,
+.styledark .inverse .smalltitletop {
     color: #8c3d2f;
 }
 
@@ -300,42 +311,42 @@ pre {
     font: 13px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; letter-spacing: 0;
 }
 
-.styledark svg > [id$=info] { 
+.styledark [id$=info] { 
     fill: #FFF;
     stroke: #FFF;
     stroke-width: 0.6;
 }
 
-.styledark svg > [id$=icon1] { 
+.styledark [id$=icon1] { 
     fill: #8c3d2f;
     stroke: #fff;
     stroke-width: 0.4;
 }
 
-.styledark svg > [id$=icon2] { 
+.styledark [id$=icon2] { 
     fill: #8c3d2f;
     stroke: #fff;
     stroke-width: 1;
 }
 
-.styledark svg > #hybicon-userideaheaderintro-icon2 { 
+.styledark #userideaheaderintro-icon2 { 
     fill: #fff;
     stroke: #8c3d2f;
     stroke-width: 0.5;
 }
 
-#hybicon-iconBrightness-icon1 {
+#iconBrightness-icon1 {
     stroke-width: 0.7;
 }
 
-.styledark svg > #hybicon-iconBrightness-icon2 { 
+.styledark #iconBrightness-icon2 { 
     fill: #fff;
     stroke: #fff;
     stroke-width: 0.5;
 }
 
-svg > #hybicon-iconMailFooter-icon1,
-svg > #hybicon-iconMailFooter-icon2 { 
+#iconMailFooter-icon1,
+#iconMailFooter-icon2 { 
     fill: #fff;
     stroke: #fff;
 }
@@ -365,7 +376,8 @@ svg > #hybicon-iconMailFooter-icon2 {
     transition: ease-out 0.5s;
 }
 
-    .stylelight .smalltitle {
+    .stylelight .smalltitle,
+    .stylelight .smalltitletop {
         color: #8c3d2f;
     }
 
@@ -374,7 +386,8 @@ svg > #hybicon-iconMailFooter-icon2 {
     color: #fff;
 }
 
-.stylelight .inverse .smalltitle {
+.stylelight .inverse .smalltitle,
+.stylelight .inverse .smalltitletop {
     color: #fff;
 }
 
@@ -383,38 +396,38 @@ svg > #hybicon-iconMailFooter-icon2 {
     font: 13px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; letter-spacing: 0;
 }
 
-.stylelight svg > [id$=info] { 
+.stylelight [id$=info] { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
     stroke-width: 2;
 }
 
-.stylelight svg > [id$=icon1] { 
+.stylelight [id$=icon1] { 
     fill: #fff;
     stroke: #8c3d2f;
     stroke-width: 0.4;
 }
 
-.stylelight svg > [id$=icon2] { 
+.stylelight [id$=icon2] { 
     fill: #fff;
     stroke: #8c3d2f;
     stroke-width: 1;
 }
 
-.stylelight svg > #hybicon-userideaheaderintro-icon2 { 
+.stylelight #userideaheaderintro-icon2 { 
     fill: #8c3d2f;
     stroke: #fff;
     stroke-width: 0.5;
 }
 
-.stylelight svg > #hybicon-iconBrightness-icon2 { 
+.stylelight #iconBrightness-icon2 { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
     stroke-width: 0.5;
 }
 
-.stylelight svg> #hybicon-iconMailFooter-icon1,
-.stylelight svg> #hybicon-iconMailFooter-icon2 { 
+.stylelight #iconMailFooter-icon1,
+.stylelight #iconMailFooter-icon2 { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
 }
@@ -436,8 +449,8 @@ svg > #hybicon-iconMailFooter-icon2 {
 }
 
 #downloaddiv {
-    padding-top: 15px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
 }
 
 @media (max-width: 768px) {
@@ -465,33 +478,33 @@ svg > #hybicon-iconMailFooter-icon2 {
 
 /* CSS icon in documentation */
 
-#hybiconCSS {
+#myHybicon {
     width: 222px;
     height: 222px;
 }
 
-#hybiconCSS > svg {
+#myHybicon-svg {
     background: #FFF;
     border-radius: 15%;
 }
 
-#hybiconCSS > svg > [id$=icon1] { 
+#myHybicon-icon1 { 
     fill: #333;
 }
 
-#hybiconCSS > svg > [id$=icon2] { 
+#myHybicon-icon2 { 
     fill: #FFF;
     stroke: #F6921E;
     stroke-width: 0.5;
 }
 
-#hybiconCSS > svg > [id$=info] { 
+#myHybicon-info { 
     fill: #604c3b;
     stroke: #604c3b;
     stroke-width: 3;
 }
 
-#hybiconCSS > svg > [id$=infotext] > tspan {
+#myHybicon-infotext {
     fill: #FFF;
     font: 11px Impact, sans-serif;
 }
