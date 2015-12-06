@@ -266,13 +266,13 @@ hybicon.prototype.createIcon = function () {
             if (thishybicon.hovered !== true &&
                 thishybicon.clicked !== true) {
                 thishybicon.hovered = true;
-                thishybicon.hoverHandler(true);
+                thishybicon.animateIcon(true);
             }
         });
         this.iconHolder.mouseout(function () {
             if (thishybicon.clicked !== true) {
                 thishybicon.hovered = false;
-                thishybicon.hoverHandler(false);
+                thishybicon.animateIcon(false);
             }
         });
     }
@@ -281,11 +281,11 @@ hybicon.prototype.createIcon = function () {
         this.iconHolder.click(function () {
             if (thishybicon.clicked !== true) {
                 thishybicon.clicked = true;
-                thishybicon.hoverHandler(true);
+                thishybicon.animateIcon(true);
             }
             else {
                 thishybicon.clicked = false;
-                thishybicon.hoverHandler(false);
+                thishybicon.animateIcon(false);
             }
         });
     }
@@ -293,7 +293,7 @@ hybicon.prototype.createIcon = function () {
     return this;
 };
 
-hybicon.prototype.hoverHandler = function (hovered) {
+hybicon.prototype.animateIcon = function (hovered) {
     if (hovered === true) {
         this.icon1.animate({ path: this.icon1PathAnim, transform: this.icon1TransformAnim }, this.animateTime, this.animateEasing);
         if (this.icon2PathAnim !== null) {
@@ -308,7 +308,7 @@ hybicon.prototype.hoverHandler = function (hovered) {
     }
 };
 
-//Parse html5 data- attributes, the onmouseup event and anchor link
+//Parse html5 data- attributes
 hybicon.prototype.parseIcon = function () {
     if (this.holderDiv !== undefined &&
         this.holderDiv !== null) {
@@ -354,6 +354,11 @@ hybicon.prototype.parseIcon = function () {
                 if (iconClass.setpresets !== undefined) {
                     iconClass.setpresets(this, hybiconData);
                 }
+            }
+            else {
+                this.icon1Path = "M0,0L100,100M100,0L0,100";
+                this.icon1Stroke = "#222";
+                this.icon1StrokeWidth = 2;
             }
 
             //data-hybicon-size
@@ -500,7 +505,6 @@ hybicon.prototype.parseAll = function () {
             }
             hybicons[i].id = hybiconid;
         }
-
         new hybicon(hybiconid);
     }
 };
@@ -633,7 +637,7 @@ hybicon.prototype.setDefaultProps = function () {
         this.icon2YAnim = sizeTransform2Anim.iconY;
     }
 
-    // Animation
+    // animation
     if (this.animateTime === null) {
         if (this.hoverMode === "rotate") { this.animateTime = 400; }
         else { this.animateTime = 200; }

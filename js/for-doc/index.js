@@ -13,8 +13,6 @@ var setDetails = function (mode) {
         case "info":
             details = "When you want to show more. Psst... There is a <a href='github.html'>GitHub plugin</a>";
             break;
-        default:
-
     }
 
     document.getElementById("details").innerHTML = details;
