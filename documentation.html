@@ -44,22 +44,22 @@
                     <div id="userideamain" data-hybicon="user-idea"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="twittertweetmain" data-hybicon="twitter-bubble"></div>
+                    <div id="twittertweetmain" data-hybicon="twitter-bubble" data-hybicon-color="#55ACEE"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="gplusplusmain" data-hybicon="google-plus"></div>
+                    <div id="gplusplusmain" data-hybicon="google-plus" data-hybicon-color="#DD4B39"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="facebooklikemain" data-hybicon="facebook-like"></div>
+                    <div id="facebooklikemain" data-hybicon="facebook-like" data-hybicon-color="#3B5998"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="instagramfavemain" data-hybicon="instagram-fave"></div>
-                </div>                
-                <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="pinterestpin" data-hybicon="pinterest-pin"></div>
+                    <div id="instagramfavemain" data-hybicon="instagram-fave" data-hybicon-color="#3f729b"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
-                    <div id="linkedinconnectmain" data-hybicon="linkedin-link"></div>
+                    <div id="pinterestpin" data-hybicon="pinterest-pin" data-hybicon-color="#bd081c"></div>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-xs-6">
+                    <div id="linkedinconnectmain" data-hybicon="linkedin-link" data-hybicon-color="#0077B5"></div>
                 </div>
                 <div class="col-lg-1 col-sm-3 col-xs-6">
                     <div id="githubforkmain" data-hybicon="github-fork"></div>
@@ -96,15 +96,60 @@
                         <div id="preIconHtmlBodyDiv" class="sourceResult">
                             <pre>&lt;body&gt;
     &lt;div <strong class="usingpre">data-hybicon</strong>&gt;&lt;/div&gt;
-
     &lt;script src="js/required/raphael.min.js"&gt;&lt;/script&gt;
     &lt;script src="js/hybicon.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;</pre>
                         </div>
                     </div>
                 </div>
-                <a href='icons.html'><div data-hybicon="download-code" data-hybicon-size="75"></div></a>
-                <div class="smalltitle">download</div>
+                <div class="row" style="margin-top: 10px; margin-bottom: 15px;">
+                    <div class="hidden-xs col-sm-2"></div>
+                    <div class="col-xs-6 col-sm-2">
+                        <a href="icons.html">
+                            <div data-hybicon="download-code" data-hybicon-size="60" data-hybicon-hovermode
+                                 data-hybicon-background="#EAFDF8" data-hybicon-color="#604c3b" data-hybicon-borderradius="50%"
+                                 data-hybicon-icon1init="50,50,77"
+                                 data-hybicon-icon1anim="50,50,0"
+                                 data-hybicon-icon2init="50,50,0"
+                                 data-hybicon-icon2anim="50,50,55"
+                                 title="Download files"></div>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <a href="https://www.npmjs.com/package/hybicon" target="_blank">
+                            <div data-hybicon="npm-search" data-hybicon-size="60" data-hybicon-hovermode
+                                 data-hybicon-background="#EAFDF8" data-hybicon-color="#604c3b" data-hybicon-borderradius="50%"
+                                 data-hybicon-icon1init="50,50,77"
+                                 data-hybicon-icon1anim="50,50,0"
+                                 data-hybicon-icon2init="50,50,0"
+                                 data-hybicon-icon2anim="50,50,55"
+                                 title="Install via npm"></div>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <a href="http://bower.io/search/?q=hybicon" target="_blank">
+                            <div data-hybicon="bower-search" data-hybicon-size="60" data-hybicon-hovermode
+                                 data-hybicon-background="#EAFDF8" data-hybicon-color="#604c3b" data-hybicon-borderradius="50%"
+                                 data-hybicon-icon1init="50,50,77"
+                                 data-hybicon-icon1anim="50,50,0"
+                                 data-hybicon-icon2init="50,50,0"
+                                 data-hybicon-icon2anim="50,50,55"
+                                 title="Install via Bower"></div>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <a href="http://www.jsdelivr.com/?query=hybicon" target="_blank">
+                            <div data-hybicon="jsdelivr-search" data-hybicon-size="60" data-hybicon-hovermode
+                                 data-hybicon-background="#EAFDF8" data-hybicon-color="#604c3b" data-hybicon-borderradius="50%"
+                                 data-hybicon-icon1init="50,50,77"
+                                 data-hybicon-icon1anim="50,50,0"
+                                 data-hybicon-icon2init="50,50,0"
+                                 data-hybicon-icon2anim="50,50,55"
+                                 title="Use jsDelivr CDN"></div>
+                        </a>
+                    </div>
+                    <div class="hidden-xs col-sm-2"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -173,7 +218,7 @@
                             <div class="smalltitle">default</div>
                         </div>
                         <div class="col-xs-4">
-                            <div data-hybicon="user-plus" data-hybicon-clickmode="rotate"></div>
+                            <div data-hybicon="user-arrowright" data-hybicon-clickmode="rotate"></div>
                             <div class="smalltitle">rotate</div>
                         </div>
                         <div class="col-xs-4">
@@ -188,8 +233,8 @@
                     </div>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="download-code" 
-     <strong class="usingpre">data-hybicon-infomode="show|right-*width*"</strong>
-     <strong class="usingpre">data-hybicon-infotext="*your text*"</strong>&gt;
+                        <strong class="usingpre">data-hybicon-infomode="show|right-*width*"</strong>
+                        <strong class="usingpre">data-hybicon-infotext="*your text*"</strong>&gt;
 &lt;/div&gt;</pre>
                     </div>
                     <div class="row">
@@ -220,6 +265,57 @@
                             <a href="documentation.html#hyperlink"><div data-hybicon="link"></div></a>
                             <div class="smalltitle">click it</div>
                         </div>
+                    </div>
+                    <hr id="animation" />
+                    <h3 class="fontface">Animation</h3>
+                    <div class="usingtext">
+                        Hybicon works on a 100x100 matrix. Animation is based on the following formula:<br />"centerX, centerY, size, rotate"
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="arrowright-arrowright"
+                        <strong class="usingpre">data-hybicon-icon1init</strong>="20,50,25,0" &lt;!-- default: "45,55,77,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon1anim</strong>="35,50,30,180" &lt;!-- default: "45,55,77,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon2init</strong>="80,50,25,180" &lt;!-- default: "80,20,33,0" --&gt;
+                        <strong class="usingpre">data-hybicon-icon2anim</strong>="65,50,30,0" &lt;!-- default: "80,20,33,0" --&gt;
+     data-hybicon-clickmode&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="arrowright-arrowright"
+                                 data-hybicon-icon1init="20,50,25,0"
+                                 data-hybicon-icon1anim="35,50,30,180"
+                                 data-hybicon-icon2init="80,50,25,180"
+                                 data-hybicon-icon2anim="65,50,30,0"
+                                 data-hybicon-clickmode
+                                 data-hybicon-border="solid 1px #333"></div>
+                        </div>
+                        <div class="smalltitle">click it</div>
+                    </div>
+                    <hr id="3rdpartyicon" />
+                    <h3 class="fontface">3rd party icon</h3>
+                    <div class="usingtext">
+                        Icons are predefined <a href="http://www.w3.org/TR/SVG/paths.html#PathDataGeneralInformation" target="_blank">SVG paths</a>. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>var <strong class="usingpre">myIcons</strong> = {
+    triangle: "M0,100,L100,100,L50,20,z",
+    rectangle: "M0,0,L100,0,L100,100,L0,100,z"
+}</pre>
+                        <pre>&lt;div <strong class="usingpre">data-hybicon-iconclass="myIcons"</strong>
+     data-hybicon="triangle-rectangle"
+     data-hybicon-clickmode="rotate"&gt;
+&lt;div&gt;
+</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon-iconclass="myIcons"
+                                 data-hybicon="triangle-rectangle"
+                                 data-hybicon-clickmode="rotate"></div>
+                        </div>
+                        <div class="smalltitle">click it</div>
                     </div>
                     <hr id="alignment" />
                     <h3 class="fontface">Alignment</h3>
@@ -314,56 +410,6 @@
                             <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-color="#4183c4" data-hybicon-border="solid 3px #333" data-hybicon-borderradius="15%"></div>
                             <div class="smalltitle">15%</div>
                         </div>
-                    </div>
-                    <hr id="animation" />
-                    <h3 class="fontface">Animation</h3>
-                    <div class="usingtext">
-                        Hybicon works on a 100x100 matrix. Animation is based on the following formula:<br />"centerX, centerY, size, rotate"
-                    </div>
-                    <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="arrowright-arrowright"
-     <strong class="usingpre">data-hybicon-icon1init</strong>="20,50,25,0" &lt;!-- default: "45,55,77,0" --&gt;
-     <strong class="usingpre">data-hybicon-icon1anim</strong>="35,50,30,180" &lt;!-- default: "45,55,77,0" --&gt;
-     <strong class="usingpre">data-hybicon-icon2init</strong>="80,50,25,180" &lt;!-- default: "80,20,33,0" --&gt;
-     <strong class="usingpre">data-hybicon-icon2anim</strong>="65,50,30,0" &lt;!-- default: "80,20,33,0" --&gt;
-     data-hybicon-clickmode&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div data-hybicon="arrowright-arrowright"
-                                 data-hybicon-icon1init="20,50,25,0"
-                                 data-hybicon-icon1anim="35,50,30,180"
-                                 data-hybicon-icon2init="80,50,25,180"
-                                 data-hybicon-icon2anim="65,50,30,0"
-                                 data-hybicon-clickmode></div>
-                        </div>
-                        <div class="smalltitle">click it</div>
-                    </div>
-                    <hr id="3rdpartyicon" />
-                    <h3 class="fontface">3rd party icon</h3>
-                    <div class="usingtext">
-                        Icons are predefined <a href="http://www.w3.org/TR/SVG/paths.html#PathDataGeneralInformation" target="_blank">SVG paths</a>. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
-                    </div>
-                    <div class="sourceResult">
-                        <pre>var <strong class="usingpre">myIcons</strong> = {
-    triangle: "M0,100,L100,100,L50,20,z",
-    rectangle: "M0,0,L100,0,L100,100,L0,100,z"
-}</pre>
-                        <pre>&lt;div <strong class="usingpre">data-hybicon-iconclass="myIcons"</strong>
-     data-hybicon="triangle-rectangle"
-     data-hybicon-clickmode="rotate"&gt;
-&lt;div&gt;
-</pre>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div data-hybicon-iconclass="myIcons"
-                                 data-hybicon="triangle-rectangle"
-                                 data-hybicon-clickmode="rotate"></div>
-                        </div>
-                        <div class="smalltitle">click it</div>
                     </div>
                     <hr id="css" />
                     <h3 class="fontface">CSS</h3>

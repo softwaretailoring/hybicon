@@ -545,7 +545,7 @@ hybicon.prototype.setDefaultProps = function () {
     var icon1SizeDefault = 77;
     if (this.icon2Path === null) {
         icon1SizeDefault = 62;
-        if (this.icon1Anim.size === null) { this.icon1Anim.size = 71; }
+        if (this.hoverMode === "" && this.icon1Anim.size === null) { this.icon1Anim.size = 71; }
     }
     var icon2SizeDefault = 33;
 
@@ -575,13 +575,18 @@ hybicon.prototype.setDefaultProps = function () {
         this.clickMode === "rotate") {
         if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
         else { this.icon2Init.size = this.icon2Anim.size; }
+
+        var rotatedeg = "360";
+        if (this.clickMode === "rotate") { rotatedeg = "180"; }
+
         if (this.icon2Path !== null) {
-            this.icon2Anim.rotate = "360";
+            if (this.icon2Anim.rotate === null) { this.icon2Anim.rotate = rotatedeg; }
         }
         else {
-            this.icon1Anim.rotate = "360";
+            if (this.icon1Anim.rotate === null) { this.icon1Anim.rotate = rotatedeg; }
         }
-        this.animateTime = 400;
+
+        if (this.hoverMode === "rotate") { this.animateTime = 400; }
     }
 
     // set width and height
@@ -618,7 +623,7 @@ hybicon.prototype.setDefaultProps = function () {
     }
 
     if (this.icon2Anim.size === null) {
-        if (this.icon2Init.size === 0) { this.icon2Anim.size = 33; }
+        if (this.icon2Init.size === 0) { this.icon2Anim.size = icon2SizeDefault; }
         else { this.icon2Anim.size = this.icon2Init.size; }
     }
     if (this.icon2HeightAnim === null) { this.icon2HeightAnim = this.icon2Anim.size; }

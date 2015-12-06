@@ -249,33 +249,9 @@ pre {
     fill: #EAFDF8;
 }
 
-#twittertweetmain > svg > [id$=icon1],
-#twittertweetmain > svg > [id$=icon2] { 
-    fill: #55ACEE;
-}
-#facebooklikemain > svg > [id$=icon1],
-#facebooklikemain > svg > [id$=icon2] { 
-    fill: #3B5998;
-}
-#gplusplusmain > svg > [id$=icon1] { 
-    fill: #DD4B39;
-}
 #gplusplusmain > svg > [id$=icon2] { 
-    fill: #DD4B39;
     stroke: #EAFDF8;
     stroke-width: 2;
-}
-#pinterestpin > svg > [id$=icon1],
-#pinterestpin > svg > [id$=icon2] { 
-    fill: #bd081c;
-}
-#linkedinconnectmain > svg > [id$=icon1],
-#linkedinconnectmain > svg > [id$=icon2] { 
-    fill: #0077B5;
-}
-#instagramfavemain > svg > [id$=icon1],
-#instagramfavemain > svg > [id$=icon2] { 
-    fill: #3f729b;
 }
 
 .row {
@@ -288,6 +264,10 @@ pre {
 }
 
 /*INTRO*/
+
+#modes {
+    padding-top: 23px;
+}
 
 .rounded {
     border-radius: 25px;
@@ -455,13 +435,13 @@ svg > #hybicon-iconMailFooter-icon2 {
     text-decoration: none;
 }
 
-#download {
+#downloaddiv {
     padding-top: 15px;
     padding-bottom: 20px;
 }
 
 @media (max-width: 768px) {
-    #download {
+    #downloaddiv {
         margin-left: 15px;
         margin-right: 15px;
         padding-bottom: 25px;
