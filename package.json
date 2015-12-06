@@ -1,0 +1,35 @@
+{
+    "name": "hybicon",
+    "version": "0.9.0",
+    "description": "JavaScript library for synergistic SVG icons.",
+    "homepage": "http://hybicon.softwaretailoring.net",
+    "main": "js/hybicon.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/softwaretailoring/hybicon.git"
+    },
+    "author": {
+        "name": "Gábor Berkesi",
+        "email": "gabor.berkesi@softwaretailoring.net",
+        "url": "http://softwaretailoring.net"
+    },
+    "files": [
+        "js/hybicon.js",
+        "js/hybicon.min.js",
+        "js/hybicon.min.js.map",
+        "LICENSE"
+    ],
+    "dependencies": {
+        "raphael": "^2.1.0"
+    },    
+    "keywords": [
+        "animated",
+        "SVG",
+        "icons",
+        "Raphael"
+    ],
+    "bugs": {
+        "url": "https://github.com/softwaretailoring/hybicon/issues"
+    },
+    "license": "MIT"
+}
