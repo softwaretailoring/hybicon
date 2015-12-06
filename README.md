@@ -11,14 +11,7 @@ For more insight please visit [http://hybicon.softwaretailoring.net][projectpage
 
 HTML
 ```html
-<div id="githubstar" class="hybicon100" data-hybicon="github-star"></div>
-```
-
-JS
-```javascript
-window.onload = function () {
-    hybicons();
-};
+<div data-hybicon="github-star"></div>
 ```
 
 ## Author
