@@ -33,7 +33,7 @@ hybicon = function (divId) {
         return this;
     }
     
-    //Prepare raphael object and set the width
+    //Prepare raphael's div
     var removeChildrens = [];
     for (var i = 0; i < this.holderDiv.children.length; i++) {
         if (this.holderDiv.children[i].localName === "svg") {
@@ -102,6 +102,7 @@ hybicon = function (divId) {
     this.animateEffect = "linear";
     this.hoverMode = null;
     this.clickMode = null;
+    this.hovered = false;
     this.clicked = false;
     this.infoMode = null;
     this.infoText = "HYBICON";
@@ -114,6 +115,8 @@ hybicon = function (divId) {
     this.hybiconBorder = "";
     this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
+
+    this.positioning = "topright";
 
     this.parseIcon();
 
@@ -172,7 +175,6 @@ hybicon.prototype.createIcon = function () {
     this.holderDiv.firstChild.style.background = this.hybiconBackground;
 
     this.setDefaultProps();
-    this.hovered = false;
 
     this.icon1Transform = this.getTransformString(this.icon1X, this.icon1Y, this.icon1Scale, this.icon1Init.rotate);
     this.icon1TransformAnim = this.getTransformString(this.icon1XAnim, this.icon1YAnim, this.icon1ScaleAnim, this.icon1Anim.rotate);
@@ -305,40 +307,6 @@ hybicon.prototype.hoverHandler = function (hovered) {
     }
 };
 
-hybicon.prototype.getIconSizeTransform = function (icon, iconWidth, iconHeight, centerX, centerY) {
-
-    var transformAttrX = "";
-    var transformAttrY = "";
-
-    var relativePath = Raphael.pathToRelative(icon);
-    var bbox = Raphael.pathBBox(relativePath);
-    var pathcenterX = bbox.cx;
-    var pathcenterY = bbox.cy;
-    var width = bbox.width;
-    var height = bbox.height;
-
-    //Calculate path width & height
-    if (iconWidth !== null && iconHeight !== null) {
-        if (height > width) {
-            transformAttrX = (iconWidth / height);
-            transformAttrY = (iconHeight / height);
-        }
-        else {
-            transformAttrX = (iconWidth / width);
-            transformAttrY = (iconHeight / width);
-        }
-    }
-
-    var iconCenterX = centerX - pathcenterX;
-    var iconCenterY = centerY - pathcenterY;
-
-    return {
-        scale: transformAttrX.toString() + "," + transformAttrY.toString(),
-        iconX: iconCenterX,
-        iconY: iconCenterY
-    }
-};
-
 //Parse html5 data- attributes, the onmouseup event and anchor link
 hybicon.prototype.parseIcon = function () {
     if (this.holderDiv !== undefined &&
@@ -449,6 +417,13 @@ hybicon.prototype.parseIcon = function () {
                 this.infoText = hybiconInfotext;
             }
 
+            //data-hybicon-positioning
+            var hybiconPositioning = this.holderDiv.getAttribute("data-hybicon-positioning");
+            if (hybiconPositioning !== null &&
+                hybiconPositioning !== "") {
+                this.positioning = hybiconPositioning;
+            }
+
             //data-hybicon-icon1init
             var hybiconIcon1Init = this.holderDiv.getAttribute("data-hybicon-icon1init");
             if (hybiconIcon1Init !== null) {
@@ -489,24 +464,6 @@ hybicon.prototype.parseIcon = function () {
     }
 };
 
-hybicon.prototype.setIconSettings = function (iconSet, iconSettings) {
-    if (iconSettings !== null) {
-        var iconsettings = iconSettings.split(",");
-        if (iconsettings.length > 0) {
-            if (iconsettings[0] !== "") { iconSet.centerX = iconsettings[0]; }
-        }
-        if (iconsettings.length > 1) {
-            if (iconsettings[1] !== "") { iconSet.centerY = iconsettings[1]; }
-        }
-        if (iconsettings.length > 2) {
-            if (iconsettings[2] !== "") { iconSet.size = iconsettings[2]; }
-        }
-        if (iconsettings.length > 3) {
-            if (iconsettings[3] !== "") { iconSet.rotate = iconsettings[3]; }
-        }
-    }
-}
-
 hybicon.prototype.parseAll = function () {
     var hybicons = document.querySelectorAll('[data-hybicon]');
 
@@ -543,33 +500,56 @@ hybicon.prototype.setDefaultProps = function () {
 
     // default values
     var icon1SizeDefault = 77;
+    var icon2SizeDefault = 33;
     if (this.icon2Path === null) {
         icon1SizeDefault = 62;
         if (this.hoverMode === "" && this.icon1Anim.size === null) { this.icon1Anim.size = 71; }
     }
-    var icon2SizeDefault = 33;
+    var icon1CenterXDefault = 45;
+    var icon1CenterYDefault = 55;
+    var icon2CenterXDefault = 80;
+    var icon2CenterYDefault = 20;
+    if (this.positioning === "topleft") {
+        icon1CenterXDefault = 55;
+        icon1CenterYDefault = 55;
+        icon2CenterXDefault = 20;
+        icon2CenterYDefault = 20;
+    }
+    if (this.positioning === "center") {
+        icon1CenterXDefault = 50;
+        icon1CenterYDefault = 50;
+        icon2CenterXDefault = 50;
+        icon2CenterYDefault = 50;
+        icon2SizeDefault = 50;
+    }
 
     if (this.icon1Init.size === null) { this.icon1Init.size = icon1SizeDefault; }
-    if (this.icon1Init.centerX === null) { this.icon1Init.centerX = 45; }
-    if (this.icon1Init.centerY === null) { this.icon1Init.centerY = 55; }
+    if (this.icon1Init.centerX === null) { this.icon1Init.centerX = icon1CenterXDefault; }
+    if (this.icon1Init.centerY === null) { this.icon1Init.centerY = icon1CenterYDefault; }
     if (this.icon1Init.rotate === null) { this.icon1Init.rotate = 0; }
     if (this.icon2Init.size === null) { this.icon2Init.size = 0; }
-    if (this.icon2Init.centerX === null) { this.icon2Init.centerX = 80; }
-    if (this.icon2Init.centerY === null) { this.icon2Init.centerY = 20; }
+    if (this.icon2Init.centerX === null) { this.icon2Init.centerX = icon2CenterXDefault; }
+    if (this.icon2Init.centerY === null) { this.icon2Init.centerY = icon2CenterYDefault; }
     if (this.icon2Init.rotate === null) { this.icon2Init.rotate = 0; }
 
     // handle hover and click modes
     if (this.hoverMode === "switch" ||
         this.clickMode === "switch") {
-        this.icon1Anim.centerX = this.icon2Init.centerX;
-        this.icon1Anim.centerY = this.icon2Init.centerY;
-        this.icon2Anim.centerX = this.icon1Init.centerX;
-        this.icon2Anim.centerY = this.icon1Init.centerY;
-        if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
-        else { this.icon1Anim.size = this.icon2Init.size; }
-        if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
-        else { this.icon2Init.size = this.icon2Anim.size; }
-        this.icon2Anim.size = this.icon1Init.size;
+        if (this.positioning === "center") {
+            if (this.icon1Anim.size === null) { this.icon1Anim.size = 0; }
+            this.icon2Anim.size = icon2SizeDefault;
+        }
+        else {
+            this.icon1Anim.centerX = this.icon2Init.centerX;
+            this.icon1Anim.centerY = this.icon2Init.centerY;
+            this.icon2Anim.centerX = this.icon1Init.centerX;
+            this.icon2Anim.centerY = this.icon1Init.centerY;
+            if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
+            else { this.icon1Anim.size = this.icon2Init.size; }
+            if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+            else { this.icon2Init.size = this.icon2Anim.size; }
+            this.icon2Anim.size = this.icon1Init.size;
+        }
     }
     if (this.hoverMode === "rotate" ||
         this.clickMode === "rotate") {
@@ -641,10 +621,68 @@ hybicon.prototype.setDefaultProps = function () {
     }
 };
 
+hybicon.prototype.setIconSettings = function (iconSet, iconSettings) {
+    if (iconSettings !== null) {
+        var iconsettings = iconSettings.split(",");
+        if (iconsettings.length > 0) {
+            if (iconsettings[0] !== "") { iconSet.centerX = iconsettings[0]; }
+        }
+        if (iconsettings.length > 1) {
+            if (iconsettings[1] !== "") { iconSet.centerY = iconsettings[1]; }
+        }
+        if (iconsettings.length > 2) {
+            if (iconsettings[2] !== "") { iconSet.size = iconsettings[2]; }
+        }
+        if (iconsettings.length > 3) {
+            if (iconsettings[3] !== "") { iconSet.rotate = iconsettings[3]; }
+        }
+    }
+}
+
 hybicon.prototype.hybiconSettings = function () {
     return { centerX: null, centerY: null, size: null, rotate: null };
 };
 
+//Transform functions
+hybicon.prototype.getIconSizeTransform = function (icon, iconWidth, iconHeight, centerX, centerY) {
+
+    var transformAttrX = "";
+    var transformAttrY = "";
+
+    var relativePath = Raphael.pathToRelative(icon);
+    var bbox = Raphael.pathBBox(relativePath);
+    var pathcenterX = bbox.cx;
+    var pathcenterY = bbox.cy;
+    var width = bbox.width;
+    var height = bbox.height;
+
+    //Calculate path width & height
+    if (iconWidth !== null && iconHeight !== null) {
+        if (height > width) {
+            transformAttrX = (iconWidth / height);
+            transformAttrY = (iconHeight / height);
+        }
+        else {
+            transformAttrX = (iconWidth / width);
+            transformAttrY = (iconHeight / width);
+        }
+    }
+
+    var iconCenterX = centerX - pathcenterX;
+    var iconCenterY = centerY - pathcenterY;
+
+    return {
+        scale: transformAttrX.toString() + "," + transformAttrY.toString(),
+        iconX: iconCenterX,
+        iconY: iconCenterY
+    }
+};
+
+hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
+    return "t" + x.toString() + "," + y.toString() + "s" + scale.toString() + "r" + rotate.toString();
+};
+
+//Identifiers
 hybicon.prototype.getIcon1Id = function () {
     return "hybicon-" + this.holderId + "-icon1";
 };
@@ -661,11 +699,7 @@ hybicon.prototype.getInfoTextId = function () {
     return "hybicon-" + this.holderId + "-infotext";
 };
 
-hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
-    return "t" + x.toString() + "," + y.toString() + "s" + scale.toString() + "r" + rotate.toString();
-    
-};
-
+//Automatic parse
 document.addEventListener("DOMContentLoaded", function (event) {
     new hybicon().parseAll();
 });
