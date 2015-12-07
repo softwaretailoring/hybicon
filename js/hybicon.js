@@ -18,7 +18,7 @@
 
 hybicon = function (divId) {
 
-    this.version = "0.9.0";
+    this.version = "1.0.0";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
