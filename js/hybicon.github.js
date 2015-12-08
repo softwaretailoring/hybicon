@@ -93,7 +93,7 @@ hybicongithub = function (divId) {
             if (!holderDiv.hasAttribute("title")) {
                 var githubtitle = this.githubUser + "/" + this.githubRepo + " - " + callbacktype;
                 if (this.githubRepoTag !== null &&
-                    callbacktype === "release") {
+                    callbacktype === "releases") {
                     githubtitle += " " + this.githubRepoTag;
                 }
                 holderDiv.setAttribute("title", githubtitle);

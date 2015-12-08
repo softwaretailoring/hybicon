@@ -18,7 +18,7 @@
 
 hybicon = function (divId) {
 
-    this.version = "1.0.0";
+    this.version = "1.0.1";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
@@ -959,7 +959,7 @@ hybicongithub = function (divId) {
             if (!holderDiv.hasAttribute("title")) {
                 var githubtitle = this.githubUser + "/" + this.githubRepo + " - " + callbacktype;
                 if (this.githubRepoTag !== null &&
-                    callbacktype === "release") {
+                    callbacktype === "releases") {
                     githubtitle += " " + this.githubRepoTag;
                 }
                 holderDiv.setAttribute("title", githubtitle);

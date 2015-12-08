@@ -35,7 +35,7 @@ $ bower install hybicon
 or CDN by [jsDelivr][jsdelivr]
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/hybicon/1.0.0/hybicon.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/hybicon/1.0.1/hybicon.min.js"></script>
 ```
 
 ## Author
