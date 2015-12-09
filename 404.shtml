@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hybrid SVG icons. Better together. Page not found." />
+    <meta name="keywords" content="svg icon" />
+    <meta name="author" content="gabor.berkesi@softwaretailoring.net" />
+    <link rel="shortcut icon" href="hybicon_favicon.png">
+
+    <title>HYBICON - Better together - 404</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/for-doc/bootstrap.min.css" rel="stylesheet">
+    <link href="css/for-doc/index.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!-- NAVBAR
+================================================== -->
+<body class="styledark">
+    <header class="inverse">
+        <div class="row">
+            <div class="col-xs-5">
+                <div id="userideaheaderintro" data-hybicon="user-idea" data-hybicon-size="150" data-hybicon-align="right"></div>
+            </div>
+            <div class="col-xs-7">
+                <h1 class="fontface pull-left">&nbsp;&nbsp;HYBICON</h1>
+            </div>
+        </div>
+    </header>
+    <div class="container" id="modes">
+        <h2 class="fontface">Page not found</h2>
+        <p class="fontface" style="text-align:center;">Please click the icon below for main page.</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="smalltitletop"></div>
+                <a href="index.html">
+                    <div data-hybicon="link-search" data-hybicon-size="css" data-hybicon-hovermode="switch" data-hybicon-infomode data-hybicon-infotext="404">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <!-- FOOTER -->
+    <footer id="footer" class="styledark">
+        <table style="margin:auto;">
+            <tr>
+                <td>&nbsp;&nbsp;&copy; 2015 <a href='http://softwaretailoring.net' target='_blank'>softwaretailoring.net</a></td>
+            </tr>
+        </table>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/for-doc/jquery-1.10.2.min.js"></script>
+    <script src="js/for-doc/bootstrap.min.js"></script>
+    <script src="js/required/raphael.min.js"></script>
+    <script src="js/for-doc/index.min.js"></script>
+    <script src="js/hybicon.min.js"></script>
+</body>
+</html>
