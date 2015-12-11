@@ -389,8 +389,15 @@ hybicon.prototype.parseIcon = function () {
             var hybiconColor = this.holderDiv.getAttribute("data-hybicon-color");
             if (hybiconColor !== null &&
                 hybiconColor !== "") {
-                this.icon1Color = hybiconColor;
-                this.icon2Color = hybiconColor;
+                var hybiconColors = hybiconColor.split('-');
+                if (hybiconColors.length > 1) {
+                    this.icon1Color = hybiconColors[0];
+                    this.icon2Color = hybiconColors[1];
+                }
+                else {
+                    this.icon1Color = hybiconColor;
+                    this.icon2Color = hybiconColor;
+                }
             }
 
             //data-hybicon-background
