@@ -105,7 +105,7 @@
                 <div class="row" style="margin-top: 10px; margin-bottom: 15px;">
                     <div class="hidden-xs col-sm-2"></div>
                     <div class="col-xs-6 col-sm-2">
-                        <a href="https://github.com/softwaretailoring/hybicon/releases/download/v1.0.1/hybicon.js-1.0.1.zip">
+                        <a href="https://github.com/softwaretailoring/hybicon/releases/download/v1.1.0/hybicon.js-1.1.0.zip">
                             <div data-hybicon="download-code" data-hybicon-size="66" data-hybicon-hovermode="switch" data-hybicon-positioning="center"
                                  data-hybicon-background="#EAFDF8" data-hybicon-color="#604c3b" data-hybicon-borderradius="50%"
                                  title="Download files"></div>
@@ -193,7 +193,7 @@
                     <hr id="hovermode" />
                     <h3 class="fontface">Hover mode</h3>
                     <div class="usingtext">
-                        The secondary icon animated on hover when set <strong>data-hybicon-hovermode</strong> attribute.
+                        The icons animated on hover when set <strong>data-hybicon-hovermode</strong> attribute.
                     </div>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="code-fave" <strong class="usingpre">data-hybicon-hovermode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
@@ -215,7 +215,7 @@
                     <hr id="clickmode" />
                     <h3 class="fontface">Click mode</h3>
                     <div class="usingtext">
-                        The secondary icon animated on click when set <strong>data-hybicon-clickmode</strong> attribute.
+                        The icons animated on click when set <strong>data-hybicon-clickmode</strong> attribute.
                     </div>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="icon1-icon2" <strong class="usingpre">data-hybicon-clickmode="show|rotate|switch"</strong>&gt;&lt;/div&gt;</pre>
@@ -441,7 +441,7 @@
                     <hr id="color" />
                     <h3 class="fontface">Color</h3>
                     <div class="sourceResult">
-                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="as CSS color"</strong>&gt;&lt;/div&gt;</pre>
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-color="as CSS color(-icon2 color)"</strong>&gt;&lt;/div&gt;</pre>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -451,6 +451,29 @@
                         <div class="col-sm-6">
                             <div data-hybicon="github-star" data-hybicon-background="#fff" data-hybicon-border="solid 3px #333" data-hybicon-borderradius="15%" data-hybicon-color="#4183C4-#333"></div>
                             <div class="smalltitle">#4183C4-#333</div>
+                        </div>
+                    </div>
+                    <hr id="style" />
+                    <h3 class="fontface">Style</h3>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="github-star" <strong class="usingpre">data-hybicon-style="fill|stroke(-icon2 style)"</strong>&gt;&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div data-hybicon="github-star" ></div>
+                            <div class="smalltitle">default</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div data-hybicon="github-star" data-hybicon-style="stroke"></div>
+                            <div class="smalltitle">stroke</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div data-hybicon="github-star" data-hybicon-style="fill-stroke"></div>
+                            <div class="smalltitle">fill-stroke</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div data-hybicon="github-star"  data-hybicon-style="stroke-fill"></div>
+                            <div class="smalltitle">stroke-fill</div>
                         </div>
                     </div>
                     <hr id="css" />
@@ -479,7 +502,7 @@
 <strong class="usingpre">#myHybicon-icon2</strong> { 
     fill: #FFF;
     stroke: #F6921E;
-    stroke-width: 0.5;
+    stroke-width: 2;
 }
 <strong class="usingpre">#myHybicon-info</strong> { 
     fill: #604c3b;

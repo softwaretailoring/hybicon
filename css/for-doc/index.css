@@ -257,6 +257,11 @@ pre {
     padding-bottom: 30px;
 }
 
+.icons hr {
+    border-color: #8c3d2f;
+    border-width: 1px;
+}
+
 #userideaheader,
 #userideaheaderintro {
     margin-top: 15px;
@@ -329,29 +334,29 @@ pre {
 .styledark [id$=icon1] { 
     fill: #8c3d2f;
     stroke: #fff;
-    stroke-width: 0.4;
+    stroke-width: 1;
 }
 
 .styledark [id$=icon2] { 
     fill: #8c3d2f;
     stroke: #fff;
-    stroke-width: 1;
+    stroke-width: 2;
 }
 
 .styledark #userideaheaderintro-icon2 { 
     fill: #fff;
     stroke: #8c3d2f;
-    stroke-width: 0.5;
+    stroke-width: 2;
 }
 
 #iconBrightness-icon1 {
-    stroke-width: 0.7;
+    stroke-width: 1;
 }
 
 .styledark #iconBrightness-icon2 { 
     fill: #fff;
     stroke: #fff;
-    stroke-width: 0.5;
+    stroke-width: 0;
 }
 
 #iconMailFooter-icon1,
@@ -414,25 +419,25 @@ pre {
 .stylelight [id$=icon1] { 
     fill: #fff;
     stroke: #8c3d2f;
-    stroke-width: 0.4;
+    stroke-width: 1.5;
 }
 
 .stylelight [id$=icon2] { 
     fill: #fff;
     stroke: #8c3d2f;
-    stroke-width: 1;
+    stroke-width: 2;
 }
 
 .stylelight #userideaheaderintro-icon2 { 
     fill: #8c3d2f;
     stroke: #fff;
-    stroke-width: 0.5;
+    stroke-width: 2;
 }
 
 .stylelight #iconBrightness-icon2 { 
     fill: #8c3d2f;
     stroke: #8c3d2f;
-    stroke-width: 0.5;
+    stroke-width: 0;
 }
 
 .stylelight #iconMailFooter-icon1,
@@ -504,7 +509,7 @@ pre {
 #myHybicon-icon2 { 
     fill: #FFF;
     stroke: #F6921E;
-    stroke-width: 0.5;
+    stroke-width: 2;
 }
 
 #myHybicon-info { 

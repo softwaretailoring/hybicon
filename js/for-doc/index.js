@@ -61,25 +61,31 @@ var setStyle = function () {
     }
 };
 
-var createAvailableIcons = function (mode) {
+var createAvailableIcons = function () {
 
-    var allhybicon = document.getElementById("allhybicon");
+    var allhybiconstroke = document.getElementById("allhybiconstroke");
+    createAvailableIconsStyle(allhybiconstroke, "stroke");
 
+    var allhybiconfill = document.getElementById("allhybiconfill");
+    createAvailableIconsStyle(allhybiconfill, "fill");
+
+    new hybicon().parseAll();
+};
+
+var createAvailableIconsStyle = function (allhybicon, style) {
     for (var property in hybiconbase) {
         if (hybiconbase.hasOwnProperty(property)) {
             if (property !== "switch" &&
                 property !== "circle" &&
                 property !== "setpresets") {
                 var icondiv = "<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>";
-                icondiv += "     <div data-hybicon='" + property + "'></div>";
+                icondiv += "     <div data-hybicon='" + property + "' data-hybicon-style='" + style + "'></div>";
                 icondiv += "     <div class='smalltitle'>" + property + "</div>";
                 icondiv += "</div>";
                 allhybicon.innerHTML += icondiv;
             }
         }
     }
-
-    new hybicon().parseAll();
 };
 
 var setGitHubSize = function () {
