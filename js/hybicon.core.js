@@ -17,7 +17,7 @@
 
 hybicon = function (divId) {
 
-    this.version = "1.0.1";
+    this.version = "1.1.0";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
@@ -75,6 +75,7 @@ hybicon = function (divId) {
         this.icon2Path = hybiconbase.idea;
     }
 
+    this.icon1Stlye = "fill";
     this.icon1Color = "#222";
     this.icon1Stroke = "none";
     this.icon1StrokeWidth = 0;
@@ -86,6 +87,7 @@ hybicon = function (divId) {
     this.icon1AnimSettings = null;
     this.icon1Anim = new this.hybiconSettings();
 
+    this.icon2Stlye = "fill";
     this.icon2Color = "#222";
     this.icon2Stroke = "none";
     this.icon2StrokeWidth = 0;
@@ -144,7 +146,7 @@ hybicon.prototype.createIcon = function () {
 
     iconWidth += infoSize;
 
-    // Set style
+    // Set style of div
     if (this.hybiconSize !== "css") { // When size via JavaScript
         this.holderDiv.style.width = ((iconWidth / 100) * this.hybiconSize).toString() + "px";
         this.holderDiv.style.height = this.hybiconSize + "px";
@@ -201,8 +203,8 @@ hybicon.prototype.createIcon = function () {
         }
     }
 
+    // Set info mode
     if (infoType !== null) {
-
         if (infoType === "" ||
             infoType === "bottomright") {
             this.infoFont = '100 12px Arial, Helvetica, sans-serif';
@@ -228,6 +230,19 @@ hybicon.prototype.createIcon = function () {
             this.infotext.id = this.getInfoTextId();
             this.infotext.node.childNodes[0].id = this.infotext.id;
         }
+    }
+
+    // Set style of icons
+    if (this.icon1Stlye === "stroke") {
+        this.icon1Stroke = this.icon1Color;
+        this.icon1StrokeWidth = 1.5;
+        this.icon1Color = "none";
+    }
+
+    if (this.icon2Stlye === "stroke") {
+        this.icon2Stroke = this.icon2Color;
+        this.icon2StrokeWidth = 2;
+        this.icon2Color = "none";
     }
 
     this.icon1.id = this.getIcon1Id();
@@ -397,6 +412,21 @@ hybicon.prototype.parseIcon = function () {
                 else {
                     this.icon1Color = hybiconColor;
                     this.icon2Color = hybiconColor;
+                }
+            }
+
+            //data-hybicon-style
+            var hybiconStyle = this.holderDiv.getAttribute("data-hybicon-style");
+            if (hybiconStyle !== null &&
+                hybiconStyle !== "") {
+                var hybiconStyles = hybiconStyle.split('-');
+                if (hybiconStyles.length > 1) {
+                    this.icon1Stlye = hybiconStyles[0];
+                    this.icon2Stlye = hybiconStyles[1];
+                }
+                else {
+                    this.icon1Stlye = hybiconStyle;
+                    this.icon2Stlye = hybiconStyle;
                 }
             }
 
