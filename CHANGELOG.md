@@ -1,4 +1,10 @@
-## 1.0.1
+## 1.1.0
+
+* Handle secondary color in data-hybicon-color attribute
+* Add data-hybicon-style attribute
+* Consolidate icons for proper stroke
+
+### 1.0.1
 
 * Fix repotag bug in GitHub plugin
 
