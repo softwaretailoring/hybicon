@@ -17,7 +17,7 @@ header {
     background-color: #4183c4;
 }
 
-.icons {
+.iconsheader {
     background-color: #116944;
 }
 
@@ -246,6 +246,15 @@ pre {
     padding-top: 40px;
     padding-bottom: 24px;
     margin-top: 33px;
+}
+
+.icons {
+    background-color: #EAFDF8;
+    padding-top: 23px;
+}
+
+.icons > h2 {
+    padding-bottom: 30px;
 }
 
 #userideaheader,
