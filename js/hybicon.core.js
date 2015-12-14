@@ -17,7 +17,7 @@
 
 hybicon = function (divId) {
 
-    this.version = "1.1.0";
+    this.version = "1.2.0";
     this.holderId = "hybicon";
 
     if (divId !== undefined &&
@@ -116,6 +116,7 @@ hybicon = function (divId) {
     this.hybiconBorder = "";
     this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
+    this.hybiconalt = null;
 
     this.positioning = "topright";
 
@@ -176,6 +177,16 @@ hybicon.prototype.createIcon = function () {
     this.holderDiv.firstChild.style.border = this.hybiconBorder;
     this.holderDiv.firstChild.style.borderRadius = this.hybiconBorderRadius;
     this.holderDiv.firstChild.style.background = this.hybiconBackground;
+
+    // Set accessibility
+    if (this.hybiconalt !== null) {
+        var hybiconTitle = document.createElement("title");
+        hybiconTitle.innerText = this.hybiconalt;
+        hybiconTitle.id = this.getSvgTitleId();
+        this.holderDiv.firstChild.insertBefore(hybiconTitle, this.holderDiv.firstChild.firstChild);
+        this.holderDiv.firstChild.setAttribute("role", "icon");
+        this.holderDiv.firstChild.setAttribute("aria-labelledby", hybiconTitle.id);
+    }
 
     this.setDefaultProps();
 
@@ -505,6 +516,13 @@ hybicon.prototype.parseIcon = function () {
                 this.animateEasing = hybiconAnimateeasing;
             }
 
+            //data-hybicon-alt
+            var hybiconAlt = this.holderDiv.getAttribute("data-hybicon-alt");
+            if (hybiconAlt !== null &&
+                hybiconAlt !== "") {
+                this.hybiconalt = hybiconAlt;
+            }
+            
             this.createIcon();
         }
 
@@ -746,6 +764,10 @@ hybicon.prototype.getTransformString = function (x, y, scale, rotate) {
 //Identifiers
 hybicon.prototype.getSvgId = function () {
     return this.holderId + "-svg";
+};
+
+hybicon.prototype.getSvgTitleId = function () {
+    return this.holderId + "-svgtitle";
 };
 
 hybicon.prototype.getIcon1Id = function () {
