@@ -612,18 +612,22 @@ hybicon.prototype.setDefaultProps = function () {
         this.clickMode === "switch") {
         if (this.positioning === "center") {
             if (this.icon1Anim.size === null) { this.icon1Anim.size = 0; }
-            this.icon2Anim.size = icon2SizeDefault;
+            if (this.icon2Anim.size === null) { this.icon2Anim.size = icon2SizeDefault; }
         }
         else {
             this.icon1Anim.centerX = this.icon2Init.centerX;
             this.icon1Anim.centerY = this.icon2Init.centerY;
             this.icon2Anim.centerX = this.icon1Init.centerX;
             this.icon2Anim.centerY = this.icon1Init.centerY;
-            if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
-            else { this.icon1Anim.size = this.icon2Init.size; }
-            if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
-            else { this.icon2Init.size = this.icon2Anim.size; }
-            this.icon2Anim.size = this.icon1Init.size;
+            if (this.icon1Anim.size === null) {
+                if (this.icon2Init.size === 0) { this.icon1Anim.size = icon2SizeDefault; }
+                else { this.icon1Anim.size = this.icon2Init.size; }
+            }
+            if (this.icon2Init.size === 0) {
+                if (this.icon2Anim.size === null) { this.icon2Init.size = icon2SizeDefault; }
+                else { this.icon2Init.size = this.icon2Anim.size; }
+            }
+            if (this.icon2Anim.size === null) { this.icon2Anim.size = this.icon1Init.size; }
         }
     }
     if (this.hoverMode === "rotate" ||
