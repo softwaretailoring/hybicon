@@ -235,13 +235,13 @@ hybicon.prototype.createIcon = function () {
     // Set style of icons
     if (this.icon1Stlye === "stroke") {
         this.icon1Stroke = this.icon1Color;
-        this.icon1StrokeWidth = 1.5;
+        this.icon1StrokeWidth = 1;
         this.icon1Color = "none";
     }
 
     if (this.icon2Stlye === "stroke") {
         this.icon2Stroke = this.icon2Color;
-        this.icon2StrokeWidth = 2;
+        this.icon2StrokeWidth = 1;
         this.icon2Color = "none";
     }
 
