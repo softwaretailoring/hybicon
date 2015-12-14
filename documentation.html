@@ -297,9 +297,9 @@
                     <hr id="animation" />
                     <h3 class="fontface">Advanced mode</h3>
                     <div class="usingtext">
-                        Hybicon works on a 100x100 matrix. Positioning and animation are based on the following formula:<br />"centerX, centerY, size, rotate"
+                        Hybicon works on a 100x100 matrix. Positioning and animation are based on the following formula:<br /><strong>"centerX, centerY, size, rotate"</strong>
                         <br />You can also set the time and <a href="http://raphaeljs.com/easing.html" target="_blank">easing</a> of animation.
-                    </div>
+</div>
                     <div class="sourceResult">
                         <pre>&lt;div data-hybicon="arrowright-arrowright"
      <strong class="usingpre">data-hybicon-icon1init</strong>="20,50,25,0" &lt;!-- default: "45,55,77,0" --&gt;
@@ -330,6 +330,7 @@
                     <h3 class="fontface">3rd party icon</h3>
                     <div class="usingtext">
                         Icons are predefined <a href="http://www.w3.org/TR/SVG/paths.html#PathDataGeneralInformation" target="_blank">SVG paths</a>. You can use your own icons with <strong>data-hybicon-iconclass</strong> attribute.
+                        <br />In this case only <strong>hybicon.core.min.js</strong> necessary.
                     </div>
                     <div class="sourceResult">
                         <pre>var <strong class="usingpre">myIcons</strong> = {
@@ -339,7 +340,9 @@
                         <pre>&lt;div <strong class="usingpre">data-hybicon-iconclass="myIcons"</strong>
      data-hybicon="triangle-rectangle"
      data-hybicon-clickmode="rotate"&gt;
-&lt;div&gt;
+&lt;/div&gt;
+&lt;script src="js/required/raphael.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/<strong class="usingpre">hybicon.core.min.js</strong>"&gt;&lt;/script&gt;
 </pre>
                     </div>
                     <div class="row">
