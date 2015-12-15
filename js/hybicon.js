@@ -117,7 +117,7 @@ hybicon = function (divId) {
     this.hybiconBorder = "";
     this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
-    this.hybiconalt = null;
+    this.hybiconAlt = null;
 
     this.positioning = "topright";
 
@@ -180,9 +180,9 @@ hybicon.prototype.createIcon = function () {
     this.holderDiv.firstChild.style.background = this.hybiconBackground;
 
     // Set accessibility
-    if (this.hybiconalt !== null) {
+    if (this.hybiconAlt !== null) {
         var hybiconTitle = document.createElement("title");
-        hybiconTitle.innerText = this.hybiconalt;
+        hybiconTitle.innerText = this.hybiconAlt;
         hybiconTitle.id = this.getSvgTitleId();
         this.holderDiv.firstChild.insertBefore(hybiconTitle, this.holderDiv.firstChild.firstChild);
         this.holderDiv.firstChild.setAttribute("role", "icon");
@@ -521,7 +521,7 @@ hybicon.prototype.parseIcon = function () {
             var hybiconAlt = this.holderDiv.getAttribute("data-hybicon-alt");
             if (hybiconAlt !== null &&
                 hybiconAlt !== "") {
-                this.hybiconalt = hybiconAlt;
+                this.hybiconAlt = hybiconAlt;
             }
             
             this.createIcon();

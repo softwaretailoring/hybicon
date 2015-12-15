@@ -9,6 +9,7 @@ var setDetails = function (mode) {
             break;
         case "click":
             details = "Click mode is fine for toggles to call a method in the page.";
+            setStyle();
             break;
         case "info":
             details = "When you want to show more. Psst... There is a <a href='github.html'>GitHub plugin</a>";
