@@ -1,6 +1,6 @@
 {
     "name": "hybicon",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "JavaScript library for synergistic SVG icons.",
     "homepage": "http://hybicon.softwaretailoring.net",
     "main": "js/hybicon.js",
@@ -17,6 +17,9 @@
         "js/hybicon.js",
         "js/hybicon.min.js",
         "js/hybicon.min.js.map",
+        "js/hybicon.core.js",
+        "js/hybicon.core.min.js",
+        "js/hybicon.core.min.js.map",
         "LICENSE"
     ],
     "dependencies": {
