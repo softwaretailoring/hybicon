@@ -12,8 +12,8 @@
     <title>HYBICON - Better together - 404</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/for-doc/bootstrap.min.css" rel="stylesheet">
-    <link href="css/for-doc/index.min.css" rel="stylesheet">
+    <link href="http://hybicon.softwaretailoring.net/css/for-doc/bootstrap.min.css" rel="stylesheet">
+    <link href="http://hybicon.softwaretailoring.net/css/for-doc/index.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="smalltitletop"></div>
-                <a href="index.html">
+                <a href="http://hybicon.softwaretailoring.net/">
                     <div data-hybicon="link-search" data-hybicon-size="css" data-hybicon-hovermode="switch" data-hybicon-infomode data-hybicon-infotext="404">
                     </div>
                 </a>
@@ -61,10 +61,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/for-doc/jquery-1.10.2.min.js"></script>
-    <script src="js/for-doc/bootstrap.min.js"></script>
-    <script src="js/required/raphael.min.js"></script>
-    <script src="js/for-doc/index.min.js"></script>
-    <script src="js/hybicon.min.js"></script>
+    <script src="http://hybicon.softwaretailoring.net/js/for-doc/jquery-1.10.2.min.js"></script>
+    <script src="http://hybicon.softwaretailoring.net/js/for-doc/bootstrap.min.js"></script>
+    <script src="http://hybicon.softwaretailoring.net/js/required/raphael.min.js"></script>
+    <script src="http://hybicon.softwaretailoring.net/js/for-doc/index.min.js"></script>
+    <script src="http://hybicon.softwaretailoring.net/js/hybicon.min.js"></script>
 </body>
 </html>
