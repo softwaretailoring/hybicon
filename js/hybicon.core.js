@@ -732,8 +732,7 @@ hybicon.prototype.getIconSizeTransform = function (icon, iconWidth, iconHeight, 
     var transformAttrX = "";
     var transformAttrY = "";
 
-    var relativePath = Raphael.pathToRelative(icon);
-    var bbox = Raphael.pathBBox(relativePath);
+    var bbox = Raphael.pathBBox(icon);
     var pathcenterX = bbox.cx;
     var pathcenterY = bbox.cy;
     var width = bbox.width;
