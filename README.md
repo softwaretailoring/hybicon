@@ -52,3 +52,7 @@ Licensed under [MIT][mit]. Better together.
 [npm]: https://www.npmjs.com/package/hybicon
 [bower]: http://bower.io/search/?q=hybicon
 [jsdelivr]: http://www.jsdelivr.com/?query=hybicon
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/softwaretailoring/hybicon/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
