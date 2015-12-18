@@ -197,7 +197,7 @@ hybicon.prototype.createIcon = function () {
         this.icon2TransformAnim = this.getTransformString(this.icon2XAnim, this.icon2YAnim, this.icon2ScaleAnim, this.icon2Anim.rotate);
     }
 
-    if ((this.hoverMode !== null) || (this.clickMode != null)) {
+    if (this.hoverMode !== null || this.clickMode != null) {
         this.icon1 = this.raphael.path(this.icon1Path);
         this.icon1.attr({ transform: this.icon1Transform });
         if (this.icon2Path !== null) {
@@ -266,36 +266,23 @@ hybicon.prototype.createIcon = function () {
         this.icon2.attr({ fill: this.icon2Color, stroke: this.icon2Stroke, 'stroke-width': this.icon2StrokeWidth });
     }
 
+    var cursorstyle = "default";
+    if (this.hoverMode !== null || this.clickMode != null) { cursorstyle = "pointer"; }
+
     this.iconRect = this.raphael.rect(0, 0, iconWidth, iconHeight);
-    this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: "pointer" });
-
-    this.iconHolder = this.raphael.set();
-
-    if (this.icon2 !== undefined) {
-        this.iconHolder.push(
-            this.icon1,
-            this.icon2,
-            this.iconRect
-        );
-    }
-    else {
-        this.iconHolder.push(
-            this.icon1,
-            this.iconRect
-        );
-    }
+    this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: cursorstyle });
 
     var thishybicon = this;
 
     if (this.hoverMode !== null) {
-        this.iconHolder.mouseover(function () {
+        this.holderDiv.addEventListener("mouseover", function (event) {
             if (thishybicon.hovered !== true &&
                 thishybicon.clicked !== true) {
                 thishybicon.hovered = true;
                 thishybicon.animateIcon(true);
             }
         });
-        this.iconHolder.mouseout(function () {
+        this.holderDiv.addEventListener("mouseout", function (event) {
             if (thishybicon.clicked !== true) {
                 thishybicon.hovered = false;
                 thishybicon.animateIcon(false);
@@ -304,7 +291,7 @@ hybicon.prototype.createIcon = function () {
     }
 
     if (this.clickMode !== null) {
-        this.iconHolder.click(function () {
+        this.holderDiv.addEventListener("click", function (event) {
             if (thishybicon.clicked !== true) {
                 thishybicon.clicked = true;
                 thishybicon.animateIcon(true);
