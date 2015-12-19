@@ -103,6 +103,7 @@ hybicon = function (divId) {
     this.animateEasing = null;
     this.hoverMode = null;
     this.clickMode = null;
+    this.clickFunction = null;
     this.hovered = false;
     this.clicked = false;
     this.infoMode = null;
@@ -117,6 +118,7 @@ hybicon = function (divId) {
     this.hybiconBorderRadius = "";
     this.hybiconBackground = "";
     this.hybiconAlt = null;
+    this.hybiconKeyCode = "32"; // default key is spacebar
 
     this.positioning = "topright";
 
@@ -184,8 +186,14 @@ hybicon.prototype.createIcon = function () {
         hybiconTitle.innerText = this.hybiconAlt;
         hybiconTitle.id = this.getSvgTitleId();
         this.holderDiv.firstChild.insertBefore(hybiconTitle, this.holderDiv.firstChild.firstChild);
-        this.holderDiv.firstChild.setAttribute("role", "icon");
         this.holderDiv.firstChild.setAttribute("aria-labelledby", hybiconTitle.id);
+    }
+    if (this.clickMode !== null) {
+        this.holderDiv.firstChild.setAttribute("role", "button");
+        this.holderDiv.firstChild.setAttribute("aria-pressed", "false");
+    }
+    else {
+        this.holderDiv.firstChild.setAttribute("role", "icon");
     }
 
     this.setDefaultProps();
@@ -267,7 +275,11 @@ hybicon.prototype.createIcon = function () {
     }
 
     var cursorstyle = "default";
-    if (this.hoverMode !== null || this.clickMode != null) { cursorstyle = "pointer"; }
+    if (this.hoverMode !== null ||
+        this.clickMode != null ||
+        this.holderDiv.parentNode.tagName.toUpperCase() === "A") {
+        cursorstyle = "pointer";
+    }
 
     this.iconRect = this.raphael.rect(0, 0, iconWidth, iconHeight);
     this.iconRect.attr({ fill: "#FFF", "fill-opacity": 0, stroke: "none", cursor: cursorstyle });
@@ -291,20 +303,41 @@ hybicon.prototype.createIcon = function () {
     }
 
     if (this.clickMode !== null) {
+        if (this.holderDiv.parentNode.tagName.toUpperCase() !== "A") {
+            var tabindex = "0";
+            if (this.holderDiv.hasAttribute("tabindex")) {
+                tabindex = this.holderDiv.getAttribute("tabindex");
+                this.holderDiv.removeAttribute("tabindex");
+            }
+            this.holderDiv.firstChild.setAttribute("tabindex", tabindex);
+        }
+
         this.holderDiv.addEventListener("click", function (event) {
-            if (thishybicon.clicked !== true) {
-                thishybicon.clicked = true;
-                thishybicon.animateIcon(true);
-            }
-            else {
-                thishybicon.clicked = false;
-                thishybicon.animateIcon(false);
-            }
+            thishybicon.handleMouseDown(event);
+        });
+
+        this.holderDiv.addEventListener("keydown", function (event) {
+            thishybicon.handleKeyDown(event);
         });
     }
 
     return this;
 };
+
+hybicon.prototype.handleMouseDown = function (event) {
+    this.clicked = !this.clicked;
+    if (this.clickFunction !== null) { this.clickFunction(); }
+    this.holderDiv.firstChild.setAttribute("aria-pressed", this.clicked ? "true" : "false");
+    this.animateIcon(this.clicked);
+}
+
+hybicon.prototype.handleKeyDown = function (event) {
+    event = event || window.event;
+    if (event.keyCode.toString() === this.hybiconKeyCode) {
+        this.handleMouseDown(event);
+        event.preventDefault();
+    }
+}
 
 hybicon.prototype.animateIcon = function (hovered) {
     if (hovered === true) {
@@ -510,6 +543,19 @@ hybicon.prototype.parseIcon = function () {
                 this.hybiconAlt = hybiconAlt;
             }
             
+            //onmousedown event of holderdiv
+            if (this.holderDiv.onmousedown !== undefined) {
+                this.clickFunction = this.holderDiv.onmousedown;
+                this.holderDiv.onmousedown = undefined;
+            }
+
+            //data-hybicon-keycode
+            var hybiconKeyCode = this.holderDiv.getAttribute("data-hybicon-keycode");
+            if (hybiconKeyCode !== null &&
+                hybiconKeyCode !== "") {
+                this.hybiconKeyCode = hybiconKeyCode;
+            }
+
             this.createIcon();
         }
 
