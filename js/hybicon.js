@@ -304,13 +304,9 @@ hybicon.prototype.createIcon = function () {
     }
 
     if (this.clickMode !== null) {
-        if (this.holderDiv.parentNode.tagName.toUpperCase() !== "A") {
-            var tabindex = "0";
-            if (this.holderDiv.hasAttribute("tabindex")) {
-                tabindex = this.holderDiv.getAttribute("tabindex");
-                this.holderDiv.removeAttribute("tabindex");
-            }
-            this.holderDiv.firstChild.setAttribute("tabindex", tabindex);
+        if (this.holderDiv.parentNode.tagName.toUpperCase() !== "A" &&
+            !this.holderDiv.hasAttribute("tabindex")) {
+            this.holderDiv.setAttribute("tabindex", 0);
         }
 
         this.holderDiv.addEventListener("click", function (event) {
