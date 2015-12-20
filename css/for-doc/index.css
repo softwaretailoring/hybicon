@@ -381,6 +381,10 @@ pre {
     text-decoration: none;
 }
 
+.styledark div:focus {
+    outline: 0;
+}
+
 .stylelight {
     background-color: #fff;
     color: #8c3d2f;
@@ -460,6 +464,10 @@ pre {
     background-color: #fff;
     color: #8c3d2f;
     text-decoration: none;
+}
+
+.stylelight div:focus {
+    outline: 0;
 }
 
 #downloaddiv {

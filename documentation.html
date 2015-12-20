@@ -314,6 +314,26 @@
                             <div class="smalltitle">try it with screen reader</div>
                         </div>
                     </div>
+                    <hr id="keyboard" />
+                    <h3 class="fontface">Keyboard</h3>
+                    <div class="usingtext">
+                        In click mode, hybicon is able to get focus and do the animation with keyboard. Default key is space bar and you can override it with <strong>data-hybicon-keycode</strong> attribute.
+                        <br />Furthermore when you use the <strong>onmousedown</strong> event on the div it fired by keydown also.
+                        <br />Generated SVG will support <a href="http://www.w3.org/WAI/intro/aria" target="_blank">WAI-ARIA</a> with <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-pressed" target="_blank">aria-pressed</a> attribute.
+                    </div>
+                    <div class="sourceResult">
+                        <pre>&lt;div data-hybicon="switch-circle" 
+     data-hybicon-clickmode
+     <strong class="usingpre">data-hybicon-keycode</strong>="72"
+     <strong class="usingpre">onmousedown</strong>="alert('It appears after mousedown and keydown.');"&gt;
+&lt;/div&gt;</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-hybicon="switch-circle" data-hybicon-clickmode data-hybicon-keycode="72" onmousedown="alert('It appears after mousedown and keydown.');"></div>
+                            <div class="smalltitle">try it with 'h' key</div>
+                        </div>
+                    </div>
                     <hr id="animation" />
                     <h3 class="fontface">Advanced mode</h3>
                     <div class="usingtext">
