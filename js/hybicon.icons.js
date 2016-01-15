@@ -7,7 +7,7 @@
 /* Check http://hybicon.softwaretailoring.net/icons.html for samples.                      */
 /* Fork https://github.com/softwaretailoring/hybicon for contribution.                     */
 /* ======================================================================================= */
-/* Copyright © 2015 Gábor Berkesi (http://softwaretailoring.net)                           */
+/* Copyright © 2015-2016 Gábor Berkesi (http://softwaretailoring.net)                      */
 /* Licensed under MIT (https://github.com/softwaretailoring/hybicon/blob/master/LICENSE)   */
 /* ======================================================================================= */
 
