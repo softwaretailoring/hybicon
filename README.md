@@ -48,7 +48,7 @@ Licensed under [MIT][mit]. Better together.
 
 [projectpage]: http://hybicon.softwaretailoring.net
 [mit]: http://www.opensource.org/licenses/mit-license.php
-[raphaeljs]: http://raphaeljs.com/
+[raphaeljs]: http://dmitrybaranovskiy.github.io/raphael
 [npm]: https://www.npmjs.com/package/hybicon
 [bower]: http://bower.io/search/?q=hybicon
 [jsdelivr]: http://www.jsdelivr.com/?query=hybicon
