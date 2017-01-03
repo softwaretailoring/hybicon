@@ -2,7 +2,7 @@
 /*                                   hybicon.core.js                                       */
 /* ======================================================================================= */
 /* This is a small JavaScript library for animated SVG based icons.                        */
-/* Requires Raphaël JavaScript Vector Library (http://raphaeljs.com)                       */
+/* Requires Raphaël JavaScript Vector Library (http://dmitrybaranovskiy.github.io/raphael/)*/
 /* ======================================================================================= */
 /* Check http://hybicon.softwaretailoring.net for samples.                                 */
 /* Fork https://github.com/softwaretailoring/hybicon for contribution.                     */
