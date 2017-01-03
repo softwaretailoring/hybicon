@@ -8,7 +8,7 @@
 /* Check http://hybicon.softwaretailoring.net for samples.                                 */
 /* Fork https://github.com/softwaretailoring/hybicon for contribution.                     */
 /* ======================================================================================= */
-/* Copyright © 2015-2016 Gábor Berkesi (http://softwaretailoring.net)                      */
+/* Copyright © 2015-2017 Gábor Berkesi (http://softwaretailoring.net)                      */
 /* Licensed under MIT (https://github.com/softwaretailoring/hybicon/blob/master/LICENSE)   */
 /* ======================================================================================= */
 
@@ -835,7 +835,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 /* Check http://hybicon.softwaretailoring.net/icons.html for samples.                      */
 /* Fork https://github.com/softwaretailoring/hybicon for contribution.                     */
 /* ======================================================================================= */
-/* Copyright © 2015-2016 Gábor Berkesi (http://softwaretailoring.net)                      */
+/* Copyright © 2015-2017 Gábor Berkesi (http://softwaretailoring.net)                      */
 /* Licensed under MIT (https://github.com/softwaretailoring/hybicon/blob/master/LICENSE)   */
 /* ======================================================================================= */
 
@@ -964,7 +964,7 @@ var hybiconbase = {
 /* Check http://hybicon.softwaretailoring.net/github.html for samples.                     */
 /* Fork https://github.com/softwaretailoring/hybicon for contribution.                     */
 /* ======================================================================================= */
-/* Copyright © 2015-2016 Gábor Berkesi (http://softwaretailoring.net)                      */
+/* Copyright © 2015-2017 Gábor Berkesi (http://softwaretailoring.net)                      */
 /* Licensed under MIT (https://github.com/softwaretailoring/hybicon/blob/master/LICENSE)   */
 /* ======================================================================================= */
 
