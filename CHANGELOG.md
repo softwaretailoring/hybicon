@@ -1,4 +1,9 @@
-## 1.3.0
+## 1.4.0
+
+* Fix broken links
+* Add new icons: stackoverflow, codepen, gitlab, bitbucket, gitter, slack
+
+### 1.3.0
 
 * Handle keydown event
 * Add data-hybicon-keycode attribute
