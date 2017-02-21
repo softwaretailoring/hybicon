@@ -69,6 +69,12 @@ footer a:hover {
     margin: 25px auto 25px auto;
 }
 
+@media (max-width:991px) {
+    .sourceResult {
+        width: 100%;
+    }
+}
+
 h1.fontface {
     font: 110px Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 0;
