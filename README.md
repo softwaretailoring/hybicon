@@ -35,8 +35,9 @@ $ bower install hybicon
 or CDN by [jsDelivr][jsdelivr]
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/hybicon/1.4.0/hybicon.min.js"></script>
-```
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hybicon@1.4.0/js/hybicon.min.js"></script>
+```  
+[![](https://data.jsdelivr.com/v1/package/npm/hybicon/badge)](https://www.jsdelivr.com/package/npm/hybicon)
 
 ## Author
 
