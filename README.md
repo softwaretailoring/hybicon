@@ -47,6 +47,9 @@ Gábor Berkesi (gabor.berkesi@softwaretailoring.net)
 
 Licensed under [MIT][mit]. Better together.
 
+<a target="_blank" href="https://www.buymeacoffee.com/sftwrtlrng"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a beer"><span style="margin-left:5px">Buy me a beer</span></a> - if you want to be better together. Thanks a lot!
+
+
 [projectpage]: http://hybicon.softwaretailoring.net
 [mit]: http://www.opensource.org/licenses/mit-license.php
 [raphaeljs]: http://dmitrybaranovskiy.github.io/raphael
